@@ -1,7 +1,45 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { themeChange } from "theme-change";
 import logo from "../assets/circle-dev-bros-hq.webp";
 
 const Nav = () => {
+  const themeOptions = [
+    "light",
+    "dark",
+    "cupcake",
+    "bumblebee",
+    "emerald",
+    "corporate",
+    "synthwave",
+    "retro",
+    "cyberpunk",
+    "valentine",
+    "halloween",
+    "garden",
+    "forest",
+    "aqua",
+    "lofi",
+    "pastel",
+    "fantasy",
+    "wireframe",
+    "black",
+    "luxury",
+    "dracula",
+    "cmyk",
+    "autumn",
+    "business",
+    "acid",
+    "lemonade",
+    "night",
+    "coffee",
+    "winter",
+  ];
+
+  useEffect(() => {
+    themeChange(false);
+  });
+
   return (
     <nav className="sticky pt-2">
       <div className="navbar bg-neutral text-neutral-content rounded-lg pl-4">
@@ -43,6 +81,22 @@ const Nav = () => {
               </li>
               <li>
                 <Link to="/">About</Link>
+              </li>
+              <li>
+                <select
+                  className="select w-full select-md max-w-xs"
+                  data-choose-theme
+                  defaultValue="night"
+                >
+                  <option disabled value="night">
+                    Select Theme
+                  </option>
+                  {themeOptions.map((theme) => (
+                    <option key={theme} value={theme}>
+                      {theme}
+                    </option>
+                  ))}
+                </select>
               </li>
             </ul>
           </div>
