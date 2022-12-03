@@ -1,15 +1,15 @@
-import { useState } from 'react'
-
+import { Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import Home from "./pages/Home";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="App">
-      <h1 className="bg-slate-400">HELLO WORLD</h1>
-      
-    </div>
-  )
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Home />} />
+      </Routes>
+    </Layout>
+  );
 }
 
-export default App
+export default App;
