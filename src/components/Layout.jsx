@@ -1,3 +1,4 @@
+import Footer from "./Footer";
 import Nav from "./Nav";
 
 const Layout = ({ children }) => {
@@ -7,6 +8,7 @@ const Layout = ({ children }) => {
         <Nav />
         <div className="min-h-[calc(100vh-72px)]">{children}</div>
       </div>
+      <Footer />
     </div>
   );
 };
