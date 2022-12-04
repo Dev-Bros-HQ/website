@@ -1,6 +1,14 @@
+import { useEffect } from "react";
 import logo from "../assets/circle-dev-bros-hq.webp";
+import { useFirebase } from "../context/firebase";
 
 const Home = () => {
+  const { builds } = useFirebase();
+
+  useEffect(() => {
+    console.log(builds);
+  }, [builds]);
+
   return (
     <section className="text-neutral-content body-font">
       <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
@@ -22,6 +30,7 @@ const Home = () => {
           </p>
         </div>
       </div>
+      <div>{JSON.stringify(builds)}</div>
     </section>
   );
 };
