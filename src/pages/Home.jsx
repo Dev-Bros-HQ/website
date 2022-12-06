@@ -82,22 +82,24 @@ const Home = () => {
 
   return (
     <>
-      <section className="text-neutral-content body-font w-screen -ml-[calc((100vw-1007px)/2)] bg-[url('/img/hero-background.svg')] bg-cover bg-bottom pb-[25vh]">
-        <div className="container mx-auto flex px-5 py-24 items-center justify-center">
+      <section className="text-neutral-content body-font w-full lg:w-screen lg:-ml-[calc((100vw-1007px)/2)] bg-[url('/img/hero-background.svg')] bg-cover bg-bottom pb-[25vh]">
+        <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col md:flex-row">
           <img
             className="w-1/2 max-w-[300px] mb-10 object-cover object-center rounded-lg"
             alt="dev bros hq logo"
             src={logo}
           />
-          <div className="text-center lg:w-1/2 w-full px-12">
+          <div className="md:text-center lg:w-1/2 w-full text-left md:px-12">
             <p className="mb-8 sm:text-4xl text-3xl">
               Where we learn to be better developers by{" "}
-              <span className="text-accent">building tools for you.</span>
+              <span className="text-accent underline">
+                building tools for you.
+              </span>
             </p>
           </div>
         </div>
       </section>
-      <section className="body-font w-screen -ml-[calc((100vw-1007px)/2)] bg-secondary-focus">
+      <section className="body-font w-full lg:w-screen lg:-ml-[calc((100vw-1007px)/2)] bg-secondary-focus">
         <div className="container px-5 py-16 mx-auto">
           <div className="flex flex-col text-center w-full mb-20">
             <h2 className="sm:text-5xl text-3xl font-medium title-font mb-4 text-base-300">
@@ -113,7 +115,7 @@ const Home = () => {
                   key={`popular-tool-${toolIndex}`}
                 >
                   <Link to={url}>
-                    <div className="relative h-full flex items-center justify-end rounded-lg overflow-hidden text-neutral shadow-lg bg-base-300">
+                    <div className="relative h-[104px] flex items-center justify-end rounded-lg overflow-hidden text-neutral shadow-lg bg-base-300">
                       {imgUrl ? (
                         <img
                           alt="team"
@@ -129,7 +131,7 @@ const Home = () => {
                         <p className="title-font font-medium text-primary">
                           {name}
                         </p>
-                        <p>
+                        <p className="text-xs xs:text-base">
                           {description ? description : getRandomBuildMessage()}
                         </p>
                       </div>
