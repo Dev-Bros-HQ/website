@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
+import { getFirestore } from "firebase/firestore";
+import {
+  getMW2Builds,
+  getMW2Attachments,
+  getMW2Guns,
+  createMW2Build,
+  createMW2Attachment,
+} from "./firebaseActions";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -19,22 +26,25 @@ const FirebaseContext = React.createContext();
 
 function FirebaseProvider({ children }) {
   const [builds, setBuilds] = useState([]);
+  const [attachments, setAttachments] = useState([]);
+  const [guns, setGuns] = useState([]);
 
   useEffect(() => {
-    const getMW2Builds = async (db) => {
-      const buildsRef = collection(db, "mw2-builds");
-      const buildsSnapshot = await getDocs(buildsRef);
-      const buildsList = buildsSnapshot.docs.map((doc) => doc.data());
-      setBuilds(buildsList);
-    };
-
-    getMW2Builds(db);
+    getMW2Builds(db, setBuilds);
+    getMW2Attachments(db, setAttachments);
+    getMW2Guns(db, setGuns);
   }, []);
 
   return (
     <FirebaseContext.Provider
       value={{
         builds,
+        attachments,
+        guns,
+        createMW2Build: (values, callback) =>
+          createMW2Build(db, values, callback),
+        createMW2Attachment: (values, attachmentType, callback) =>
+          createMW2Attachment(db, values, attachmentType, callback),
       }}
     >
       {children}
