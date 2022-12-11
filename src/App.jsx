@@ -3,7 +3,7 @@ import Layout from "./components/Layout";
 import { FirebaseProvider } from "./context/firebase";
 import Home from "./pages/Home";
 import MW2Builds from "./pages/mw2-builds";
-import MW2Admin from "./pages/mw2-builds/admin";
+import MW2Admin from "./pages/mw2-admin";
 import PageNotFound from "./pages/PageNotFound";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
