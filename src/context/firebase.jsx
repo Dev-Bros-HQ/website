@@ -8,7 +8,6 @@ import {
   getMW2Attachments,
   getMW2Guns,
   createMW2Build,
-  createMW2Attachment,
   createDatabaseDocument,
 } from "./firebaseActions";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -35,14 +34,36 @@ function FirebaseProvider({ children }) {
   const [guns, setGuns] = useState([]);
   const [userInformation, setUserInformation] = useState({});
   const [user, loading, error] = useAuthState(auth);
+  const attachmentTypes = [
+    "Muzzle",
+    "Barrel",
+    "Underbarrel",
+    "Laser",
+    "Optic",
+    "Stock",
+    "Comb",
+    "Rear Grip",
+    "Bolt",
+    "Guard",
+    "Magazine",
+    "Ammunition",
+  ];
 
   const getUserInformation = async (id) => {
     await getUser(db, id, setUserInformation);
   };
+  const getAllAttachments = async () => {
+    const allAttachments = {};
+    for (let a = 0; a < attachmentTypes.length; a += 1) {
+      allAttachments[`${attachmentTypes[a].toLowerCase()}`] =
+        await getMW2Attachments(db, attachmentTypes[a].toLowerCase());
+    }
+    setAttachments(allAttachments);
+  };
 
   useEffect(() => {
+    getAllAttachments();
     getMW2Builds(db, setBuilds);
-    getMW2Attachments(db, setAttachments);
     getMW2Guns(db, setGuns);
   }, []);
 
@@ -66,10 +87,9 @@ function FirebaseProvider({ children }) {
         attachments,
         guns,
         createDocument,
+        getUpdatedAttachments: getAllAttachments,
         createMW2Build: (values, callback) =>
           createMW2Build(db, values, callback),
-        createMW2Attachment: (values, attachmentType, callback) =>
-          createMW2Attachment(db, values, attachmentType, callback),
       }}
     >
       {children}

@@ -15,7 +15,7 @@ const Nav = () => {
   };
 
   return (
-    <nav className="sticky top-0 pt-2">
+    <nav className="sticky top-0 pt-2 z-50">
       <div className="navbar bg-neutral text-neutral-content rounded-lg pl-4">
         <div className="navbar-start">
           <Link
