@@ -1,5 +1,7 @@
 import {
   collection,
+  query,
+  where,
   getDocs,
   doc,
   setDoc,
@@ -33,7 +35,6 @@ export const getMW2Guns = async (db, callback) => {
   gunsSnapshot.docs.forEach((doc) => {
     returnValue[doc.id] = doc.data();
   });
-  console.log({ returnValue });
   callback(returnValue);
 };
 
@@ -81,4 +82,30 @@ export const createMW2Attachment = async (
     console.log(ref);
     callback();
   });
+};
+
+export const getUser = async (db, uid, callback) => {
+  if (!uid) console.warn("NO UID PRESENT");
+  const q = query(collection(db, "users"), where("uid", "==", uid));
+  const doc = await getDocs(q);
+  const userInfo = doc.docs[0].data();
+  callback(userInfo);
+};
+
+export const createDatabaseDocument = async (
+  db,
+  collectionName,
+  data,
+  id,
+  idPrefix
+) => {
+  const generatedID = id || generateUUID(idPrefix || "");
+
+  return await setDoc(doc(db, collectionName, generatedID), data)
+    .then(() => {
+      return { success: true, error: null };
+    })
+    .catch((err) => {
+      return { success: null, error: err };
+    });
 };
