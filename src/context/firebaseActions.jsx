@@ -16,16 +16,11 @@ export const getMW2Builds = async (db, callback) => {
   callback(buildsList);
 };
 
-export const getMW2Attachments = async (db, callback) => {
-  const attachmentsRef = collection(db, "mw2-attachments");
+export const getMW2Attachments = async (db, attachmentType) => {
+  const attachmentsRef = collection(db, `mw2-${attachmentType}`);
   const attachmentsSnapshot = await getDocs(attachmentsRef);
-  const returnValue = {};
-  attachmentsSnapshot.docs.forEach((doc) => {
-    const attachmentType = doc.id.split("-")[0];
-    returnValue[attachmentType] = returnValue[attachmentType] || [];
-    returnValue[attachmentType].push({ id: doc.id, ...doc.data() });
-  });
-  callback(returnValue);
+  const attachmentsList = attachmentsSnapshot.docs.map((doc) => doc.data());
+  return attachmentsList;
 };
 
 export const getMW2Guns = async (db, callback) => {
@@ -56,30 +51,7 @@ export const createMW2Build = async (db, values, callback) => {
       },
     },
   };
-  console.log({ docData });
   await setDoc(doc(db, "mw2-builds", buildUUID), docData).then((ref) => {
-    console.log(ref);
-    callback();
-  });
-};
-
-export const createMW2Attachment = async (
-  db,
-  values,
-  attachmentType,
-  callback
-) => {
-  const buildUUID = generateUUID(attachmentType);
-
-  //TODO: SUBMIT REAL DATA INSTEAD OF THIS MOCK BS ↓
-  const docData = {
-    stringExample: "Cool Attachment",
-    attachmentType,
-    createdAt: Timestamp.fromDate(values.createdAt),
-  };
-  console.log({ docData });
-  await setDoc(doc(db, "mw2-attachments", buildUUID), docData).then((ref) => {
-    console.log(ref);
     callback();
   });
 };

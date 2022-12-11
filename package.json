@@ -13,8 +13,12 @@
     "dotenv": "^16.0.3",
     "firebase": "^9.14.0",
     "react": "^18.2.0",
+    "react-aria-modal": "^4.0.2",
     "react-dom": "^18.2.0",
     "react-firebase-hooks": "^5.1.1",
+    "react-hot-toast": "^2.4.0",
+    "react-modal": "^3.16.1",
+    "react-overlays": "^5.2.1",
     "react-router-dom": "^6.4.4",
     "react-uuid": "^2.0.0"
   },

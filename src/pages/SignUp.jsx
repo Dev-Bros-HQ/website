@@ -39,7 +39,6 @@ const SignUp = () => {
         email,
         password
       );
-      console.log({ user });
       await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
         authProvider: "local",
