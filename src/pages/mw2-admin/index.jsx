@@ -3,6 +3,7 @@ import AddAttachment from "../../components/mw2/AddAttachment";
 import AddGun from "../../components/mw2/AddGun";
 import AttachmentsTable from "../../components/mw2/AttachmentsTable";
 import GunsTable from "../../components/mw2/GunsTable";
+import ImageParallaxScroller from "../../components/UI/ImageParallaxScroller";
 import { useFirebase } from "../../context/firebase";
 
 const MW2Admin = () => {
@@ -20,6 +21,11 @@ const MW2Admin = () => {
     <section className="flex flex-col items-center">
       {isAdmin ? (
         <>
+          <br />
+          <br />
+          <br />
+          <br />
+          <ImageParallaxScroller />
           <br />
           <br />
           <br />
