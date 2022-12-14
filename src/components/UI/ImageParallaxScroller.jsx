@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
+import "react-lazy-load-image-component/src/effects/opacity.css";
 
 const ImageParallaxScroller = ({ images, onImageSelect, title }) => {
   const trackRef = useRef();
@@ -26,8 +26,8 @@ const ImageParallaxScroller = ({ images, onImageSelect, title }) => {
         nextPercentageUnconstrained =
           parseFloat(trackRef.current.dataset.prevPercentage) + percentage,
         nextPercentage = Math.max(
-          Math.min(nextPercentageUnconstrained, 0),
-          -100
+          Math.min(nextPercentageUnconstrained, -5),
+          -95
         );
 
       trackRef.current.dataset.percentage = nextPercentage;
@@ -67,7 +67,7 @@ const ImageParallaxScroller = ({ images, onImageSelect, title }) => {
   }, []);
 
   return (
-    <div className="relative h-screen m-0 overflow-hidden w-[calc(100vw-19px)] -mt-[68px] ">
+    <div className="relative h-screen m-0 overflow-hidden w-[100vw] md:w-[calc(100vw-19px)] -mt-[68px] ">
       <br />
       <br />
       <br />
@@ -78,7 +78,7 @@ const ImageParallaxScroller = ({ images, onImageSelect, title }) => {
         ref={trackRef}
         data-mouse-down-at="0"
         data-prev-percentage="0"
-        className="flex gap-[4vmin] absolute left-1/2 top-1/2 translate-x-0 -translate-y-1/2 select-none cursor-grab"
+        className="flex gap-[4vmin] absolute left-1/2 top-1/2 -translate-x-[5%] -translate-y-1/2 select-none cursor-grab"
       >
         {images.map((image, imageIndex) => {
           const { value, url, label } = image;
@@ -89,19 +89,19 @@ const ImageParallaxScroller = ({ images, onImageSelect, title }) => {
             >
               <LazyLoadImage
                 key={url}
-                className="image w-[40vmin] h-[56vmin] object-cover object-[100%_center] relative block max-w-none"
+                className="image  h-[90vmin] md:h-[56vmin] w-[60vmin] md:w-[40vmin] object-cover object-[100%_center] relative block max-w-none"
                 src={url}
                 draggable="false"
                 visibleByDefault={true}
                 effect="opacity"
               />
-              <p className="absolute top-2 left-1/2 -translate-x-1/2 text-[rgba(255,255,255,.3)] uppercase text-6xl font-bold text-center">
+              <p className="absolute top-2 left-1/2 -translate-x-1/2 text-[rgba(255,255,255,.3)] uppercase text-4xl md:text-6xl font-bold text-center">
                 {label}
               </p>
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-30px)]">
                 <button
                   onClick={() => onImageSelect(value)}
-                  className="btn btn-primary"
+                  className="btn btn-primary w-full"
                 >
                   Select {label}
                 </button>

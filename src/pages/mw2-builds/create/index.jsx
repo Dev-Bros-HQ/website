@@ -7,7 +7,6 @@ const CreateMW2Build = () => {
   const [step, setStep] = useState(0);
   const [filteredGuns, setFilteredGuns] = useState([]);
   const [formattedGuns, setFormattedGuns] = useState([]);
-  const [gunClass, setGunClass] = useState("");
   const [gun, setGun] = useState({});
 
   const images = [
@@ -57,7 +56,6 @@ const CreateMW2Build = () => {
     setStep(0);
     setFilteredGuns([]);
     setFormattedGuns([]);
-    setGunClass("");
     setGun({});
   };
 
@@ -71,7 +69,6 @@ const CreateMW2Build = () => {
   const imageSelect = (value) => {
     if (step === 0) {
       const filtered = filterGunsByClass(value);
-      setGunClass(value);
       setFilteredGuns(filtered);
     }
     if (step === 1) {
@@ -94,10 +91,6 @@ const CreateMW2Build = () => {
     }
   }, [filteredGuns]);
 
-  // useEffect(() => {
-  //   console.log({ gunClass, gun });
-  // }, [gunClass, gun]);
-
   return (
     <section className="flex flex-col items-center">
       {step === 0 && (
@@ -119,10 +112,10 @@ const CreateMW2Build = () => {
           <br />
           <br />
           <br />
-          <div className="flex relative w-full justify-center pt-16">
+          <div className="flex flex-col md:flex-row items-center relative w-full justify-center pt-16">
             <button
               onClick={resetBuild}
-              className="btn btn-accent absolute left-0 top-0"
+              className="btn btn-accent absolute left-4 top-0"
             >
               ← Choose a Different Gun
             </button>
@@ -146,13 +139,15 @@ const CreateMW2Build = () => {
                 </div>
               </div>
             </div>
-            <div className="card w-96 bg-primary text-primary-content ml-0 md:ml-6">
+            <div className="card w-96 bg-primary text-primary-content ml-0 md:ml-6 mt-6 md:mt-0">
               <div className="card-body">
                 <h2 className="card-title">Next step:</h2>
                 <p>Choose up to 5 attachemnts.</p>
               </div>
             </div>
           </div>
+
+          {/* Add Form here for all of the attachments and such */}
         </>
       )}
     </section>
