@@ -1,48 +1,20 @@
-import { useFirebase } from "../../context/firebase";
+import { Link } from "react-router-dom";
 
 const MW2Builds = () => {
-  const { builds, attachments, createMW2Build } = useFirebase();
-  const values = {
-    createdAt: new Date(),
-  };
-  const callback = () => {
-    window.location.reload();
-  };
   return (
-    <div>
-      MW2 Builds
-      <p>Builds</p>
-      {JSON.stringify(builds)}
+    <section className="flex flex-col items-center">
       <br />
       <br />
       <br />
-      <p>Attachemnts</p>
-      {attachments?.barrels?.map((barrel) => {
-        return (
-          <div key={barrel.id}>
-            {barrel.id}
-            {barrel?.createdAt?.toDate().toLocaleTimeString("en-US")}
-          </div>
-        );
-      })}
       <br />
+      <h1 className="text-6xl text-center">MW2 Gun Builds</h1>
       <br />
-      <p>Muzzles</p>
-      {attachments?.muzzles?.map((muzzle) => {
-        return (
-          <div key={muzzle.id}>
-            {muzzle.id}
-            {muzzle?.createdAt?.toDate().toLocaleTimeString("en-US")}
-          </div>
-        );
-      })}
+      <p>By the community, for the community</p>
       <br />
-      <br />
-      <br />
-      <button onClick={() => createMW2Build(values, callback)}>
-        Create Mock Build
-      </button>
-    </div>
+      <Link to="/mw2-builds/create" className="btn btn-secondary">
+        Make build
+      </Link>
+    </section>
   );
 };
 

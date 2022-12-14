@@ -11,7 +11,7 @@ const MW2Admin = () => {
   const isAdmin = authState?.user?.admin;
 
   useEffect(() => {
-    if (authState.user !== {} && isAdmin === false) {
+    if (!Object.keys(authState?.user).length && isAdmin === false) {
       setNotAdminMessage("You don't have permission to view this page.");
     }
   }, [authState, isAdmin]);
