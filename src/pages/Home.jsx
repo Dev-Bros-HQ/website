@@ -82,7 +82,7 @@ const Home = () => {
 
   return (
     <>
-      <section className="text-neutral-content body-font w-full lg:w-screen lg:-ml-[calc((100vw-1007px)/2)] bg-[url('/img/hero-background.svg')] bg-cover bg-bottom pb-[25vh]">
+      <section className="text-neutral-content body-font w-full lg:w-screen lg:-ml-[calc((100vw-1007px)/2)] bg-[url('/assets/hero-background.svg')] bg-cover bg-bottom pb-[25vh]">
         <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col md:flex-row">
           <img
             className="w-1/2 max-w-[300px] mb-10 object-cover object-center rounded-lg"
