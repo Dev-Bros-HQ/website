@@ -16,7 +16,7 @@ const Nav = () => {
 
   return (
     <nav className="sticky top-0 pt-2 z-50">
-      <div className="navbar bg-neutral text-neutral-content rounded-lg pl-4">
+      <div className="navbar bg-neutral text-neutral-content rounded-lg pl-4 mx-2 w-[calc(100%-16px)]">
         <div className="navbar-start">
           <Link
             className="btn btn-ghost normal-case text-xl rounded-full p-0"
