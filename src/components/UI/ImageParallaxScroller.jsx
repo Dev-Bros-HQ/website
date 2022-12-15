@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/opacity.css";
 
 const ImageParallaxScroller = ({ images, onImageSelect, title }) => {
   const trackRef = useRef();
@@ -84,16 +83,23 @@ const ImageParallaxScroller = ({ images, onImageSelect, title }) => {
           const { value, url, label } = image;
           return (
             <div
+              id={`image-${value}-${imageIndex}`}
               key={`image-scroll-${value}-${imageIndex}`}
-              className="relative rounded-lg overflow-hidden bg-neutral"
+              className="relative rounded-lg overflow-hidden bg-neutral transition-opacity duration-500 opacity-0 shadow-2xl"
             >
               <LazyLoadImage
                 key={url}
-                className="image  h-[90vmin] md:h-[56vmin] w-[60vmin] md:w-[40vmin] object-cover object-[100%_center] relative block max-w-none"
+                className="image h-[90vmin] md:h-[56vmin] w-[60vmin] md:w-[40vmin] object-cover object-[100%_center] relative block max-w-none"
                 src={url}
                 draggable="false"
                 visibleByDefault={true}
-                effect="opacity"
+                afterLoad={() => {
+                  setTimeout(() => {
+                    document
+                      .getElementById(`image-${value}-${imageIndex}`)
+                      .classList.add("opacity-100");
+                  }, 100 * imageIndex);
+                }}
               />
               <p className="absolute top-2 left-1/2 -translate-x-1/2 text-[rgba(255,255,255,.3)] uppercase text-4xl md:text-6xl font-bold text-center">
                 {label}

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import ImageParallaxScroller from "../../../components/UI/ImageParallaxScroller";
 import { useFirebase } from "../../../context/firebase";
 
@@ -92,65 +93,84 @@ const CreateMW2Build = () => {
   }, [filteredGuns]);
 
   return (
-    <section className="flex flex-col items-center">
-      {step === 0 && (
-        <ImageParallaxScroller
-          images={images}
-          onImageSelect={imageSelect}
-          title="Select Class"
+    <>
+      <Helmet>
+        <title>Create MW2 Gun Build | Dev Bros HQ</title>
+        <meta
+          content="Create MW2 Gun Build | Dev Bros HQ"
+          property="og:title"
         />
-      )}
-      {step === 1 && (
-        <ImageParallaxScroller
-          images={formattedGuns}
-          onImageSelect={imageSelect}
-          title="Select Gun"
+        <meta
+          content="Select the gun and up to 5 attachments for this build."
+          property="og:description"
         />
-      )}
-      {step > 1 && (
-        <>
-          <br />
-          <br />
-          <br />
-          <div className="flex flex-col md:flex-row items-center relative w-full justify-center pt-16">
-            <button
-              onClick={resetBuild}
-              className="btn btn-accent absolute left-4 top-0"
-            >
-              ← Choose a Different Gun
-            </button>
-            <div className="card w-96 bg-base-100 shadow-xl image-full">
-              <figure>
-                <img
-                  src={gun.imgURL}
-                  alt={gun["gun-name"]}
-                  className="scale-125"
-                />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title text-[rgba(255,255,255,1)] uppercase text-6xl font-bold text-center">
-                  {gun["gun-name"]}
-                </h2>
-                <div className="badge badge-lg badge-primary">
-                  Class: {gun.class}
+        <meta content="https://devbroshq.com/" property="og:url" />
+        <meta
+          content="https://devbroshq.com/square-dev-bros-hq-title.webp"
+          property="og:image"
+        />
+        <meta content="#3ABFF8" data-react-helmet="true" name="theme-color" />
+      </Helmet>
+      <section className="flex flex-col items-center">
+        {step === 0 && (
+          <ImageParallaxScroller
+            images={images}
+            onImageSelect={imageSelect}
+            title="Select Class"
+          />
+        )}
+        {step === 1 && (
+          <ImageParallaxScroller
+            images={formattedGuns}
+            onImageSelect={imageSelect}
+            title="Select Gun"
+          />
+        )}
+        {step > 1 && (
+          <>
+            <br />
+            <br />
+            <br />
+            <div className="flex flex-col md:flex-row items-center relative w-full justify-center pt-16">
+              <button
+                onClick={resetBuild}
+                className="btn btn-accent absolute left-4 top-0"
+              >
+                ← Choose a Different Gun
+              </button>
+              <div className="card w-96 bg-base-100 shadow-xl image-full">
+                <figure>
+                  <img
+                    src={gun.imgURL}
+                    alt={gun["gun-name"]}
+                    className="scale-125"
+                  />
+                </figure>
+                <div className="card-body">
+                  <h2 className="card-title text-[rgba(255,255,255,1)] uppercase text-6xl font-bold text-center">
+                    {gun["gun-name"]}
+                  </h2>
+                  <div className="badge badge-lg badge-primary">
+                    Class: {gun.class}
+                  </div>
+                  <div className="badge badge-lg badge-secondary">
+                    Ammo: {gun.ammunition}
+                  </div>
                 </div>
-                <div className="badge badge-lg badge-secondary">
-                  Ammo: {gun.ammunition}
+              </div>
+              <div className="card w-96 bg-primary text-primary-content ml-0 md:ml-6 mt-6 md:mt-0">
+                <div className="card-body">
+                  <h2 className="card-title">Next step:</h2>
+                  <p>Choose up to 5 attachemnts.</p>
                 </div>
               </div>
             </div>
-            <div className="card w-96 bg-primary text-primary-content ml-0 md:ml-6 mt-6 md:mt-0">
-              <div className="card-body">
-                <h2 className="card-title">Next step:</h2>
-                <p>Choose up to 5 attachemnts.</p>
-              </div>
-            </div>
-          </div>
 
-          {/* Add Form here for all of the attachments and such */}
-        </>
-      )}
-    </section>
+            {/* Add Form here for all of the attachments and such */}
+          </>
+        )}
+      </section>
+    </>
   );
 };
 
