@@ -69,6 +69,9 @@ const Nav = () => {
                 <li>
                   <Link to="/mw2-builds">MW2 Builds</Link>
                 </li>
+                <li>
+                  <Link to="/magic-8">Magic 8 Ball</Link>
+                </li>
               </ul>
             </li>
           </ul>
