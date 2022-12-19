@@ -6,17 +6,19 @@ const Footer = () => {
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-wrap md:text-left order-first">
           <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h2 className="title-font font-medium tracking-widest text-sm mb-3">
-              CATEGORIES
+            <h2 className="title-font font-medium text-secondary-content tracking-widest text-sm mb-3">
+              Links
             </h2>
             <nav className="list-none mb-10">
               <li>
-                <Link to="/mw2-builds" className="text-base">
-                  MW2 Gun Builds
+                <Link to="/" className="text-base">
+                  Home
                 </Link>
               </li>
               <li>
-                <a className="text-base">Second Link</a>
+                <Link to="/about" className="text-base">
+                  About
+                </Link>
               </li>
               <li>
                 <a className="text-base">Third Link</a>
@@ -27,15 +29,19 @@ const Footer = () => {
             </nav>
           </div>
           <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h2 className="title-font font-medium text-secondary-content tracking-widest text-sm mb-3">
-              CATEGORIES
+            <h2 className="title-font font-medium tracking-widest text-sm mb-3">
+              Tools
             </h2>
             <nav className="list-none mb-10">
               <li>
-                <a className="text-base">First Link</a>
+                <Link to="/mw2-builds" className="text-base">
+                  MW2 Gun Builds
+                </Link>
               </li>
               <li>
-                <a className="text-base">Second Link</a>
+                <Link to="/magic-8" className="text-base">
+                  Magic 8 Ball
+                </Link>
               </li>
               <li>
                 <a className="text-base">Third Link</a>
