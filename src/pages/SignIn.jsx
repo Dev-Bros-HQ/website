@@ -27,17 +27,6 @@ const SignIn = () => {
     }
   };
 
-  //TODO: Implement password reset button
-  const sendPasswordReset = async (email) => {
-    try {
-      await sendPasswordResetEmail(auth, email);
-      alert("Password reset link sent!");
-    } catch (err) {
-      console.error(err);
-      alert(err.message);
-    }
-  };
-
   return (
     <>
       <section className="flex flex-col items-center">
@@ -84,6 +73,15 @@ const SignIn = () => {
                 Don't have an account?{" "}
                 <Link to="/sign-up" className="text-accent-focus underline">
                   Sign up!
+                </Link>
+              </p>
+              <br />
+              <p className="text-primary-content">
+                <Link
+                  to="/forgot-password"
+                  className="text-accent-focus underline"
+                >
+                  Forgot Password
                 </Link>
               </p>
             </div>

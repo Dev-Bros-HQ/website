@@ -7,6 +7,7 @@ import MW2Admin from "./pages/mw2-admin";
 import PageNotFound from "./pages/PageNotFound";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import ForgotPassword from "./pages/ForgotPassword";
 import CreateMW2Build from "./pages/mw2-builds/create";
 import Magic8 from "./pages/magic-8";
 import About from "./pages/About";
@@ -17,9 +18,10 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/about" element={<About />} />
           <Route path="/mw2-admin" element={<MW2Admin />} />
           <Route path="/mw2-builds" element={<MW2Builds />} />
           <Route path="/mw2-builds/create" element={<CreateMW2Build />} />
