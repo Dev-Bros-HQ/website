@@ -11,6 +11,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import CreateMW2Build from "./pages/mw2-builds/create";
 import Magic8 from "./pages/magic-8";
 import About from "./pages/About";
+import InYourFridge from "./pages/in-your-fridge";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/about" element={<About />} />
+          <Route path="/in-your-fridge" element={<InYourFridge />} />
           <Route path="/mw2-admin" element={<MW2Admin />} />
           <Route path="/mw2-builds" element={<MW2Builds />} />
           <Route path="/mw2-builds/create" element={<CreateMW2Build />} />

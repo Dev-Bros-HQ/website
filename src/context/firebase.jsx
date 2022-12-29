@@ -83,6 +83,7 @@ function FirebaseProvider({ children }) {
         db,
         auth,
         authState: { user: { ...user, ...userInformation }, loading, error },
+        isLoggedIn: userInformation.uid ? true : false,
         builds,
         attachments,
         guns,

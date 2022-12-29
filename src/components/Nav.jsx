@@ -72,6 +72,9 @@ const Nav = () => {
                 <li>
                   <Link to="/magic-8">Magic 8 Ball</Link>
                 </li>
+                <li>
+                  <Link to="/in-your-fridge">In Your Fridge</Link>
+                </li>
               </ul>
             </li>
           </ul>

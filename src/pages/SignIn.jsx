@@ -17,7 +17,8 @@ const SignIn = () => {
     callback(value);
   };
 
-  const logInWithEmailAndPassword = async () => {
+  const logInWithEmailAndPassword = async (e) => {
+    e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
       navigate("/");
@@ -39,52 +40,55 @@ const SignIn = () => {
         <br />
         <div className="card w-full max-w-lg bg-primary-focus shadow-xl">
           <div className="card-body">
-            <div className="form-control w-full">
-              <p className="text-primary-content uppercase text-lg font-bold">
-                Email
-              </p>
-              <input
-                type="text"
-                placeholder=""
-                className="input input-bordered w-full"
-                onChange={(e) => handleInputChange(e, setEmail)}
-              />
-              <br />
-              <p className="text-primary-content uppercase text-lg font-bold">
-                Password
-              </p>
-              <input
-                type="password"
-                placeholder=""
-                className="input input-bordered w-full"
-                onChange={(e) => handleInputChange(e, setPassword)}
-              />
-              <br />
-              <button
-                type="submit"
-                disabled={!email.length && !password.length}
-                className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg bg-secondary-focus text-secondary-content border-none hover:bg-secondary-content hover:text-secondary"
-                onClick={() => logInWithEmailAndPassword()}
-              >
-                Submit
-              </button>
-              <br />
-              <p className="text-primary-content">
-                Don't have an account?{" "}
-                <Link to="/sign-up" className="text-accent-focus underline">
-                  Sign up!
-                </Link>
-              </p>
-              <br />
-              <p className="text-primary-content">
-                <Link
-                  to="/forgot-password"
-                  className="text-accent-focus underline"
+            <form onSubmit={logInWithEmailAndPassword}>
+              <div className="form-control w-full">
+                <p className="text-primary-content uppercase text-lg font-bold">
+                  Email
+                </p>
+                <input
+                  type="email"
+                  placeholder=""
+                  autoComplete="email"
+                  className="input input-bordered w-full"
+                  onChange={(e) => handleInputChange(e, setEmail)}
+                />
+                <br />
+                <p className="text-primary-content uppercase text-lg font-bold">
+                  Password
+                </p>
+                <input
+                  type="password"
+                  placeholder=""
+                  autoComplete="current-password"
+                  className="input input-bordered w-full"
+                  onChange={(e) => handleInputChange(e, setPassword)}
+                />
+                <br />
+                <button
+                  type="submit"
+                  disabled={!email.length && !password.length}
+                  className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg bg-secondary-focus text-secondary-content border-none hover:bg-secondary-content hover:text-secondary"
                 >
-                  Forgot Password
-                </Link>
-              </p>
-            </div>
+                  Submit
+                </button>
+                <br />
+                <p className="text-primary-content">
+                  Don't have an account?{" "}
+                  <Link to="/sign-up" className="text-accent-focus underline">
+                    Sign up!
+                  </Link>
+                </p>
+                <br />
+                <p className="text-primary-content">
+                  <Link
+                    to="/forgot-password"
+                    className="text-accent-focus underline"
+                  >
+                    Forgot Password
+                  </Link>
+                </p>
+              </div>
+            </form>
           </div>
         </div>
       </section>
