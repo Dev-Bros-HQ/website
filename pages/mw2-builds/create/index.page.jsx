@@ -72,8 +72,11 @@ const Page = () => {
       setFilteredGuns(filtered);
     }
     if (step === 1) {
+      const currentGun = filteredGuns.filter(
+        (gun) => gun["gun-name"] === value
+      )[0];
       const filtered = filterGunsByClass(value);
-      setGun(value);
+      setGun(currentGun);
       setFilteredGuns(filtered);
     }
     setStep((curr) => curr + 1);
@@ -82,7 +85,7 @@ const Page = () => {
   useEffect(() => {
     if (filteredGuns.length > 0) {
       const formatted = filteredGuns.map((gun) => ({
-        value: gun,
+        value: gun["gun-name"],
         label: gun["gun-name"],
         url: gun.imgURL,
       }));

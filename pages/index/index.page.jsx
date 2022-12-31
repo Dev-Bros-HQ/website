@@ -1,84 +1,66 @@
 import React from "react";
 import logo from "../../assets/square-dev-bros-hq-title.webp";
 import mw2Logo from "../../assets/mw2-2022-logo.webp";
-import { getRandomInt } from "../../helpers";
+import { usePageContext } from "../../renderer/usePageContext";
+const popularTools = [
+  {
+    imgUrl: mw2Logo,
+    name: "MW2 Gun Builds",
+    description: "Create, Share, and View the best gun builds!",
+    url: "/mw2-builds",
+  },
+  {
+    imgUrl: "",
+    name: "Coming Soon",
+    description: "",
+    url: "/",
+  },
+  {
+    imgUrl: "",
+    name: "Coming Soon",
+    description: "",
+    url: "/",
+  },
+  {
+    imgUrl: "",
+    name: "Coming Soon",
+    description: "",
+    url: "/",
+  },
+  {
+    imgUrl: "",
+    name: "Coming Soon",
+    description: "",
+    url: "/",
+  },
+  {
+    imgUrl: "",
+    name: "Coming Soon",
+    description: "",
+    url: "/",
+  },
+  {
+    imgUrl: "",
+    name: "Coming Soon",
+    description: "",
+    url: "/",
+  },
+  {
+    imgUrl: "",
+    name: "Coming Soon",
+    description: "",
+    url: "/",
+  },
+  {
+    imgUrl: "",
+    name: "Coming Soon",
+    description: "",
+    url: "/",
+  },
+];
 
 const Page = () => {
-  const buildingToolsEmojis = ["👀", "👷", "🛠️", "🕒", "🚧"];
-  const buildingToolsMessages = [
-    "We are still working on this tool",
-    "This tool has a few bugs, but we are working on it",
-    "Check back later",
-    "This tool is under construction",
-    "Almost there...",
-  ];
-  const popularTools = [
-    {
-      imgUrl: mw2Logo,
-      name: "MW2 Gun Builds",
-      description: "Create, Share, and View the best gun builds!",
-      url: "/mw2-builds",
-    },
-    {
-      imgUrl: "",
-      name: "Coming Soon",
-      description: "",
-      url: "/",
-    },
-    {
-      imgUrl: "",
-      name: "Coming Soon",
-      description: "",
-      url: "/",
-    },
-    {
-      imgUrl: "",
-      name: "Coming Soon",
-      description: "",
-      url: "/",
-    },
-    {
-      imgUrl: "",
-      name: "Coming Soon",
-      description: "",
-      url: "/",
-    },
-    {
-      imgUrl: "",
-      name: "Coming Soon",
-      description: "",
-      url: "/",
-    },
-    {
-      imgUrl: "",
-      name: "Coming Soon",
-      description: "",
-      url: "/",
-    },
-    {
-      imgUrl: "",
-      name: "Coming Soon",
-      description: "",
-      url: "/",
-    },
-    {
-      imgUrl: "",
-      name: "Coming Soon",
-      description: "",
-      url: "/",
-    },
-  ];
-
-  const getRandomBuildEmoji = () => {
-    return buildingToolsEmojis[getRandomInt(0, buildingToolsEmojis.length - 1)];
-  };
-
-  const getRandomBuildMessage = () => {
-    return buildingToolsMessages[
-      getRandomInt(0, buildingToolsMessages.length - 1)
-    ];
-  };
-
+  const pageContext = usePageContext();
   return (
     <>
       <section className="text-neutral-content body-font w-full lg:w-screen lg:-ml-[calc((100vw-1007px)/2)] bg-[url('/assets/hero-background.svg')] bg-cover bg-bottom pb-[25vh]">
@@ -123,7 +105,7 @@ const Page = () => {
                         />
                       ) : (
                         <div className="left-0 top-0 w-[104px] h-full absolute flex justify-center items-center text-[30px] pr-4">
-                          {getRandomBuildEmoji()}
+                          {pageContext?.popularTools?.[toolIndex]?.emoji}
                         </div>
                       )}
                       <div className="h-full w-[calc(100%-90px)] shadow-[-5px_0px_10px_8px_rgb(243,244,246)] shadow-base-300 ml-2 p-4 z-20 bg-base-300 text-base-content">
@@ -131,7 +113,9 @@ const Page = () => {
                           {name}
                         </p>
                         <p className="text-xs xs:text-base">
-                          {description ? description : getRandomBuildMessage()}
+                          {description
+                            ? description
+                            : pageContext?.popularTools?.[toolIndex]?.message}
                         </p>
                       </div>
                     </div>
