@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async";
-import ImageParallaxScroller from "../../../components/UI/ImageParallaxScroller";
 import { useFirebase } from "../../../context/firebase";
+import ImageParallaxScroller from "../../../components/UI/ImageParallaxScroller";
 
-const CreateMW2Build = () => {
+const Page = () => {
   const { guns } = useFirebase();
   const [step, setStep] = useState(0);
   const [filteredGuns, setFilteredGuns] = useState([]);
@@ -94,23 +93,6 @@ const CreateMW2Build = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Create MW2 Gun Build | Dev Bros HQ</title>
-        <meta
-          content="Create MW2 Gun Build | Dev Bros HQ"
-          property="og:title"
-        />
-        <meta
-          content="Select the gun and up to 5 attachments for this build."
-          property="og:description"
-        />
-        <meta content="https://devbroshq.com/" property="og:url" />
-        <meta
-          content="https://devbroshq.com/square-dev-bros-hq-title.webp"
-          property="og:image"
-        />
-        <meta content="#3ABFF8" data-react-helmet="true" name="theme-color" />
-      </Helmet>
       <section className="flex flex-col items-center">
         {step === 0 && (
           <ImageParallaxScroller
@@ -174,4 +156,9 @@ const CreateMW2Build = () => {
   );
 };
 
-export default CreateMW2Build;
+export { Page };
+
+export const documentProps = {
+  "og:title": "Create MW2 Gun Build",
+  "og:description": "Select the gun and up to 5 attachments for this build.",
+};

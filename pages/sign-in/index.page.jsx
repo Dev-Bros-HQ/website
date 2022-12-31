@@ -6,7 +6,7 @@ import {
 import { useFirebase } from "../context/firebase";
 import { Link, useNavigate } from "react-router-dom";
 
-const SignIn = () => {
+const Page = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { auth } = useFirebase();
@@ -92,4 +92,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export { Page };

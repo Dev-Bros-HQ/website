@@ -5,7 +5,7 @@ import AttachmentsTable from "../../components/mw2/AttachmentsTable";
 import GunsTable from "../../components/mw2/GunsTable";
 import { useFirebase } from "../../context/firebase";
 
-const MW2Admin = () => {
+const Page = () => {
   const [notAdminMessage, setNotAdminMessage] = useState("Loading...");
   const { authState } = useFirebase();
   const isAdmin = authState?.user?.admin;
@@ -53,4 +53,4 @@ const MW2Admin = () => {
   );
 };
 
-export default MW2Admin;
+export { Page };

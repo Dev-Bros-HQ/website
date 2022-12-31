@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { isValidEmail } from "../helpers";
 import { toast } from "react-hot-toast";
 
-const SignUp = () => {
+const Page = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -142,4 +142,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export { Page };

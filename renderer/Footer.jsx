@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import logo from "../assets/circle-dev-bros-hq.webp";
 const Footer = () => {
   return (
@@ -11,14 +10,14 @@ const Footer = () => {
             </h2>
             <nav className="list-none mb-10">
               <li>
-                <Link to="/" className="text-base">
+                <a href="/" className="text-base">
                   Home
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/about" className="text-base">
+                <a href="/about" className="text-base">
                   About
-                </Link>
+                </a>
               </li>
               <li>
                 <a className="text-base">Third Link</a>
@@ -34,14 +33,14 @@ const Footer = () => {
             </h2>
             <nav className="list-none mb-10">
               <li>
-                <Link to="/mw2-builds" className="text-base">
+                <a href="/mw2-builds" className="text-base">
                   MW2 Gun Builds
-                </Link>
+                </a>
               </li>
               <li>
-                <Link to="/magic-8" className="text-base">
+                <a href="/magic-8" className="text-base">
                   Magic 8 Ball
-                </Link>
+                </a>
               </li>
               <li>
                 <a className="text-base">Third Link</a>
@@ -74,13 +73,13 @@ const Footer = () => {
       </div>
       <div>
         <div className="container px-9 py-6 mx-auto flex items-start sm:items-center sm:flex-row flex-col">
-          <Link
-            to="/"
+          <a
+            href="/"
             className="flex title-font font-medium items-center md:justify-start justify-center text-secondary-content"
           >
             <img src={logo} alt="dev bros hq logo" className="w-10 h-10" />
             <span className="ml-3 text-xl">Dev Bros HQ</span>
-          </Link>
+          </a>
           <p className="text-sm sm:ml-6 sm:mt-0 mt-4">© 2022 Dev Bros HQ</p>
         </div>
       </div>

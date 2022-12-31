@@ -1,5 +1,4 @@
 import { signOut } from "firebase/auth";
-import { Link } from "react-router-dom";
 import logo from "../assets/circle-dev-bros-hq.webp";
 import { useFirebase } from "../context/firebase";
 
@@ -18,12 +17,12 @@ const Nav = () => {
     <nav className="sticky top-0 pt-2 z-50">
       <div className="navbar bg-neutral text-neutral-content rounded-lg pl-4 mx-2 w-[calc(100%-16px)]">
         <div className="navbar-start">
-          <Link
+          <a
             className="btn btn-ghost normal-case text-xl rounded-full p-0"
-            to="/"
+            href="/"
           >
             <img src={logo} alt="dev bros hq logo" className="w-12 h-12" />
-          </Link>
+          </a>
         </div>
         <div className="navbar-end">
           {user.admin ? (
@@ -43,7 +42,7 @@ const Nav = () => {
                 </a>
                 <ul className="p-2 bg-neutral rounded-lg right-0 pt-4">
                   <li>
-                    <Link to="/mw2-admin">MW2 Dashboard</Link>
+                    <a href="/mw2-admin">MW2 Dashboard</a>
                   </li>
                 </ul>
               </li>
@@ -67,10 +66,10 @@ const Nav = () => {
               </a>
               <ul className="p-2 bg-neutral rounded-lg right-0 pt-4">
                 <li>
-                  <Link to="/mw2-builds">MW2 Builds</Link>
+                  <a href="/mw2-builds">MW2 Builds</a>
                 </li>
                 <li>
-                  <Link to="/magic-8">Magic 8 Ball</Link>
+                  <a href="/magic-8">Magic 8 Ball</a>
                 </li>
               </ul>
             </li>
@@ -80,9 +79,9 @@ const Nav = () => {
               Sign Out
             </button>
           ) : (
-            <Link to="/sign-in" className="btn btn-accent">
+            <a href="/sign-in" className="btn btn-accent">
               Sign In
-            </Link>
+            </a>
           )}
         </div>
       </div>

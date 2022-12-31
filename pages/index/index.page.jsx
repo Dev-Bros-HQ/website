@@ -1,11 +1,10 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
-import logo from "../assets/square-dev-bros-hq-title.webp";
-import mw2Logo from "../assets/mw2-2022-logo.webp";
-import { getRandomInt } from "../helpers";
+import React, { useEffect } from "react";
+import logo from "../../assets/square-dev-bros-hq-title.webp";
+import mw2Logo from "../../assets/mw2-2022-logo.webp";
+// import { getRandomInt } from "../helpers";
 import { Helmet } from "react-helmet-async";
 
-const Home = () => {
+const Page = () => {
   const buildingToolsEmojis = ["👀", "👷", "🛠️", "🕒", "🚧"];
   const buildingToolsMessages = [
     "We are still working on this tool",
@@ -72,31 +71,33 @@ const Home = () => {
   ];
 
   const getRandomBuildEmoji = () => {
-    return buildingToolsEmojis[getRandomInt(0, buildingToolsEmojis.length - 1)];
+    // return buildingToolsEmojis[getRandomInt(0, buildingToolsEmojis.length - 1)];
+    return "";
   };
 
   const getRandomBuildMessage = () => {
-    return buildingToolsMessages[
-      getRandomInt(0, buildingToolsMessages.length - 1)
-    ];
+    // return buildingToolsMessages[
+    //   getRandomInt(0, buildingToolsMessages.length - 1)
+    // ];
+    return "";
   };
+  // <Helmet>
+  //   <title>Dev Bros HQ</title>
+  //   <meta content="Dev Bros HQ" property="og:title" />
+  //   <meta
+  //     content="We build tools for you to help us become better developers."
+  //     property="og:description"
+  //   />
+  //   <meta content="https://devbroshq.com/" property="og:url" />
+  //   <meta
+  //     content="https://devbroshq.com/square-dev-bros-hq-title.webp"
+  //     property="og:image"
+  //   />
+  //   <meta content="#3ABFF8" data-react-helmet="true" name="theme-color" />
+  // </Helmet>
 
   return (
     <>
-      <Helmet>
-        <title>Dev Bros HQ</title>
-        <meta content="Dev Bros HQ" property="og:title" />
-        <meta
-          content="We build tools for you to help us become better developers."
-          property="og:description"
-        />
-        <meta content="https://devbroshq.com/" property="og:url" />
-        <meta
-          content="https://devbroshq.com/square-dev-bros-hq-title.webp"
-          property="og:image"
-        />
-        <meta content="#3ABFF8" data-react-helmet="true" name="theme-color" />
-      </Helmet>
       <section className="text-neutral-content body-font w-full lg:w-screen lg:-ml-[calc((100vw-1007px)/2)] bg-[url('/assets/hero-background.svg')] bg-cover bg-bottom pb-[25vh]">
         <div className="container mx-auto flex px-5 py-24 items-center justify-center flex-col md:flex-row">
           <img
@@ -129,7 +130,7 @@ const Home = () => {
                   className="p-2 lg:w-1/3 md:w-1/2 w-full"
                   key={`popular-tool-${toolIndex}`}
                 >
-                  <Link to={url}>
+                  <a href={url}>
                     <div className="relative h-[104px] flex items-center justify-end rounded-lg overflow-hidden text-neutral shadow-lg bg-base-300">
                       {imgUrl ? (
                         <img
@@ -151,7 +152,7 @@ const Home = () => {
                         </p>
                       </div>
                     </div>
-                  </Link>
+                  </a>
                 </div>
               );
             })}
@@ -162,4 +163,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export { Page };
