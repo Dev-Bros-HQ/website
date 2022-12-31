@@ -3,11 +3,10 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { useFirebase } from "../context/firebase";
-import { Link } from "react-router-dom";
+import { useFirebase } from "../../context/firebase";
 import { toast } from "react-hot-toast";
-import { isValidEmail } from "../helpers";
-import Spinner from "../components/Spinner";
+import { isValidEmail } from "../../helpers";
+import Spinner from "../../components/Spinner";
 
 const Page = () => {
   const [email, setEmail] = useState("");

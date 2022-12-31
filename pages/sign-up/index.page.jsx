@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import { useFirebase } from "../context/firebase";
-import Spinner from "../components/Spinner";
-import { useNavigate } from "react-router-dom";
-import { isValidEmail } from "../helpers";
+import { useFirebase } from "../../context/firebase";
+import Spinner from "../../components/Spinner";
+import { isValidEmail } from "../../helpers";
 import { toast } from "react-hot-toast";
 
 const Page = () => {
@@ -14,7 +13,6 @@ const Page = () => {
   const [formLoading, setFormLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const { db, auth } = useFirebase();
-  const navigate = useNavigate();
 
   const handleInputChange = (e, callback) => {
     const { value } = e.target;
@@ -71,7 +69,7 @@ const Page = () => {
         email,
         admin: false,
       });
-      navigate("/");
+      //navigate to home page
     } catch (err) {
       setFormLoading(false);
       console.error(err);
