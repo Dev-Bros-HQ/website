@@ -43,7 +43,7 @@ const Page = () => {
     {
       value: "Sniper",
       label: "Sniper",
-      url: "https://devbroshq.com/assets/mw2-guns/mcpr300webp",
+      url: "https://devbroshq.com/assets/mw2-guns/mcpr300.webp",
     },
     {
       value: "Handgun",
