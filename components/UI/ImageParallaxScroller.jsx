@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import pkg from "react-lazy-load-image-component";
 
 const ImageParallaxScroller = ({ images, onImageSelect, title }) => {
+  const { LazyLoadImage } = pkg;
   const trackRef = useRef();
 
   useEffect(() => {
