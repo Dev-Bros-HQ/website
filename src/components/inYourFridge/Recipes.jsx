@@ -609,18 +609,38 @@ const Recipes = () => {
           } = formatMealFromMealDB(meal);
 
           const tags = strTags?.split(",");
+          const test = true;
+          if (test) {
+            return (
+              <div className="indicator w-full">
+                <div className="indicator-item indicator-bottom">
+                  <button className="btn btn-primary">Apply</button>
+                </div>
+                <div className="card border w-full">
+                  <div className="card-body">
+                    <h2 className="card-title">{strMeal}</h2>
+                    <p>{strCategory}</p>
+                  </div>
+                </div>
+              </div>
+            );
+          }
 
           return (
             <div
               key={idMeal}
-              className="card w-96 min-h-[200px] bg-base-100 shadow-xl image-full"
+              className="card w-96 min-h-[200px] bg-neutral shadow-xl p-4"
             >
               <figure>
-                <img src={strMealThumb} alt={strMeal} className="w-full" />
+                <img
+                  src={strMealThumb}
+                  alt={strMeal}
+                  className="w-full max-h-[200px] rounded-xl object-cover z-40"
+                />
               </figure>
-              <div className="card-body">
-                <span>{strCategory}</span>
+              <div className="card-body p-0 py-2">
                 <h2 className="card-title">{strMeal}</h2>
+                <span>{strCategory}</span>
                 {tags && (
                   <div className="flex gap-1">
                     {tags.map((tag) => (
@@ -634,22 +654,6 @@ const Recipes = () => {
                   </div>
                 )}
 
-                {ingredients && (
-                  <div className="card bg-yellow-100 text-neutral flex flex-wrap gap-1 p-2 px-3 max-h-[200px]">
-                    <p>Ingredients</p>
-                    {ingredients.map((ingredient, ingredientIndex) => (
-                      <div
-                        key={`${mealId}-ingredient-${ingredientIndex}`}
-                        className="flex text-[12px]"
-                      >
-                        <strong className="mr-2">
-                          {ingredient.ingredient}
-                        </strong>{" "}
-                        <p>({ingredient.qty})</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
                 <div className="card-actions justify-end grow items-end">
                   <button className="btn btn-primary">View Recipe</button>
                 </div>

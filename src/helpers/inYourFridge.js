@@ -26,6 +26,21 @@ export const foodCategories = {
   },
 };
 
+export const mealDBCategories = [
+  "Beef",
+  "Chicken",
+  "Dessert",
+  "Lamb",
+  "Miscellaneous",
+  "Pasta",
+  "Pork",
+  "Seafood",
+  "Side",
+  "Starter",
+  "Sweets",
+  "Vegetarian",
+];
+
 export const foodMeasurments = [
   { label: "Teaspoon", value: "tsp" },
   { label: "Tablespoon", value: "tbsp" },

@@ -1,13 +1,11 @@
 import Header from "../../components/Header";
 import { useFirebase } from "../../context/firebase";
-import InYourFridgeDashboard from "./Dashboard";
+import InYourFridgeDashboard from "./InYourFridgeDashboard";
 
 const InYourFridge = () => {
   const fruits = ["🍎", "🥬", "🌽"];
 
   const { isLoggedIn } = useFirebase();
-
-  console.log({ isLoggedIn });
 
   return (
     <>
