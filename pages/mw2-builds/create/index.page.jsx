@@ -13,42 +13,42 @@ const Page = () => {
     {
       value: "Assault Rifle",
       label: "Assault Rifle",
-      url: "https://iili.io/HntDUrl.png",
+      url: "https://devbroshq.com/assets/mw2-guns/m4.webp",
     },
     {
       value: "Battle Rifle",
       label: "Battle Rifle",
-      url: "https://iili.io/HntDh7I.png",
+      url: "https://devbroshq.com/assets/mw2-guns/lachmann556.webp",
     },
     {
       value: "SMG",
       label: "SMG",
-      url: "https://iili.io/Hntb0y7.png",
+      url: "https://devbroshq.com/assets/mw2-guns/vel46.webp",
     },
     {
       value: "Shotgun",
       label: "Shotgun",
-      url: "https://iili.io/HntDkLG.png",
+      url: "https://devbroshq.com/assets/mw2-guns/lockwood300.webp",
     },
     {
       value: "LMG",
       label: "LMG",
-      url: "https://iili.io/HntbfEv.png",
+      url: "https://devbroshq.com/assets/mw2-guns/sakinmg38.webp",
     },
     {
       value: "Marksman Rifle",
       label: "Marksman Rifle",
-      url: "https://iili.io/HntDq57.png",
+      url: "https://devbroshq.com/assets/mw2-guns/ebr14.webp",
     },
     {
       value: "Sniper",
       label: "Sniper",
-      url: "https://iili.io/HntDDEx.png",
+      url: "https://devbroshq.com/assets/mw2-guns/mcpr300webp",
     },
     {
       value: "Handgun",
       label: "Handgun",
-      url: "https://iili.io/HnDd6zB.png",
+      url: "https://devbroshq.com/assets/mw2-guns/p890.webp",
     },
   ];
 

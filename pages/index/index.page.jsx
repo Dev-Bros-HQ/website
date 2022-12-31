@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import logo from "../../assets/square-dev-bros-hq-title.webp";
 import mw2Logo from "../../assets/mw2-2022-logo.webp";
-// import { getRandomInt } from "../helpers";
-import { Helmet } from "react-helmet-async";
+import { getRandomInt } from "../../helpers";
 
 const Page = () => {
   const buildingToolsEmojis = ["👀", "👷", "🛠️", "🕒", "🚧"];
@@ -71,30 +70,14 @@ const Page = () => {
   ];
 
   const getRandomBuildEmoji = () => {
-    // return buildingToolsEmojis[getRandomInt(0, buildingToolsEmojis.length - 1)];
-    return "";
+    return buildingToolsEmojis[getRandomInt(0, buildingToolsEmojis.length - 1)];
   };
 
   const getRandomBuildMessage = () => {
-    // return buildingToolsMessages[
-    //   getRandomInt(0, buildingToolsMessages.length - 1)
-    // ];
-    return "";
+    return buildingToolsMessages[
+      getRandomInt(0, buildingToolsMessages.length - 1)
+    ];
   };
-  // <Helmet>
-  //   <title>Dev Bros HQ</title>
-  //   <meta content="Dev Bros HQ" property="og:title" />
-  //   <meta
-  //     content="We build tools for you to help us become better developers."
-  //     property="og:description"
-  //   />
-  //   <meta content="https://devbroshq.com/" property="og:url" />
-  //   <meta
-  //     content="https://devbroshq.com/square-dev-bros-hq-title.webp"
-  //     property="og:image"
-  //   />
-  //   <meta content="#3ABFF8" data-react-helmet="true" name="theme-color" />
-  // </Helmet>
 
   return (
     <>
