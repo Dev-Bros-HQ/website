@@ -40,19 +40,23 @@ async function render(pageContext) {
         <title>${ogTitle}</title>
         <meta charset="UTF-8" />
         <meta
-          content=${ogTitle}
+          content="${ogTitle}"
           property="og:title"
         />
         <meta
-          content=${ogDescription}
+          content="${ogDescription}"
+          property="description"
+        />
+        <meta
+          content="${ogDescription}"
           property="og:description"
         />
         <meta
-          content=${ogUrl}
+          content="${ogUrl}"
           property="og:url"
         />
         <meta
-          content=${ogImage}
+          content="${ogImage}"
           property="og:image"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
