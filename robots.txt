@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+Disallow: /mw2-admin/
+Sitemap: https://devbroshq.com/sitemap.xml
