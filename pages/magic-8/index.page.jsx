@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { debounce } from "../../helpers";
 import get8BallResponse from "../../helpers/8ball";
 
-const Magic8 = () => {
+const Page = () => {
   const ballRef = useRef();
   const responseRef = useRef();
   const [response, setResponse] = useState("");
@@ -47,4 +47,12 @@ const Magic8 = () => {
   );
 };
 
-export default Magic8;
+export { Page };
+
+export const documentProps = {
+  "og:title": "Magic 8 Ball",
+  "og:description":
+    "Ask a yes or no question, get a yes, no, or maybe response",
+  "og:url": "https://devbroshq.com/",
+  "og:image": "https://devbroshq.com/square-dev-bros-hq-title.webp",
+};

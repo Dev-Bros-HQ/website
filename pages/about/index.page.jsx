@@ -1,7 +1,6 @@
-import { Helmet } from "react-helmet-async";
-import Header from "../components/Header";
+import Header from "../../components/Header";
 
-const About = () => {
+const Page = () => {
   const textSections = [
     "We're a team of developers dedicated to creating tools that make it easier for you, the end user, to get things done.",
     "At Dev Bros HQ, we believe that technology should be accessible and user-friendly, which is why we're constantly working on new and innovative ways to help you streamline your tasks and accomplish more with less effort. Our tools are designed with you in mind, and we strive to make them as intuitive and easy to use as possible.",
@@ -12,20 +11,6 @@ const About = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Dev Bros HQ | About</title>
-        <meta content="Dev Bros HQ | About" property="og:title" />
-        <meta
-          content="We build tools for you to help us become better developers."
-          property="og:description"
-        />
-        <meta content="https://devbroshq.com/" property="og:url" />
-        <meta
-          content="https://devbroshq.com/square-dev-bros-hq-title.webp"
-          property="og:image"
-        />
-        <meta content="#3ABFF8" data-react-helmet="true" name="theme-color" />
-      </Helmet>
       <div className="font-sans">
         <div className="container mx-auto px-4 py-8 flex flex-col items-center">
           <Header>Welcome to Dev Bros HQ!</Header>
@@ -51,4 +36,12 @@ const About = () => {
   );
 };
 
-export default About;
+export { Page };
+
+export const documentProps = {
+  "og:title": "About Dev Bros HQ",
+  "og:description":
+    "We build tools for you to help us become better developers.",
+  "og:url": "https://devbroshq.com/",
+  "og:image": "https://devbroshq.com/square-dev-bros-hq-title.webp",
+};

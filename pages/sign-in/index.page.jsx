@@ -3,14 +3,12 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { useFirebase } from "../context/firebase";
-import { Link, useNavigate } from "react-router-dom";
+import { useFirebase } from "../../context/firebase";
 
-const SignIn = () => {
+const Page = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { auth } = useFirebase();
-  const navigate = useNavigate();
 
   const handleInputChange = (e, callback) => {
     const { value } = e.target;
@@ -20,7 +18,7 @@ const SignIn = () => {
   const logInWithEmailAndPassword = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/");
+      //add navigation to home page
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -71,18 +69,18 @@ const SignIn = () => {
               <br />
               <p className="text-primary-content">
                 Don't have an account?{" "}
-                <Link to="/sign-up" className="text-accent-focus underline">
+                <a href="/sign-up" className="text-accent-focus underline">
                   Sign up!
-                </Link>
+                </a>
               </p>
               <br />
               <p className="text-primary-content">
-                <Link
-                  to="/forgot-password"
+                <a
+                  href="/forgot-password"
                   className="text-accent-focus underline"
                 >
                   Forgot Password
-                </Link>
+                </a>
               </p>
             </div>
           </div>
@@ -92,4 +90,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export { Page };

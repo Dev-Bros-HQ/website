@@ -3,13 +3,12 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { useFirebase } from "../context/firebase";
-import { Link } from "react-router-dom";
+import { useFirebase } from "../../context/firebase";
 import { toast } from "react-hot-toast";
-import { isValidEmail } from "../helpers";
-import Spinner from "../components/Spinner";
+import { isValidEmail } from "../../helpers";
+import Spinner from "../../components/Spinner";
 
-const ForgotPassword = () => {
+const Page = () => {
   const [email, setEmail] = useState("");
   const [linkSent, setLinkSent] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -97,9 +96,9 @@ const ForgotPassword = () => {
               </p>
               <p className="text-primary-content">
                 Need to{" "}
-                <Link to="/sign-in" className="text-accent-focus underline">
+                <a href="/sign-in" className="text-accent-focus underline">
                   sign in?
-                </Link>
+                </a>
               </p>
             </div>
           </div>
@@ -131,16 +130,16 @@ const ForgotPassword = () => {
                 <br />
                 <p className="text-primary-content">
                   Don't have an account?{" "}
-                  <Link to="/sign-up" className="text-accent-focus underline">
+                  <a href="/sign-up" className="text-accent-focus underline">
                     Sign up!
-                  </Link>
+                  </a>
                 </p>
                 <br />
                 <p className="text-primary-content">
                   Need to{" "}
-                  <Link to="/sign-in" className="text-accent-focus underline">
+                  <a href="/sign-in" className="text-accent-focus underline">
                     sign in?
-                  </Link>
+                  </a>
                 </p>
               </div>
             </div>
@@ -151,4 +150,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export { Page };
