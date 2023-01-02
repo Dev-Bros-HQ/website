@@ -69,6 +69,8 @@ const Page = () => {
             className="w-1/2 max-w-[300px] mb-10 object-cover object-center rounded-lg"
             alt="dev bros hq logo"
             src={logo}
+            width="300"
+            height="300"
           />
           <div className="md:text-center lg:w-1/2 w-full text-left md:px-12">
             <p className="mb-8 sm:text-4xl text-3xl">
@@ -84,7 +86,7 @@ const Page = () => {
         <div className="container px-5 py-16 mx-auto">
           <div className="flex flex-col text-center w-full mb-20">
             <h2 className="sm:text-5xl text-3xl font-medium title-font mb-4 text-base-300">
-              Check out our <span className="text-accent">Popular Tools!</span>
+              Check out our Popular Tools!
             </h2>
           </div>
           <div className="flex flex-wrap -m-2">
@@ -100,7 +102,7 @@ const Page = () => {
                       {imgUrl ? (
                         <img
                           alt="team"
-                          className="left-0 top-0 h-[104px] absolute pr-4 w-[104px]"
+                          className="left-0 top-0 h-[104px] w-[104px] absolute mr-4"
                           src={imgUrl}
                         />
                       ) : (
