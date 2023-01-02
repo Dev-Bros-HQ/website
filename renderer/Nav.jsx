@@ -28,7 +28,7 @@ const Nav = () => {
           {user.admin ? (
             <ul className="menu menu-horizontal text-secondary">
               <li tabIndex={0}>
-                <a className="rounded-lg">
+                <button className="btn rounded-lg">
                   Admin
                   <svg
                     className="fill-current"
@@ -39,7 +39,7 @@ const Nav = () => {
                   >
                     <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
                   </svg>
-                </a>
+                </button>
                 <ul className="p-2 bg-neutral rounded-lg right-0 pt-4">
                   <li>
                     <a href="/mw2-admin">MW2 Dashboard</a>
@@ -52,7 +52,7 @@ const Nav = () => {
           )}
           <ul className="menu menu-horizontal">
             <li tabIndex={0}>
-              <a className="rounded-lg">
+              <button className="btn rounded-lg">
                 Tools
                 <svg
                   className="fill-current"
@@ -63,7 +63,7 @@ const Nav = () => {
                 >
                   <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
                 </svg>
-              </a>
+              </button>
               <ul className="p-2 bg-neutral rounded-lg right-0 pt-4">
                 <li>
                   <a href="/mw2-builds">MW2 Builds</a>

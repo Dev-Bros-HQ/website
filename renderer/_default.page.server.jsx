@@ -35,7 +35,7 @@ async function render(pageContext) {
   } = SEO;
 
   return escapeInject`<!DOCTYPE html>
-    <html data-theme="night">
+    <html data-theme="night" lang="en">
       <head>
         <title>${ogTitle}</title>
         <meta charset="UTF-8" />
@@ -45,7 +45,7 @@ async function render(pageContext) {
         />
         <meta
           content="${ogDescription}"
-          property="description"
+          name="description"
         />
         <meta
           content="${ogDescription}"
