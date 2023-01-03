@@ -6,7 +6,7 @@ import { object } from "prop-types";
 
 const Page = () => {
   const { guns } = useFirebase();
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(3);
   const [filteredGuns, setFilteredGuns] = useState([]);
   const [formattedGuns, setFormattedGuns] = useState([]);
   const [gun, setGun] = useState({});
@@ -63,28 +63,43 @@ const Page = () => {
     setGun({});
   };
 
+  const handleSubmit = () => {
+    console.log(attachmentValues);
+  };
+
+  const isFieldDisabled = (name) => {
+    return hasFiveAttachments && !attachmentValues.hasOwnProperty(name)
+      ? "disabled"
+      : "";
+  };
+
   const checkNumberOfAttachments = () => {
     const keys = Object.keys(attachmentValues);
     const length = keys.length;
-    if (length >= 4) {
+    if (length >= 5) {
       setHasFiveAttachments(true);
     } else {
       setHasFiveAttachments(false);
     }
-    console.log(keys);
+    // console.log(keys);
   };
 
   const handleInput = (e) => {
+    e.preventDefault();
     const value = e.target.value;
     const name = e.target.name;
 
     let currValue = attachmentValues[name];
     if (currValue) {
       if (value === "") {
-        const currAttachments = attachmentValues;
-        delete currAttachments[name];
-        console.log(currAttachments);
-        setAttachmentValues(currAttachments);
+        const newValues = {};
+        const keys = Object.keys(attachmentValues).filter(
+          (key) => key !== name
+        );
+        keys.forEach((key) => {
+          newValues[key] = attachmentValues[key];
+        });
+        setAttachmentValues(newValues);
         return;
       }
       currValue.value = value;
@@ -99,6 +114,7 @@ const Page = () => {
   };
 
   const handleTuningInput = (e) => {
+    e.preventDefault();
     const value = e.target.value;
     const name = e.target.name;
     const attachmentName = name.replace("-x", "").replace("-y", "");
@@ -123,9 +139,7 @@ const Page = () => {
 
   useEffect(() => {
     checkNumberOfAttachments();
-    console.log(attachmentValues);
-    console.log(hasFiveAttachments);
-  }, [attachmentValues]);
+  }, [attachmentValues, hasFiveAttachments]);
 
   const filterGunsByClass = (classType) => {
     const gunsOfClass = Object.keys(guns)
@@ -184,7 +198,7 @@ const Page = () => {
             <br />
             <br />
             <br />
-            <div className="flex flex-col md:flex-row items-center relative w-full justify-center pt-16">
+            <div className="flex flex-col md:flex-row items-center md:items-stretch relative w-full justify-center pt-16">
               <button
                 onClick={resetBuild}
                 className="btn btn-accent absolute left-4 top-0"
@@ -218,226 +232,297 @@ const Page = () => {
                 </div>
               </div>
             </div>
-            <div className="flex items-center justify-center space-x-4 pt-5">
-              <h1 className="w-15">Ammunition:</h1>
+            <div className="flex items-center space-x-4 pt-5 max-w-[1280px] mx-auto">
+              <h1 className="grow-[2] w-[150px] text-right">Ammunition:</h1>
               <select
                 name="ammunition"
                 onChange={handleInput}
-                className="select select-info w-64 max-w-xs"
-                disabled={
-                  hasFiveAttachments &&
-                  !attachmentValues.hasOwnProperty("ammunition")
-                }
+                className="select select-info w-64"
+                disabled={isFieldDisabled("ammunition")}
               >
-                <option value="">Select Amno Type</option>
-                {build.attachments.Ammunition.map((amno) => (
-                  <option value={amno}>{amno}</option>
+                <option value="">Select Ammo Type</option>
+                {build.attachments.Ammunition.map((ammo) => (
+                  <option key={ammo} value={ammo}>
+                    {ammo}
+                  </option>
                 ))}
               </select>
-              <label htmlFor="x">X:</label>
-              <input
-                onChange={handleTuningInput}
-                name="ammunition-x"
-                type="number"
-                className="input input-bordered input-info w-24 max-w-xs"
-              />
-              <label htmlFor="y">Y:</label>
-              <input
-                onChange={handleTuningInput}
-                name="ammunition-y"
-                type="number"
-                className="input input-bordered input-info w-24 max-w-xs"
-              />
+              <label htmlFor="ammunition-x" className="grow[1]">
+                X:
+                <input
+                  onChange={handleTuningInput}
+                  name="ammunition-x"
+                  type="number"
+                  className="input input-bordered input-info max-w-[100px] ml-2"
+                  disabled={isFieldDisabled("ammunition")}
+                />
+              </label>
+              <label htmlFor="ammunition-y" className="grow[1]">
+                Y:
+                <input
+                  onChange={handleTuningInput}
+                  name="ammunition-y"
+                  type="number"
+                  className="input input-bordered input-info max-w-[100px] ml-2"
+                  disabled={isFieldDisabled("ammunition")}
+                />
+              </label>
             </div>
-            <div className="flex items-center justify-center space-x-4 pt-5">
-              <h1 className="w-15">Barrel:</h1>
+            <div className="flex items-center space-x-4 pt-5 max-w-[1280px] mx-auto">
+              <h1 className="grow-[2] w-[150px] text-right">Barrel:</h1>
               <select
                 name="barrel"
                 onChange={handleInput}
-                className="select select-info w-64 max-w-xs"
+                className="select select-info w-64"
+                disabled={isFieldDisabled("barrel")}
               >
                 <option value="">Select Barrel</option>
                 {build.attachments.Barrels.map((barrel) => (
-                  <option value={barrel}>{barrel}</option>
+                  <option key={barrel} value={barrel}>
+                    {barrel}
+                  </option>
                 ))}
               </select>
-              <label htmlFor="x">X:</label>
-              <input
-                onChange={handleTuningInput}
-                name="barrel-x"
-                type="number"
-                className="input input-bordered input-info w-24 max-w-xs"
-              />
-              <label htmlFor="y">Y:</label>
-              <input
-                onChange={handleTuningInput}
-                name="barrel-y"
-                type="number"
-                className="input input-bordered input-info w-24 max-w-xs"
-              />
+              <label htmlFor="barrel-x" className="grow[1]">
+                X:
+                <input
+                  onChange={handleTuningInput}
+                  name="barrel-x"
+                  type="number"
+                  className="input input-bordered input-info max-w-[100px] ml-2"
+                  disabled={isFieldDisabled("barrel")}
+                />
+              </label>
+              <label htmlFor="barrel-y" className="grow[1]">
+                Y:
+                <input
+                  onChange={handleTuningInput}
+                  name="barrel-y"
+                  type="number"
+                  className="input input-bordered input-info max-w-[100px] ml-2"
+                  disabled={isFieldDisabled("barrel")}
+                />
+              </label>
             </div>
-            <div className="flex items-center justify-center space-x-4 pt-5">
-              <h1 className="w-15">Muzzle:</h1>
+            <div className="flex items-center space-x-4 pt-5 max-w-[1280px] mx-auto">
+              <h1 className="grow-[2] w-[150px] text-right">Muzzle:</h1>
               <select
                 name="muzzle"
                 onChange={handleInput}
                 className="select select-info w-64 max-w-xs"
+                disabled={isFieldDisabled("muzzle")}
               >
                 <option value="">Select Muzzle</option>
                 {build.attachments.Muzzles.map((muzzle) => (
-                  <option value={muzzle}>{muzzle}</option>
+                  <option key={muzzle} value={muzzle}>
+                    {muzzle}
+                  </option>
                 ))}
               </select>
-              <label htmlFor="x">X:</label>
-              <input
-                onChange={handleTuningInput}
-                name="muzzle-x"
-                type="number"
-                className="input input-bordered input-info w-24 max-w-xs"
-              />
-              <label htmlFor="y">Y:</label>
-              <input
-                onChange={handleTuningInput}
-                name="muzzle-y"
-                type="number"
-                className="input input-bordered input-info w-24 max-w-xs"
-              />
+              <label htmlFor="muzzle-x" className="grow[1]">
+                X:
+                <input
+                  onChange={handleTuningInput}
+                  name="muzzle-x"
+                  type="number"
+                  className="input input-bordered input-info max-w-[100px] ml-2"
+                  disabled={isFieldDisabled("muzzle")}
+                />
+              </label>
+              <label htmlFor="muzzle-y" className="grow[1]">
+                Y:
+                <input
+                  onChange={handleTuningInput}
+                  name="muzzle-y"
+                  type="number"
+                  className="input input-bordered input-info max-w-[100px] ml-2"
+                  disabled={isFieldDisabled("muzzle")}
+                />
+              </label>
             </div>
-            <div className="flex items-center justify-center space-x-4 pt-5">
-              <h1 className="w-15">Optic:</h1>
+            <div className="flex items-center space-x-4 pt-5 max-w-[1280px] mx-auto">
+              <h1 className="grow-[2] w-[150px] text-right">Optic:</h1>
               <select
                 name="optic"
                 onChange={handleInput}
                 className="select select-info w-64 max-w-xs"
+                disabled={isFieldDisabled("optic")}
               >
                 <option value="">Select Optic</option>
                 {build.attachments.Optics.map((optics) => (
-                  <option value={optics}>{optics}</option>
+                  <option key={optics} value={optics}>
+                    {optics}
+                  </option>
                 ))}
               </select>
-              <label htmlFor="x">X:</label>
-              <input
-                onChange={handleTuningInput}
-                name="optic-x"
-                type="number"
-                className="input input-bordered input-info w-24 max-w-xs"
-              />
-              <label htmlFor="y">Y:</label>
-              <input
-                onChange={handleTuningInput}
-                name="optic-y"
-                type="number"
-                className="input input-bordered input-info w-24 max-w-xs"
-              />
+              <label htmlFor="optic-x" className="grow[1]">
+                X:
+                <input
+                  onChange={handleTuningInput}
+                  name="optic-x"
+                  type="number"
+                  className="input input-bordered input-info max-w-[100px] ml-2"
+                  disabled={isFieldDisabled("optic")}
+                />
+              </label>
+              <label htmlFor="optic-y" className="grow[1]">
+                Y:
+                <input
+                  onChange={handleTuningInput}
+                  name="optic-y"
+                  type="number"
+                  className="input input-bordered input-info max-w-[100px] ml-2"
+                  disabled={isFieldDisabled("optic")}
+                />
+              </label>
             </div>
-            <div className="flex items-center justify-center space-x-4 pt-5">
-              <h1 className="w-15">Rear Grip:</h1>
+            <div className="flex items-center space-x-4 pt-5 max-w-[1280px] mx-auto">
+              <h1 className="grow-[2] w-[150px] text-right">Rear Grip:</h1>
               <select
                 name="rear-grip"
                 onChange={handleInput}
                 className="select select-info w-64 max-w-xs"
+                disabled={isFieldDisabled("rear-grip")}
               >
                 <option value="">Select Rear Grip</option>
                 {build.attachments["Rear Grips"].map((rg) => (
-                  <option value={rg}>{rg}</option>
+                  <option key={rg} value={rg}>
+                    {rg}
+                  </option>
                 ))}
               </select>
-              <label htmlFor="x">X:</label>
-              <input
-                onChange={handleTuningInput}
-                name="rear-grip-x"
-                type="number"
-                className="input input-bordered input-info w-24 max-w-xs"
-              />
-              <label htmlFor="y">Y:</label>
-              <input
-                onChange={handleTuningInput}
-                name="rear-grip-y"
-                type="number"
-                className="input input-bordered input-info w-24 max-w-xs"
-              />
+              <label htmlFor="rear-grip-x" className="grow[1]">
+                X:
+                <input
+                  onChange={handleTuningInput}
+                  name="rear-grip-x"
+                  type="number"
+                  className="input input-bordered input-info max-w-[100px] ml-2"
+                  disabled={isFieldDisabled("rear-grip")}
+                />
+              </label>
+              <label htmlFor="rear-grip-y" className="grow[1]">
+                Y:
+                <input
+                  onChange={handleTuningInput}
+                  name="rear-grip-y"
+                  type="number"
+                  className="input input-bordered input-info max-w-[100px] ml-2"
+                  disabled={isFieldDisabled("rear-grip")}
+                />
+              </label>
             </div>
-            <div className="flex items-center justify-center space-x-4 pt-5">
-              <h1 className="w-15">Stock:</h1>
+            <div className="flex items-center space-x-4 pt-5 max-w-[1280px] mx-auto">
+              <h1 className="grow-[2] w-[150px] text-right">Stock:</h1>
               <select
                 name="stock"
                 onChange={handleInput}
                 className="select select-info w-64 max-w-xs"
+                disabled={isFieldDisabled("stock")}
               >
                 <option value="">Select Stock</option>
                 {build.attachments.Stocks.map((stock) => (
-                  <option value={stock}>{stock}</option>
+                  <option key={stock} value={stock}>
+                    {stock}
+                  </option>
                 ))}
               </select>
-              <label htmlFor="x">X:</label>
-              <input
-                onChange={handleTuningInput}
-                name="stock-x"
-                type="number"
-                className="input input-bordered input-info w-24 max-w-xs"
-              />
-              <label htmlFor="y">Y:</label>
-              <input
-                onChange={handleTuningInput}
-                name="stock-y"
-                type="number"
-                className="input input-bordered input-info w-24 max-w-xs"
-              />
+              <label htmlFor="stock-x" className="grow[1]">
+                X:
+                <input
+                  onChange={handleTuningInput}
+                  name="stock-x"
+                  type="number"
+                  className="input input-bordered input-info max-w-[100px] ml-2"
+                  disabled={isFieldDisabled("stock")}
+                />
+              </label>
+              <label htmlFor="stock-y" className="grow[1]">
+                Y:
+                <input
+                  onChange={handleTuningInput}
+                  name="stock-y"
+                  type="number"
+                  className="input input-bordered input-info max-w-[100px] ml-2"
+                  disabled={isFieldDisabled("stock")}
+                />
+              </label>
             </div>
-            <div className="flex items-center justify-center space-x-4 pt-5">
-              <h1 className="w-15">Underbarrel:</h1>
+            <div className="flex items-center space-x-4 pt-5 max-w-[1280px] mx-auto">
+              <h1 className="grow-[2] w-[150px] text-right">Underbarrel:</h1>
               <select
                 name="underbarrel"
                 onChange={handleInput}
                 className="select select-info w-64 max-w-xs"
+                disabled={isFieldDisabled("underbarrel")}
               >
                 <option value="">Select Underbarrel</option>
                 {build.attachments.Underbarrels.map((underbarrel) => (
-                  <option value={underbarrel}>{underbarrel}</option>
+                  <option key={underbarrel} value={underbarrel}>
+                    {underbarrel}
+                  </option>
                 ))}
               </select>
-              <label htmlFor="x">X:</label>
-              <input
-                onChange={handleTuningInput}
-                name="underbarrel-x"
-                type="number"
-                className="input input-bordered input-info w-24 max-w-xs"
-              />
-              <label htmlFor="y">Y:</label>
-              <input
-                onChange={handleTuningInput}
-                name="underbarrel-y"
-                type="number"
-                className="input input-bordered input-info w-24 max-w-xs"
-              />
+              <label htmlFor="underbarrel-x" className="grow[1]">
+                X
+                <input
+                  onChange={handleTuningInput}
+                  name="underbarrel-x"
+                  type="number"
+                  className="input input-bordered input-info max-w-[100px] ml-2"
+                  disabled={isFieldDisabled("underbarrel")}
+                />
+                :
+              </label>
+              <label htmlFor="underbarrel-y" className="grow[1]">
+                Y:
+                <input
+                  onChange={handleTuningInput}
+                  name="underbarrel-y"
+                  type="number"
+                  className="input input-bordered input-info max-w-[100px] ml-2"
+                  disabled={isFieldDisabled("underbarrel")}
+                />
+              </label>
             </div>
-            <div className="flex items-center justify-center space-x-4 pt-5">
-              <h1 className="w-15">Laser:</h1>
+            <div className="flex items-center space-x-4 pt-5 max-w-[1280px] mx-auto">
+              <h1 className="grow-[2] w-[150px] text-right">Laser:</h1>
               <select
                 name="laser"
                 onChange={handleInput}
                 className="select select-info w-64 max-w-xs"
+                disabled={isFieldDisabled("laser")}
               >
                 <option value="">Select Laser</option>
                 {build.attachments.Lasers.map((laser) => (
-                  <option value={laser}>{laser}</option>
+                  <option key={laser} value={laser}>
+                    {laser}
+                  </option>
                 ))}
               </select>
             </div>
-            <div className="flex items-center justify-center space-x-4 pt-5">
-              <h1 className="w-15">Magazine:</h1>
+            <div className="flex items-center space-x-4 pt-5 max-w-[1280px] mx-auto">
+              <h1 className="grow-[2] w-[150px] text-right">Magazine:</h1>
               <select
                 name="magazine"
                 onChange={handleInput}
                 className="select select-info w-64 max-w-xs"
+                disabled={isFieldDisabled("magazine")}
               >
                 <option value="">Select Magazine</option>
                 {build.attachments.Magazines.map((magazine) => (
-                  <option value={magazine}>{magazine}</option>
+                  <option key={magazine} value={magazine}>
+                    {magazine}
+                  </option>
                 ))}
               </select>
             </div>
-            <button className="btn btn-outline btn-info m-10">Submit</button>
+            <button
+              className="btn btn-outline btn-info m-10"
+              onClick={handleSubmit}
+            >
+              Submit
+            </button>
           </>
         )}
       </section>
