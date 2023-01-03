@@ -12,11 +12,19 @@ const passToClient = ["pageProps", "popularTools"];
 async function render(pageContext) {
   const { Page, pageProps } = pageContext;
   const { documentProps } = pageContext.exports;
-  const viewHtml = ReactDOMServer.renderToString(
-    <PageLayout pageContext={pageContext}>
-      <Page {...pageProps} />
-    </PageLayout>
-  );
+  // console.log({ pageContext, pageProps });
+  let viewHtml;
+  if (pageContext.Page) {
+    // For SSR pages
+    viewHtml = ReactDOMServer.renderToString(
+      <PageLayout pageContext={pageContext}>
+        <Page {...pageProps} />
+      </PageLayout>
+    );
+  } else {
+    // For SPA pages
+    viewHtml = "";
+  }
 
   const SEO = {
     "og:title": "Dev Bros HQ",

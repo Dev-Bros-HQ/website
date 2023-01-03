@@ -10,7 +10,7 @@ import {
   createMW2Build,
   createDatabaseDocument,
 } from "./firebaseActions";
-// import { useAuthState } from "react-firebase-hooks/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -33,8 +33,7 @@ function FirebaseProvider({ children }) {
   const [attachments, setAttachments] = useState([]);
   const [guns, setGuns] = useState([]);
   const [userInformation, setUserInformation] = useState({});
-  // const [user, loading, error] = useAuthState(auth);
-  let user, loading, error;
+  const [user, loading, error] = useAuthState(auth);
   //TODO: NEED TO GET USER INFORMATION FROM SOMEWHERE
   const attachmentTypes = [
     "Muzzle",

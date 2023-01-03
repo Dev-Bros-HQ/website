@@ -1,6 +1,6 @@
 import { signOut } from "firebase/auth";
 import logo from "../assets/circle-dev-bros-hq.webp";
-import { useFirebase } from "../context/firebase";
+const { useFirebase } = await import("../context/firebase");
 
 const Nav = () => {
   const {
