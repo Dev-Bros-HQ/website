@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useFirebase } from "../../../context/firebase";
 import { build } from "../../../helpers/guns";
 import ImageParallaxScroller from "../../../components/UI/ImageParallaxScroller";
+import { object } from "prop-types";
 
 const Page = () => {
   const { guns } = useFirebase();
@@ -9,6 +10,8 @@ const Page = () => {
   const [filteredGuns, setFilteredGuns] = useState([]);
   const [formattedGuns, setFormattedGuns] = useState([]);
   const [gun, setGun] = useState({});
+  const [attachmentValues, setAttachmentValues] = useState({});
+  const [hasFiveAttachments, setHasFiveAttachments] = useState(false);
 
   const images = [
     {
@@ -59,6 +62,70 @@ const Page = () => {
     setFormattedGuns([]);
     setGun({});
   };
+
+  const checkNumberOfAttachments = () => {
+    const keys = Object.keys(attachmentValues);
+    const length = keys.length;
+    if (length >= 4) {
+      setHasFiveAttachments(true);
+    } else {
+      setHasFiveAttachments(false);
+    }
+    console.log(keys);
+  };
+
+  const handleInput = (e) => {
+    const value = e.target.value;
+    const name = e.target.name;
+
+    let currValue = attachmentValues[name];
+    if (currValue) {
+      if (value === "") {
+        const currAttachments = attachmentValues;
+        delete currAttachments[name];
+        console.log(currAttachments);
+        setAttachmentValues(currAttachments);
+        return;
+      }
+      currValue.value = value;
+    } else {
+      currValue = {
+        value,
+        tuningX: 0,
+        tuningY: 0,
+      };
+    }
+    setAttachmentValues((curr) => ({ ...curr, [name]: currValue }));
+  };
+
+  const handleTuningInput = (e) => {
+    const value = e.target.value;
+    const name = e.target.name;
+    const attachmentName = name.replace("-x", "").replace("-y", "");
+    let currValue = attachmentValues[attachmentName];
+    if (currValue) {
+      if (name.includes("-x")) {
+        currValue.tuningX = value;
+      }
+      if (name.includes("-y")) {
+        currValue.tuningY = value;
+      }
+    } else {
+      if (name.includes("-x")) {
+        currValue = { value: "", tuningX: value, tuningY: 0 };
+      }
+      if (name.includes("-y")) {
+        currValue = { value: "", tuningX: 0, tuningY: value };
+      }
+    }
+    setAttachmentValues((curr) => ({ ...curr, [attachmentName]: currValue }));
+  };
+
+  useEffect(() => {
+    checkNumberOfAttachments();
+    console.log(attachmentValues);
+    console.log(hasFiveAttachments);
+  }, [attachmentValues]);
 
   const filterGunsByClass = (classType) => {
     const gunsOfClass = Object.keys(guns)
@@ -153,7 +220,15 @@ const Page = () => {
             </div>
             <div className="flex items-center justify-center space-x-4 pt-5">
               <h1 className="w-15">Ammunition:</h1>
-              <select className="select select-info w-64 max-w-xs">
+              <select
+                name="ammunition"
+                onChange={handleInput}
+                className="select select-info w-64 max-w-xs"
+                disabled={
+                  hasFiveAttachments &&
+                  !attachmentValues.hasOwnProperty("ammunition")
+                }
+              >
                 <option value="">Select Amno Type</option>
                 {build.attachments.Ammunition.map((amno) => (
                   <option value={amno}>{amno}</option>
@@ -161,18 +236,26 @@ const Page = () => {
               </select>
               <label htmlFor="x">X:</label>
               <input
+                onChange={handleTuningInput}
+                name="ammunition-x"
                 type="number"
                 className="input input-bordered input-info w-24 max-w-xs"
               />
               <label htmlFor="y">Y:</label>
               <input
+                onChange={handleTuningInput}
+                name="ammunition-y"
                 type="number"
                 className="input input-bordered input-info w-24 max-w-xs"
               />
             </div>
             <div className="flex items-center justify-center space-x-4 pt-5">
               <h1 className="w-15">Barrel:</h1>
-              <select className="select select-info w-64 max-w-xs">
+              <select
+                name="barrel"
+                onChange={handleInput}
+                className="select select-info w-64 max-w-xs"
+              >
                 <option value="">Select Barrel</option>
                 {build.attachments.Barrels.map((barrel) => (
                   <option value={barrel}>{barrel}</option>
@@ -180,18 +263,26 @@ const Page = () => {
               </select>
               <label htmlFor="x">X:</label>
               <input
+                onChange={handleTuningInput}
+                name="barrel-x"
                 type="number"
                 className="input input-bordered input-info w-24 max-w-xs"
               />
               <label htmlFor="y">Y:</label>
               <input
+                onChange={handleTuningInput}
+                name="barrel-y"
                 type="number"
                 className="input input-bordered input-info w-24 max-w-xs"
               />
             </div>
             <div className="flex items-center justify-center space-x-4 pt-5">
               <h1 className="w-15">Muzzle:</h1>
-              <select className="select select-info w-64 max-w-xs">
+              <select
+                name="muzzle"
+                onChange={handleInput}
+                className="select select-info w-64 max-w-xs"
+              >
                 <option value="">Select Muzzle</option>
                 {build.attachments.Muzzles.map((muzzle) => (
                   <option value={muzzle}>{muzzle}</option>
@@ -199,18 +290,26 @@ const Page = () => {
               </select>
               <label htmlFor="x">X:</label>
               <input
+                onChange={handleTuningInput}
+                name="muzzle-x"
                 type="number"
                 className="input input-bordered input-info w-24 max-w-xs"
               />
               <label htmlFor="y">Y:</label>
               <input
+                onChange={handleTuningInput}
+                name="muzzle-y"
                 type="number"
                 className="input input-bordered input-info w-24 max-w-xs"
               />
             </div>
             <div className="flex items-center justify-center space-x-4 pt-5">
               <h1 className="w-15">Optic:</h1>
-              <select className="select select-info w-64 max-w-xs">
+              <select
+                name="optic"
+                onChange={handleInput}
+                className="select select-info w-64 max-w-xs"
+              >
                 <option value="">Select Optic</option>
                 {build.attachments.Optics.map((optics) => (
                   <option value={optics}>{optics}</option>
@@ -218,18 +317,26 @@ const Page = () => {
               </select>
               <label htmlFor="x">X:</label>
               <input
+                onChange={handleTuningInput}
+                name="optic-x"
                 type="number"
                 className="input input-bordered input-info w-24 max-w-xs"
               />
               <label htmlFor="y">Y:</label>
               <input
+                onChange={handleTuningInput}
+                name="optic-y"
                 type="number"
                 className="input input-bordered input-info w-24 max-w-xs"
               />
             </div>
             <div className="flex items-center justify-center space-x-4 pt-5">
               <h1 className="w-15">Rear Grip:</h1>
-              <select className="select select-info w-64 max-w-xs">
+              <select
+                name="rear-grip"
+                onChange={handleInput}
+                className="select select-info w-64 max-w-xs"
+              >
                 <option value="">Select Rear Grip</option>
                 {build.attachments["Rear Grips"].map((rg) => (
                   <option value={rg}>{rg}</option>
@@ -237,18 +344,26 @@ const Page = () => {
               </select>
               <label htmlFor="x">X:</label>
               <input
+                onChange={handleTuningInput}
+                name="rear-grip-x"
                 type="number"
                 className="input input-bordered input-info w-24 max-w-xs"
               />
               <label htmlFor="y">Y:</label>
               <input
+                onChange={handleTuningInput}
+                name="rear-grip-y"
                 type="number"
                 className="input input-bordered input-info w-24 max-w-xs"
               />
             </div>
             <div className="flex items-center justify-center space-x-4 pt-5">
               <h1 className="w-15">Stock:</h1>
-              <select className="select select-info w-64 max-w-xs">
+              <select
+                name="stock"
+                onChange={handleInput}
+                className="select select-info w-64 max-w-xs"
+              >
                 <option value="">Select Stock</option>
                 {build.attachments.Stocks.map((stock) => (
                   <option value={stock}>{stock}</option>
@@ -256,18 +371,26 @@ const Page = () => {
               </select>
               <label htmlFor="x">X:</label>
               <input
+                onChange={handleTuningInput}
+                name="stock-x"
                 type="number"
                 className="input input-bordered input-info w-24 max-w-xs"
               />
               <label htmlFor="y">Y:</label>
               <input
+                onChange={handleTuningInput}
+                name="stock-y"
                 type="number"
                 className="input input-bordered input-info w-24 max-w-xs"
               />
             </div>
             <div className="flex items-center justify-center space-x-4 pt-5">
               <h1 className="w-15">Underbarrel:</h1>
-              <select className="select select-info w-64 max-w-xs">
+              <select
+                name="underbarrel"
+                onChange={handleInput}
+                className="select select-info w-64 max-w-xs"
+              >
                 <option value="">Select Underbarrel</option>
                 {build.attachments.Underbarrels.map((underbarrel) => (
                   <option value={underbarrel}>{underbarrel}</option>
@@ -275,18 +398,26 @@ const Page = () => {
               </select>
               <label htmlFor="x">X:</label>
               <input
+                onChange={handleTuningInput}
+                name="underbarrel-x"
                 type="number"
                 className="input input-bordered input-info w-24 max-w-xs"
               />
               <label htmlFor="y">Y:</label>
               <input
+                onChange={handleTuningInput}
+                name="underbarrel-y"
                 type="number"
                 className="input input-bordered input-info w-24 max-w-xs"
               />
             </div>
             <div className="flex items-center justify-center space-x-4 pt-5">
               <h1 className="w-15">Laser:</h1>
-              <select className="select select-info w-64 max-w-xs">
+              <select
+                name="laser"
+                onChange={handleInput}
+                className="select select-info w-64 max-w-xs"
+              >
                 <option value="">Select Laser</option>
                 {build.attachments.Lasers.map((laser) => (
                   <option value={laser}>{laser}</option>
@@ -295,7 +426,11 @@ const Page = () => {
             </div>
             <div className="flex items-center justify-center space-x-4 pt-5">
               <h1 className="w-15">Magazine:</h1>
-              <select className="select select-info w-64 max-w-xs">
+              <select
+                name="magazine"
+                onChange={handleInput}
+                className="select select-info w-64 max-w-xs"
+              >
                 <option value="">Select Magazine</option>
                 {build.attachments.Magazines.map((magazine) => (
                   <option value={magazine}>{magazine}</option>
