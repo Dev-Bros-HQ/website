@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import ImageParallaxScroller from "../../../components/UI/ImageParallaxScroller";
 import { useFirebase } from "../../../context/firebase";
+import { build } from "../../../helpers/guns";
 
 const CreateMW2Build = () => {
   const { guns } = useFirebase();
@@ -161,12 +162,162 @@ const CreateMW2Build = () => {
               <div className="card w-96 bg-primary text-primary-content ml-0 md:ml-6 mt-6 md:mt-0">
                 <div className="card-body">
                   <h2 className="card-title">Next step:</h2>
-                  <p>Choose up to 5 attachemnts.</p>
+                  <p>Choose up to 5 attachments.</p>
                 </div>
               </div>
             </div>
-
-            {/* Add Form here for all of the attachments and such */}
+            <div className="flex items-center justify-center space-x-4 pt-5">
+              <h1 className="w-15">Ammunition:</h1>
+              <select className="select select-info w-64 max-w-xs">
+                <option value="">Select Amno Type</option>
+                {build.attachments.Ammunition.map((amno) => (
+                  <option value={amno}>{amno}</option>
+                ))}
+              </select>
+              <label htmlFor="x">X:</label>
+              <input
+                type="number"
+                className="input input-bordered input-info w-24 max-w-xs"
+              />
+              <label htmlFor="y">Y:</label>
+              <input
+                type="number"
+                className="input input-bordered input-info w-24 max-w-xs"
+              />
+            </div>
+            <div className="flex items-center justify-center space-x-4 pt-5">
+              <h1 className="w-15">Barrel:</h1>
+              <select className="select select-info w-64 max-w-xs">
+                <option value="">Select Barrel</option>
+                {build.attachments.Barrels.map((barrel) => (
+                  <option value={barrel}>{barrel}</option>
+                ))}
+              </select>
+              <label htmlFor="x">X:</label>
+              <input
+                type="number"
+                className="input input-bordered input-info w-24 max-w-xs"
+              />
+              <label htmlFor="y">Y:</label>
+              <input
+                type="number"
+                className="input input-bordered input-info w-24 max-w-xs"
+              />
+            </div>
+            <div className="flex items-center justify-center space-x-4 pt-5">
+              <h1 className="w-15">Muzzle:</h1>
+              <select className="select select-info w-64 max-w-xs">
+                <option value="">Select Muzzle</option>
+                {build.attachments.Muzzles.map((muzzle) => (
+                  <option value={muzzle}>{muzzle}</option>
+                ))}
+              </select>
+              <label htmlFor="x">X:</label>
+              <input
+                type="number"
+                className="input input-bordered input-info w-24 max-w-xs"
+              />
+              <label htmlFor="y">Y:</label>
+              <input
+                type="number"
+                className="input input-bordered input-info w-24 max-w-xs"
+              />
+            </div>
+            <div className="flex items-center justify-center space-x-4 pt-5">
+              <h1 className="w-15">Optic:</h1>
+              <select className="select select-info w-64 max-w-xs">
+                <option value="">Select Optic</option>
+                {build.attachments.Optics.map((optics) => (
+                  <option value={optics}>{optics}</option>
+                ))}
+              </select>
+              <label htmlFor="x">X:</label>
+              <input
+                type="number"
+                className="input input-bordered input-info w-24 max-w-xs"
+              />
+              <label htmlFor="y">Y:</label>
+              <input
+                type="number"
+                className="input input-bordered input-info w-24 max-w-xs"
+              />
+            </div>
+            <div className="flex items-center justify-center space-x-4 pt-5">
+              <h1 className="w-15">Rear Grip:</h1>
+              <select className="select select-info w-64 max-w-xs">
+                <option value="">Select Rear Grip</option>
+                {build.attachments["Rear Grips"].map((rg) => (
+                  <option value={rg}>{rg}</option>
+                ))}
+              </select>
+              <label htmlFor="x">X:</label>
+              <input
+                type="number"
+                className="input input-bordered input-info w-24 max-w-xs"
+              />
+              <label htmlFor="y">Y:</label>
+              <input
+                type="number"
+                className="input input-bordered input-info w-24 max-w-xs"
+              />
+            </div>
+            <div className="flex items-center justify-center space-x-4 pt-5">
+              <h1 className="w-15">Stock:</h1>
+              <select className="select select-info w-64 max-w-xs">
+                <option value="">Select Stock</option>
+                {build.attachments.Stocks.map((stock) => (
+                  <option value={stock}>{stock}</option>
+                ))}
+              </select>
+              <label htmlFor="x">X:</label>
+              <input
+                type="number"
+                className="input input-bordered input-info w-24 max-w-xs"
+              />
+              <label htmlFor="y">Y:</label>
+              <input
+                type="number"
+                className="input input-bordered input-info w-24 max-w-xs"
+              />
+            </div>
+            <div className="flex items-center justify-center space-x-4 pt-5">
+              <h1 className="w-15">Underbarrel:</h1>
+              <select className="select select-info w-64 max-w-xs">
+                <option value="">Select Underbarrel</option>
+                {build.attachments.Underbarrels.map((underbarrel) => (
+                  <option value={underbarrel}>{underbarrel}</option>
+                ))}
+              </select>
+              <label htmlFor="x">X:</label>
+              <input
+                type="number"
+                className="input input-bordered input-info w-24 max-w-xs"
+              />
+              <label htmlFor="y">Y:</label>
+              <input
+                type="number"
+                className="input input-bordered input-info w-24 max-w-xs"
+              />
+            </div>
+            <div className="flex items-center justify-center space-x-4 pt-5">
+              <h1 className="w-15">Laser:</h1>
+              <select className="select select-info w-64 max-w-xs">
+                <option value="">Select Laser</option>
+                {build.attachments.Lasers.map((laser) => (
+                  <option value={laser}>{laser}</option>
+                ))}
+              </select>
+            </div>
+            <div className="flex items-center justify-center space-x-4 pt-5">
+              <h1 className="w-15">Magazine:</h1>
+              <select className="select select-info w-64 max-w-xs">
+                <option value="">Select Magazine</option>
+                {build.attachments.Magazines.map((magazine) => (
+                  <option value={magazine}>{magazine}</option>
+                ))}
+              </select>
+            </div>
+            <button className="btn btn-outline btn-info m-10">Submit</button>
           </>
         )}
       </section>
