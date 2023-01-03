@@ -6,7 +6,7 @@ import { object } from "prop-types";
 
 const Page = () => {
   const { guns } = useFirebase();
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(0);
   const [filteredGuns, setFilteredGuns] = useState([]);
   const [formattedGuns, setFormattedGuns] = useState([]);
   const [gun, setGun] = useState({});
