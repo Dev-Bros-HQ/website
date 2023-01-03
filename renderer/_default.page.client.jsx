@@ -1,18 +1,28 @@
 import React from "react";
-import { hydrateRoot } from "react-dom/client";
-import "./index.css";
+import ReactDOM from "react-dom/client";
 import { PageLayout } from "./PageLayout";
+import "./index.css";
 
 export { render };
 
+let root;
 async function render(pageContext) {
   const { Page, pageProps } = pageContext;
-  hydrateRoot(
-    document.getElementById("page-view"),
+  const page = (
     <PageLayout pageContext={pageContext}>
       <Page {...pageProps} />
     </PageLayout>
   );
+  const container = document.getElementById("page-view");
+  if (container.innerHTML === "" || !pageContext.isHydration) {
+    if (!root) {
+      root = ReactDOM.createRoot(container);
+    }
+    root.render(page);
+    // SSR
+  } else {
+    root = ReactDOM.hydrateRoot(container, page);
+  }
 }
 
 /* To enable Client-side Routing:

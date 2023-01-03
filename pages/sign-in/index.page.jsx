@@ -18,7 +18,7 @@ const Page = () => {
   const logInWithEmailAndPassword = async () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      //add navigation to home page
+      window.location.href = "/";
     } catch (err) {
       console.error(err);
       alert(err.message);

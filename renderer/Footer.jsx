@@ -1,7 +1,7 @@
 import logo from "../assets/circle-dev-bros-hq.webp";
 const Footer = () => {
   return (
-    <footer className="bg-secondary-focus text-neutral-content body-font pb-2">
+    <footer className="bg-secondary-focus text-neutral-content body-font py-2">
       <div className="card bg-base-300 container px-5 py-12 mx-auto">
         <div className="flex flex-wrap md:text-left order-first">
           <div className="lg:w-1/4 md:w-1/2 w-full px-4">
