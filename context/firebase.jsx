@@ -10,7 +10,6 @@ import {
   createMW2Build,
   createDatabaseDocument,
 } from "./firebaseActions";
-import { useAuthState } from "react-firebase-hooks/auth";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -33,7 +32,7 @@ function FirebaseProvider({ children }) {
   const [attachments, setAttachments] = useState([]);
   const [guns, setGuns] = useState([]);
   const [userInformation, setUserInformation] = useState({});
-  const [user, loading, error] = useAuthState(auth);
+  const user = auth.currentUser;
   //TODO: NEED TO GET USER INFORMATION FROM SOMEWHERE
   const attachmentTypes = [
     "Muzzle",
@@ -72,7 +71,7 @@ function FirebaseProvider({ children }) {
     if (user && userInformation.uid !== user.uid && user.uid) {
       getUserInformation(user.uid);
     }
-  }, [user, loading]);
+  }, [user]);
 
   const createDocument = async (collectionName, data, id, idPrefix) => {
     return await createDatabaseDocument(db, collectionName, data, id, idPrefix);
@@ -83,7 +82,7 @@ function FirebaseProvider({ children }) {
       value={{
         db,
         auth,
-        authState: { user: { ...user, ...userInformation }, loading, error },
+        authState: { user: { ...user, ...userInformation } },
         builds,
         attachments,
         guns,
