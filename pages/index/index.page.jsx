@@ -74,10 +74,8 @@ const Page = () => {
           />
           <div className="md:text-center lg:w-1/2 w-full text-left md:px-12">
             <p className="mb-8 sm:text-4xl text-3xl">
-              Where we learn to be better developers by{" "}
-              <span className="text-accent underline">
-                building tools for you.
-              </span>
+              Tools for internet users, built by a team that's{" "}
+              <span className="text-accent underline">always learning</span>
             </p>
           </div>
         </div>
