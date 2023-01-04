@@ -36,20 +36,9 @@ export const getMW2Guns = async (db, callback) => {
 export const createMW2Build = async (db, values, callback) => {
   const buildUUID = generateUUID("build");
 
-  //TODO: SUBMIT REAL DATA INSTEAD OF THIS MOCK BS ↓
   const docData = {
-    stringExample: "Hello world!",
-    booleanExample: true,
-    numberExample: 3.14159265,
-    dateExample: Timestamp.fromDate(values.createdAt),
-    arrayExample: [5, true, "hello"],
-    nullExample: null,
-    objectExample: {
-      a: 5,
-      b: {
-        nested: "foo",
-      },
-    },
+    id: buildUUID,
+    ...values, //taking the value object and applying to doc data
   };
   await setDoc(doc(db, "mw2-builds", buildUUID), docData).then((ref) => {
     callback();

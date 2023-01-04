@@ -3,15 +3,18 @@ import { useFirebase } from "../../../context/firebase";
 import { build } from "../../../helpers/guns";
 import ImageParallaxScroller from "../../../components/UI/ImageParallaxScroller";
 import { object } from "prop-types";
+import Spinner from "../../../components/Spinner";
 
 const Page = () => {
-  const { guns } = useFirebase();
+  const { guns, createMW2Build } = useFirebase();
   const [step, setStep] = useState(0);
   const [filteredGuns, setFilteredGuns] = useState([]);
   const [formattedGuns, setFormattedGuns] = useState([]);
   const [gun, setGun] = useState({});
   const [attachmentValues, setAttachmentValues] = useState({});
   const [hasFiveAttachments, setHasFiveAttachments] = useState(false);
+  const [handle, setHandle] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const images = [
     {
@@ -64,7 +67,20 @@ const Page = () => {
   };
 
   const handleSubmit = () => {
-    console.log(attachmentValues);
+    setLoading(true);
+    const build = {
+      gun,
+      attachments: attachmentValues,
+      handle,
+      createdDate: Date.now(),
+    };
+    const callback = () => {
+      setLoading(false);
+      window.location.href = "/mw2-builds";
+      console.log("Success");
+    };
+    createMW2Build(build, callback);
+    console.log(build);
   };
 
   const isFieldDisabled = (name) => {
@@ -517,11 +533,20 @@ const Page = () => {
                 ))}
               </select>
             </div>
+            <div className="flex items-center space-x-4 pt-5 max-w-[1280px] mx-auto">
+              <h1 className="grow-[2] w-[150px] text-right">Credit</h1>
+              <input
+                type="text"
+                className="input input-bordered input-info max-w-[300px] ml-2"
+                placeholder="Enter Twitter Handle"
+                onChange={(e) => setHandle(e.target.value)}
+              ></input>
+            </div>
             <button
               className="btn btn-outline btn-info m-10"
               onClick={handleSubmit}
             >
-              Submit
+              {loading ? <Spinner /> : "Submit"}
             </button>
           </>
         )}
