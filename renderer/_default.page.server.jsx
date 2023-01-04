@@ -7,7 +7,7 @@ export { render };
 export { passToClient };
 
 // Example of `pageContext` often passed to the browser
-const passToClient = ["pageProps", "popularTools"];
+const passToClient = ["pageProps", "popularTools", "routeParams", "$$typeof"];
 
 async function render(pageContext) {
   const { Page, pageProps } = pageContext;

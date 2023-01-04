@@ -9,7 +9,9 @@ import {
   getMW2Guns,
   createMW2Build,
   createDatabaseDocument,
+  getMW2Build,
 } from "./firebaseActions";
+import { debounce } from "../helpers";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -63,7 +65,7 @@ function FirebaseProvider({ children }) {
 
   useEffect(() => {
     getAllAttachments();
-    getMW2Builds(db, setBuilds);
+    debounce(getMW2Builds(db, setBuilds), 500);
     getMW2Guns(db, setGuns);
   }, []);
 
@@ -88,6 +90,7 @@ function FirebaseProvider({ children }) {
         guns,
         createDocument,
         getUpdatedAttachments: getAllAttachments,
+        getMW2Build: (id, callback) => getMW2Build(db, id, callback),
         createMW2Build: (values, callback) =>
           createMW2Build(db, values, callback),
       }}

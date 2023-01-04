@@ -6,6 +6,7 @@ import {
   doc,
   setDoc,
   Timestamp,
+  getDoc,
 } from "firebase/firestore";
 import { generateUUID } from "../helpers";
 
@@ -14,6 +15,11 @@ export const getMW2Builds = async (db, callback) => {
   const buildsSnapshot = await getDocs(buildsRef);
   const buildsList = buildsSnapshot.docs.map((doc) => doc.data());
   callback(buildsList);
+};
+export const getMW2Build = async (db, id, callback) => {
+  const buildRef = doc(db, `mw2-builds`, id);
+  const buildSnapshot = await getDoc(buildRef);
+  callback(buildSnapshot.data());
 };
 
 export const getMW2Attachments = async (db, attachmentType) => {
