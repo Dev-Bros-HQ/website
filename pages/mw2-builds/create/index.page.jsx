@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useFirebase } from "../../../context/firebase";
 import { build } from "../../../helpers/guns";
 import ImageParallaxScroller from "../../../components/UI/ImageParallaxScroller";
-import { object } from "prop-types";
 import Spinner from "../../../components/Spinner";
 
 const Page = () => {
@@ -15,6 +14,7 @@ const Page = () => {
   const [hasFiveAttachments, setHasFiveAttachments] = useState(false);
   const [handle, setHandle] = useState("");
   const [loading, setLoading] = useState(false);
+  const { authState } = useFirebase();
 
   const images = [
     {
@@ -69,6 +69,7 @@ const Page = () => {
   const handleSubmit = () => {
     setLoading(true);
     const build = {
+      author_uid: authState?.user?.uid,
       gun,
       attachments: attachmentValues,
       handle,
@@ -77,10 +78,8 @@ const Page = () => {
     const callback = () => {
       setLoading(false);
       window.location.href = "/mw2-builds";
-      console.log("Success");
     };
     createMW2Build(build, callback);
-    console.log(build);
   };
 
   const isFieldDisabled = (name) => {
