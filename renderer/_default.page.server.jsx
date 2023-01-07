@@ -2,6 +2,7 @@ import ReactDOMServer from "react-dom/server";
 import React from "react";
 import { escapeInject, dangerouslySkipEscape } from "vite-plugin-ssr";
 import { PageLayout } from "./PageLayout";
+import fetch from "node-fetch";
 
 export { render };
 export { passToClient };

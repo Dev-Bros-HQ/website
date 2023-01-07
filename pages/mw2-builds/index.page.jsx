@@ -1,9 +1,9 @@
-import { useFirebase } from "../../context/firebase";
 import mw2Image from "../../assets/mw2-2022-logo.webp";
 import { format } from "date-fns";
+import { useMW2 } from "../../context/MW2Provider";
 
 const Page = () => {
-  // const { builds } = useFirebase();
+  // const { builds } = useMW2();
   // console.log({ builds });
   const builds = [
     {

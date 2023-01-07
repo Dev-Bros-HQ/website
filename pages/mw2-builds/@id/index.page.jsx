@@ -1,12 +1,12 @@
-import { useFirebase } from "../../../context/firebase";
 import { usePageContext } from "../../../renderer/usePageContext";
 import { useEffect, useState } from "react";
 import Spinner from "../../../components/Spinner";
+import { useMW2 } from "../../../context/MW2Provider";
 
 const Page = () => {
   const pageContext = usePageContext();
   const buildID = pageContext.routeParams.id;
-  const { getMW2Build } = useFirebase();
+  const { getMW2Build } = useMW2();
   const [build, setBuild] = useState({});
   const [loading, setLoading] = useState(true);
 

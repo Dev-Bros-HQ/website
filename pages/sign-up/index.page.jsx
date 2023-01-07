@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
-import { useFirebase } from "../../context/firebase";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { doc, getFirestore, setDoc } from "firebase/firestore";
 import Spinner from "../../components/Spinner";
 import { isValidEmail } from "../../helpers";
 import { toast } from "react-hot-toast";
+import { getApp } from "firebase/app";
 
 const Page = () => {
   const [email, setEmail] = useState("");
@@ -12,7 +12,9 @@ const Page = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [formLoading, setFormLoading] = useState(false);
   const [errors, setErrors] = useState({});
-  const { db, auth } = useFirebase();
+  const app = getApp();
+  const db = getFirestore(app);
+  const auth = getAuth(app);
 
   const handleInputChange = (e, callback) => {
     const { value } = e.target;

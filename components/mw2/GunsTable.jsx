@@ -1,7 +1,13 @@
-import { useFirebase } from "../../context/firebase";
+import { useEffect } from "react";
+import { useMW2 } from "../../context/MW2Provider";
 
 const GunsTable = () => {
-  const { guns } = useFirebase();
+  const { guns, getGuns } = useMW2();
+
+  useEffect(() => {
+    getGuns();
+  }, []);
+
   return (
     <div className="overflow-auto w-full max-h-80 relative border-primary border-2 rounded-xl">
       <table className="table table-compact w-full">

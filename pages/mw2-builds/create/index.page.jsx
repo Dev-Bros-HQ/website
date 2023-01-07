@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { useFirebase } from "../../../context/firebase";
 import { build } from "../../../helpers/guns";
 import ImageParallaxScroller from "../../../components/UI/ImageParallaxScroller";
 import Spinner from "../../../components/Spinner";
+import { useMW2 } from "../../../context/MW2Provider";
+import { useFirebase } from "../../../context/FirebaseProvider";
 
 const Page = () => {
-  const { guns, createMW2Build } = useFirebase();
+  const { user } = useFirebase();
+  const { guns, createBuild } = useMW2();
   const [step, setStep] = useState(0);
   const [filteredGuns, setFilteredGuns] = useState([]);
   const [formattedGuns, setFormattedGuns] = useState([]);
@@ -14,7 +16,6 @@ const Page = () => {
   const [hasFiveAttachments, setHasFiveAttachments] = useState(false);
   const [handle, setHandle] = useState("");
   const [loading, setLoading] = useState(false);
-  const { authState } = useFirebase();
 
   const images = [
     {
@@ -69,7 +70,7 @@ const Page = () => {
   const handleSubmit = () => {
     setLoading(true);
     const build = {
-      author_uid: authState?.user?.uid,
+      author_uid: user?.uid,
       gun,
       attachments: attachmentValues,
       handle,
@@ -79,7 +80,7 @@ const Page = () => {
       setLoading(false);
       window.location.href = "/mw2-builds";
     };
-    createMW2Build(build, callback);
+    createBuild(build, callback);
   };
 
   const isFieldDisabled = (name) => {

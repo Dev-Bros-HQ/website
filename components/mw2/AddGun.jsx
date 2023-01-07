@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
-import { useFirebase } from "../../context/firebase";
+import { createDocument } from "../../context/firebaseActions";
 import { build } from "../../helpers/guns";
 import Spinner from "../Spinner";
 import DevBrosModal from "../UI/Modal";
@@ -13,7 +13,6 @@ const AddGun = () => {
   const [ammunition, setAmmunition] = useState("");
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const { createDocument } = useFirebase();
   const gunBuild = build;
 
   const handleInputChange = (e, callback) => {

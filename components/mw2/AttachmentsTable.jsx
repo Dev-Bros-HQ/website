@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useFirebase } from "../../context/firebase";
+import { useMW2 } from "../../context/MW2Provider";
 
 const AttachmentsTable = () => {
-  const { attachments } = useFirebase();
+  const { attachments, getAttachments } = useMW2();
   const [formattedAttachments, setFormattedAttachments] = useState([]);
   const formatAttachmentsForTable = () => {
     const returnValue = [];
@@ -14,6 +14,9 @@ const AttachmentsTable = () => {
     }
     setFormattedAttachments(returnValue);
   };
+  useEffect(() => {
+    getAttachments();
+  }, []);
 
   useEffect(() => {
     formatAttachmentsForTable();

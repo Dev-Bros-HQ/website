@@ -5,7 +5,6 @@ import {
   getDocs,
   doc,
   setDoc,
-  Timestamp,
   getDoc,
 } from "firebase/firestore";
 import { generateUUID } from "../helpers";
@@ -56,10 +55,17 @@ export const getUser = async (db, uid, callback) => {
   const q = query(collection(db, "users"), where("uid", "==", uid));
   const doc = await getDocs(q);
   const userInfo = doc.docs[0].data();
+  if (!callback) {
+    return userInfo;
+  }
   callback(userInfo);
 };
 
-export const createDatabaseDocument = async (
+export const createDocument = async (collectionName, data, id, idPrefix) => {
+  return await createDatabaseDocument(db, collectionName, data, id, idPrefix);
+};
+
+const createDatabaseDocument = async (
   db,
   collectionName,
   data,

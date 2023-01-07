@@ -1,12 +1,14 @@
-import { signOut } from "firebase/auth";
+import { getApp } from "firebase/app";
+import { getAuth, signOut } from "firebase/auth";
+import { useEffect, useState } from "react";
 import logo from "../assets/circle-dev-bros-hq.webp";
-const { useFirebase } = await import("../context/firebase");
+import { useFirebase } from "../context/FirebaseProvider";
+import { usePageContext } from "./usePageContext";
 
 const Nav = () => {
-  const {
-    auth,
-    authState: { user, loading, error },
-  } = useFirebase();
+  const app = getApp();
+  const auth = getAuth(app);
+  const { user } = useFirebase();
 
   const logout = async () => {
     await signOut(auth);
@@ -25,7 +27,7 @@ const Nav = () => {
           </a>
         </div>
         <div className="navbar-end">
-          {user.admin ? (
+          {user?.admin ? (
             <ul className="menu menu-horizontal text-secondary">
               <li tabIndex={0}>
                 <button className="btn rounded-lg">
@@ -74,7 +76,7 @@ const Nav = () => {
               </ul>
             </li>
           </ul>
-          {user.uid ? (
+          {user?.uid ? (
             <button className="btn btn-accent" onClick={logout}>
               Sign Out
             </button>
