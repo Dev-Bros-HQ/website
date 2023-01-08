@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import CountdownTimer from "../../components/CountdownTimer";
 
 const Page = () => {
   const [breath, setBreath] = useState("Press Start to Begin Excersise");
@@ -9,6 +10,7 @@ const Page = () => {
     hold: 7,
     exhale: 8,
   });
+  const [countdown, setCountdown] = useState();
   const circleRef = useRef();
   const circleTextRef = useRef();
 
@@ -56,7 +58,7 @@ const Page = () => {
 
   const hold = async () => {
     await updateBreath("hold");
-    circleRef.current.style.background = "#F4C152";
+    circleRef.current.style.background = "#2BD4BD";
     setTimerTimeout(
       setTimeout(() => {
         exhale();
@@ -94,22 +96,49 @@ const Page = () => {
             className={`absolute rounded-full h-[100%] w-[100%] bg-inherit animate-[zoomOutRight_6s_ease_infinite] animate-delay-1000`}
           ></div>
           <div
-            className={`absolute rounded-full h-[100%] w-[100%] bg-inherit animate-[zoomOutLeft_6s_ease_infinite] animate-delay-[2000ms]`}
+            className={`absolute rounded-full h-[100%] w-[100%] bg-inherit animate-[zoomOutLeft_6s_ease_infinite] animate-delay-[4000ms]`}
           ></div>
           <div className="absolute rounded-full rotate-90 h-[100%] w-[100%] bg-inherit">
             <div
-              className={`rounded-full h-[100%] w-[100%] bg-inherit animate-[zoomOutLeft_6s_ease_infinite] animate-delay-[2500ms]`}
+              className={`rounded-full h-[100%] w-[100%] bg-inherit animate-[zoomOutLeft_6s_ease_infinite] animate-delay-[2700ms]`}
             ></div>
           </div>
           <div className="absolute rounded-full -rotate-90 h-[100%] w-[100%] bg-inherit">
             <div
-              className={`rounded-full h-[100%] w-[100%] bg-inherit animate-[zoomOutLeft_6s_ease_infinite] animate-delay-[2500ms]`}
+              className={`rounded-full h-[100%] w-[100%] bg-inherit animate-[zoomOutLeft_6s_ease_infinite] animate-delay-[1700ms]`}
             ></div>
           </div>
+          <div className="absolute rounded-full rotate-45 h-[100%] w-[100%] bg-inherit">
+            <div
+              className={`rounded-full h-[100%] w-[100%] bg-inherit animate-[zoomOutLeft_6s_ease_infinite] animate-delay-[3100ms]`}
+            ></div>
+          </div>
+          <div className="absolute rounded-full -rotate-45 h-[100%] w-[100%] bg-inherit">
+            <div
+              className={`rounded-full h-[100%] w-[100%] bg-inherit animate-[zoomOutLeft_6s_ease_infinite] animate-delay-[5200ms]`}
+            ></div>
+          </div>
+          <div className="absolute rounded-full rotate-[135deg] h-[100%] w-[100%] bg-inherit">
+            <div
+              className={`rounded-full h-[100%] w-[100%] bg-inherit animate-[zoomOutLeft_6s_ease_infinite] animate-delay-[700ms]`}
+            ></div>
+          </div>
+          <div className="absolute rounded-full -rotate-[135deg] h-[100%] w-[100%] bg-inherit">
+            <div
+              className={`rounded-full h-[100%] w-[100%] bg-inherit animate-[zoomOutLeft_6s_ease_infinite] animate-delay-[4800ms]`}
+            ></div>
+          </div>
+          {breath === "inhale" && (
+            <CountdownTimer number={breathTimes.inhale} />
+          )}
+          {breath === "hold" && <CountdownTimer number={breathTimes.hold} />}
+          {breath === "exhale" && (
+            <CountdownTimer number={breathTimes.exhale} />
+          )}
         </div>
       </div>
 
-      <div className="bg-secondary w-full p-10 rounded-2xl flex flex-col items-center shadow-2xl">
+      <div className="bg-secondary w-full p-10 rounded-2xl flex flex-col items-center shadow-2xl z-10">
         <div
           ref={circleTextRef}
           className="w-full flex items-center justify-center text-secondary-content transition-all duration-500 text-4xl capitalize pb-12"
@@ -144,7 +173,7 @@ const Page = () => {
                 min="1"
                 max="10"
                 value={breathTimes.hold}
-                className="range range-warning"
+                className="range range-success"
                 onChange={handleRangeChange}
               />
               <span>Exhale</span>
@@ -171,8 +200,8 @@ const Page = () => {
                   </span>
                 </li>
                 <li className="text-xl">
-                  <span className="text-warning">Hold</span> your breath for{" "}
-                  <span className="text-warning">
+                  <span className="text-success">Hold</span> your breath for{" "}
+                  <span className="text-success">
                     {breathTimes.hold}{" "}
                     {breathTimes.hold > 1 ? "seconds" : "second"}
                   </span>
