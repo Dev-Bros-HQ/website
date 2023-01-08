@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { getApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import React, { useState } from "react";
 import {
   getMW2Builds,
   getMW2Attachments,
@@ -8,6 +6,7 @@ import {
   createMW2Build,
   getMW2Build,
 } from "./firebaseActions";
+import { db } from "./firebaseConfig";
 
 const MW2Context = React.createContext();
 
@@ -30,15 +29,18 @@ function MW2Provider({ children }) {
     "Ammunition",
   ];
 
-  const app = getApp();
-  const db = getFirestore(app);
+  const getBuild = (id, callback) => {
+    console.log(`calling getBuild: ${id}`);
+    getMW2Build(db, id, callback);
+  };
 
-  const getBuild = (id, callback) => getMW2Build(db, id, callback);
-
-  const createBuild = (values, callback) =>
+  const createBuild = (values, callback) => {
+    console.log(`calling createBuild:`, values);
     createMW2Build(db, values, callback);
+  };
 
   const getAttachments = async () => {
+    console.log(`calling getAttachments:`);
     const allAttachments = {};
     for (let a = 0; a < attachmentTypes.length; a += 1) {
       allAttachments[`${attachmentTypes[a].toLowerCase()}`] =
@@ -49,10 +51,12 @@ function MW2Provider({ children }) {
   };
 
   const getBuilds = async () => {
+    console.log(`calling getBuilds`);
     await getMW2Builds(db, setBuilds);
   };
 
   const getGuns = async () => {
+    console.log(`calling getGuns`);
     await getMW2Guns(db, setGuns);
   };
 

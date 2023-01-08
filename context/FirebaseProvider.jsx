@@ -1,29 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import React, { useState } from "react";
+import { useEffectOnce } from "../hooks/useEffectOnce";
 import { getUser } from "./firebaseActions";
-
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_FIREBASE_APP_ID,
-  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
+import { app, auth, db } from "./firebaseConfig";
 
 const FirebaseContext = React.createContext();
 
 function FirebaseProvider({ children }) {
   const [user, setUser] = useState();
 
-  useEffect(() => {
+  useEffectOnce(() => {
+    console.log("subscribing to auth changes");
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user) {
         // User is signed in.
@@ -35,8 +21,11 @@ function FirebaseProvider({ children }) {
       }
     });
 
-    return () => unsubscribe();
-  }, []);
+    return () => {
+      console.log("unsubscribing to auth changes");
+      return unsubscribe();
+    };
+  });
 
   return (
     <FirebaseContext.Provider

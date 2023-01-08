@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useMW2 } from "../../context/MW2Provider";
+import { useEffectOnce } from "../../hooks/useEffectOnce";
 
 const AttachmentsTable = () => {
   const { attachments, getAttachments } = useMW2();
@@ -14,9 +15,7 @@ const AttachmentsTable = () => {
     }
     setFormattedAttachments(returnValue);
   };
-  useEffect(() => {
-    getAttachments();
-  }, []);
+  useEffectOnce(getAttachments);
 
   useEffect(() => {
     formatAttachmentsForTable();

@@ -1,18 +1,14 @@
-import { getApp } from "firebase/app";
-import { getAuth, signOut } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { signOut } from "firebase/auth";
 import logo from "../assets/circle-dev-bros-hq.webp";
 import { useFirebase } from "../context/FirebaseProvider";
-import { usePageContext } from "./usePageContext";
+import { auth } from "../context/firebaseConfig";
 
 const Nav = () => {
-  const app = getApp();
-  const auth = getAuth(app);
   const { user } = useFirebase();
 
   const logout = async () => {
     await signOut(auth);
-    window.location.reload();
+    window.location.href = "/";
   };
 
   return (

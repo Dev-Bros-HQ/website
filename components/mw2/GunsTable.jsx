@@ -1,12 +1,10 @@
-import { useEffect } from "react";
 import { useMW2 } from "../../context/MW2Provider";
+import { useEffectOnce } from "../../hooks/useEffectOnce";
 
 const GunsTable = () => {
   const { guns, getGuns } = useMW2();
 
-  useEffect(() => {
-    getGuns();
-  }, []);
+  useEffectOnce(getGuns);
 
   return (
     <div className="overflow-auto w-full max-h-80 relative border-primary border-2 rounded-xl">
