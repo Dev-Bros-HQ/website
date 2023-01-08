@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+const { withAnimations } = require("animated-tailwindcss");
+
+module.exports = withAnimations({
   content: [
     "./renderer/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -51,4 +53,4 @@ module.exports = {
     },
   },
   plugins: [require("daisyui")],
-};
+});
