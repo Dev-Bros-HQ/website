@@ -32,13 +32,13 @@ const Page = () => {
         circleTextRef.current.style.opacity = "1";
         clearTimeout(timer);
         resolve();
-      }, 500);
+      }, 1000);
     });
   };
 
   const stop = async () => {
     clearTimeout(timeout);
-    circleRef.current.style.transform = "scale(25%)";
+    circleRef.current.style.transform = "scale(33%)";
     circleRef.current.style.transitionDuration = `2s`;
     circleRef.current.style.background = "#F4C152";
     await updateBreath("Press Start to Begin Excersise");
@@ -68,7 +68,7 @@ const Page = () => {
 
   const exhale = async () => {
     await updateBreath("exhale");
-    circleRef.current.style.transform = "scale(25%)";
+    circleRef.current.style.transform = "scale(33%)";
     circleRef.current.style.transitionDuration = `${breathTimes.exhale}s`;
     circleRef.current.style.background = "#F471B5";
     setTimerTimeout(
@@ -87,10 +87,10 @@ const Page = () => {
 
   return (
     <section className="flex flex-col items-center pb-20">
-      <div className="flex flex-col items-center pt-16 pb-8">
+      <div className="flex flex-col items-center justify-center pt-16 pb-8">
         <div
           ref={circleRef}
-          className={`relative rounded-full h-[350px] w-[350px] bg-warning transition-all ease-in-out flex justify-center items-center scale-[25%]`}
+          className={`relative rounded-full h-[350px] w-[350px] bg-warning transition-all ease-in-out flex justify-center items-center scale-[33%]`}
         >
           <div
             className={`absolute rounded-full h-[100%] w-[100%] bg-inherit animate-[zoomOutRight_6s_ease_infinite] animate-delay-1000`}
@@ -128,14 +128,10 @@ const Page = () => {
               className={`rounded-full h-[100%] w-[100%] bg-inherit animate-[zoomOutLeft_6s_ease_infinite] animate-delay-[4800ms]`}
             ></div>
           </div>
-          {breath === "inhale" && (
-            <CountdownTimer number={breathTimes.inhale} />
-          )}
-          {breath === "hold" && <CountdownTimer number={breathTimes.hold} />}
-          {breath === "exhale" && (
-            <CountdownTimer number={breathTimes.exhale} />
-          )}
         </div>
+        {breath === "inhale" && <CountdownTimer number={breathTimes.inhale} />}
+        {breath === "hold" && <CountdownTimer number={breathTimes.hold} />}
+        {breath === "exhale" && <CountdownTimer number={breathTimes.exhale} />}
       </div>
 
       <div className="bg-secondary w-full p-10 rounded-2xl flex flex-col items-center shadow-2xl z-10">

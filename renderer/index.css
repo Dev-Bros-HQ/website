@@ -5,3 +5,7 @@
 div::-webkit-scrollbar {
   width: 0;
 }
+
+.countdown > *:before {
+  transition: all 1s ease;
+}
