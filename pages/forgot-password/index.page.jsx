@@ -1,18 +1,16 @@
 import { useState } from "react";
-import {
-  signInWithEmailAndPassword,
-  sendPasswordResetEmail,
-} from "firebase/auth";
-import { useFirebase } from "../../context/firebase";
+import { sendPasswordResetEmail, getAuth } from "firebase/auth";
 import { toast } from "react-hot-toast";
 import { isValidEmail } from "../../helpers";
 import Spinner from "../../components/Spinner";
+import { getApp } from "firebase/app";
 
 const Page = () => {
   const [email, setEmail] = useState("");
   const [linkSent, setLinkSent] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { auth } = useFirebase();
+  const app = getApp();
+  const auth = getAuth(app);
 
   const handleInputChange = (e, callback) => {
     const { value } = e.target;

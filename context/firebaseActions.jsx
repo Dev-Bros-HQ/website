@@ -5,7 +5,7 @@ import {
   getDocs,
   doc,
   setDoc,
-  Timestamp,
+  getDoc,
 } from "firebase/firestore";
 import { generateUUID } from "../helpers";
 
@@ -14,6 +14,11 @@ export const getMW2Builds = async (db, callback) => {
   const buildsSnapshot = await getDocs(buildsRef);
   const buildsList = buildsSnapshot.docs.map((doc) => doc.data());
   callback(buildsList);
+};
+export const getMW2Build = async (db, id, callback) => {
+  const buildRef = doc(db, `mw2-builds`, id);
+  const buildSnapshot = await getDoc(buildRef);
+  callback(buildSnapshot.data());
 };
 
 export const getMW2Attachments = async (db, attachmentType) => {
@@ -36,20 +41,9 @@ export const getMW2Guns = async (db, callback) => {
 export const createMW2Build = async (db, values, callback) => {
   const buildUUID = generateUUID("build");
 
-  //TODO: SUBMIT REAL DATA INSTEAD OF THIS MOCK BS ↓
   const docData = {
-    stringExample: "Hello world!",
-    booleanExample: true,
-    numberExample: 3.14159265,
-    dateExample: Timestamp.fromDate(values.createdAt),
-    arrayExample: [5, true, "hello"],
-    nullExample: null,
-    objectExample: {
-      a: 5,
-      b: {
-        nested: "foo",
-      },
-    },
+    id: buildUUID,
+    ...values, //taking the value object and applying to doc data
   };
   await setDoc(doc(db, "mw2-builds", buildUUID), docData).then((ref) => {
     callback();
@@ -61,10 +55,17 @@ export const getUser = async (db, uid, callback) => {
   const q = query(collection(db, "users"), where("uid", "==", uid));
   const doc = await getDocs(q);
   const userInfo = doc.docs[0].data();
+  if (!callback) {
+    return userInfo;
+  }
   callback(userInfo);
 };
 
-export const createDatabaseDocument = async (
+export const createDocument = async (collectionName, data, id, idPrefix) => {
+  return await createDatabaseDocument(db, collectionName, data, id, idPrefix);
+};
+
+const createDatabaseDocument = async (
   db,
   collectionName,
   data,

@@ -1,14 +1,17 @@
 import React from "react";
 import Layout from "./Layout";
-import { FirebaseProvider } from "../context/firebase";
 import { PageContextProvider } from "./usePageContext";
+import { FirebaseProvider } from "../context/FirebaseProvider";
+import { MW2Provider } from "../context/MW2Provider";
 
 function PageLayout({ pageContext, children }) {
   return (
     <React.StrictMode>
       <PageContextProvider pageContext={pageContext}>
         <FirebaseProvider>
-          <Layout>{children}</Layout>
+          <MW2Provider>
+            <Layout>{children}</Layout>
+          </MW2Provider>
         </FirebaseProvider>
       </PageContextProvider>
     </React.StrictMode>

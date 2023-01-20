@@ -3,18 +3,18 @@ import AddAttachment from "../../components/mw2/AddAttachment";
 import AddGun from "../../components/mw2/AddGun";
 import AttachmentsTable from "../../components/mw2/AttachmentsTable";
 import GunsTable from "../../components/mw2/GunsTable";
-import { useFirebase } from "../../context/firebase";
+import { useFirebase } from "../../context/FirebaseProvider";
 
 const Page = () => {
   const [notAdminMessage, setNotAdminMessage] = useState("Loading...");
-  const { authState } = useFirebase();
-  const isAdmin = authState?.user?.admin;
+  const { user } = useFirebase();
+  const isAdmin = user?.admin;
 
   useEffect(() => {
-    if (!Object.keys(authState?.user).length && isAdmin === false) {
+    if (user?.uid && isAdmin === false) {
       setNotAdminMessage("You don't have permission to view this page.");
     }
-  }, [authState, isAdmin]);
+  }, [user, isAdmin]);
 
   return (
     <section className="flex flex-col items-center">

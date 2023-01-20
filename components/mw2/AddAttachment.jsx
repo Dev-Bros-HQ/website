@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
-import { useFirebase } from "../../context/firebase";
+import { createDocument } from "../../context/firebaseActions";
+import { useMW2 } from "../../context/MW2Provider";
 import Spinner from "../Spinner";
 import DevBrosModal from "../UI/Modal";
 
@@ -11,7 +12,7 @@ const AddAttachment = () => {
   const [attachmentType, setAttachmentType] = useState("");
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const { createDocument, getUpdatedAttachments } = useFirebase();
+  const { getUpdatedAttachments } = useMW2();
   const attachmentTypes = [
     "Muzzle",
     "Barrel",

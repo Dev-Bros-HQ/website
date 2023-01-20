@@ -97,7 +97,7 @@ const ImageParallaxScroller = ({ images, onImageSelect, title }) => {
         ref={trackRef}
         data-mouse-down-at="0"
         data-prev-percentage="0"
-        className="flex gap-[4vmin] absolute left-1/2 top-1/2 -translate-x-[0%] -translate-y-1/2 select-none cursor-grab"
+        className="flex gap-[4vmin] absolute left-[calc(50%-20vmin)] top-1/2 -translate-x-[0%] -translate-y-1/2 select-none cursor-grab"
       >
         {imgsLoaded ? (
           images.map((image, imageIndex) => {
@@ -137,7 +137,10 @@ const ImageParallaxScroller = ({ images, onImageSelect, title }) => {
             );
           })
         ) : (
-          <Spinner />
+          <div className="absolute left-[20vmin] -translate-y-[50px] -translate-x-[50%] flex flex-col items-center gap-3 bg-primary py-6 px-12 rounded-md text-primary-content cursor-default shadow-xl">
+            <p className="w-full text-center text-3xl">Loading</p>
+            <Spinner size="lg" />
+          </div>
         )}
       </div>
     </div>

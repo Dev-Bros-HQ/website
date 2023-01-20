@@ -1,16 +1,14 @@
 import { signOut } from "firebase/auth";
 import logo from "../assets/circle-dev-bros-hq.webp";
-const { useFirebase } = await import("../context/firebase");
+import { useFirebase } from "../context/FirebaseProvider";
+import { auth } from "../context/firebaseConfig";
 
 const Nav = () => {
-  const {
-    auth,
-    authState: { user, loading, error },
-  } = useFirebase();
+  const { user } = useFirebase();
 
   const logout = async () => {
     await signOut(auth);
-    window.location.reload();
+    window.location.href = "/";
   };
 
   return (
@@ -25,7 +23,7 @@ const Nav = () => {
           </a>
         </div>
         <div className="navbar-end">
-          {user.admin ? (
+          {user?.admin ? (
             <ul className="menu menu-horizontal text-secondary">
               <li tabIndex={0}>
                 <button className="btn rounded-lg">
@@ -77,7 +75,7 @@ const Nav = () => {
               </ul>
             </li>
           </ul>
-          {user.uid ? (
+          {user?.uid ? (
             <button className="btn btn-accent" onClick={logout}>
               Sign Out
             </button>
