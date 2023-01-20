@@ -6,6 +6,9 @@ import { useMW2 } from "../../../context/MW2Provider";
 import { useFirebase } from "../../../context/FirebaseProvider";
 
 const Page = () => {
+  //turning off page until ready to release
+  return <></>;
+
   const { user } = useFirebase();
   const { guns, createBuild } = useMW2();
   const [step, setStep] = useState(0);

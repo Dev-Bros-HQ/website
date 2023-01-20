@@ -4,6 +4,9 @@ import { useMW2 } from "../../context/MW2Provider";
 import { useEffectOnce } from "../../hooks/useEffectOnce";
 
 const Page = () => {
+  //turning off page until ready to release
+  return <></>;
+
   const { builds, getBuilds } = useMW2();
   useEffectOnce(getBuilds);
 
