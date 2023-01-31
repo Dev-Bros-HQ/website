@@ -70,7 +70,7 @@ const Nav = () => {
                   <a href="/magic-8">Magic 8 Ball</a>
                 </li>
                 <li>
-                  <a href="/box-breath">Box Breathing</a>
+                  <a href="/box-breathe">Box Breathing</a>
                 </li>
               </ul>
             </li>

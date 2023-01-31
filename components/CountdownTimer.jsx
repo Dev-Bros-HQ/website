@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const CountdownTimer = ({ number }) => {
-  const [seconds, setSeconds] = useState(number);
+const CountdownTimer = ({ number, shadowColor }) => {
+  const [seconds, setSeconds] = useState(number - 1);
   const countdownRef = useRef();
 
   useEffect(() => {
@@ -12,7 +12,6 @@ const CountdownTimer = ({ number }) => {
       const change = Math.round((+stamp - +currStamp) / 1000);
       setSeconds(() => {
         if (change > 0) {
-          console.log(change);
           return change;
         }
         countdownRef.current.style.opacity = "0";
@@ -26,10 +25,11 @@ const CountdownTimer = ({ number }) => {
   return (
     <div
       ref={countdownRef}
-      className="absolute flex flex-col p-2 transition-all duration-[500ms] animate-fade-in"
+      className="absolute flex flex-col transition-all duration-[500ms] animate-fade-in"
+      style={{ boxShadow: `inset 0 4px 4px ${shadowColor}` }}
     >
       <span className="countdown font-mono text-6xl text-neutral">
-        <span style={{ "--value": seconds }}></span>
+        <span style={{ "--value": seconds + 1 }}></span>
       </span>
     </div>
   );
