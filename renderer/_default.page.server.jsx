@@ -87,6 +87,14 @@ async function render(pageContext) {
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#2d89ef" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-F1YWPQQ7QY"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){window.dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-F1YWPQQ7QY');
+        </script>
       </head>
       <body>
         <div id="page-view">${dangerouslySkipEscape(viewHtml)}</div>

@@ -1,62 +1,6 @@
 import { getRandomInt } from "../../helpers";
-import mw2Logo from "../../assets/mw2-2022-logo.webp";
+import { popularTools } from "./popularTools";
 
-const popularTools = [
-  {
-    imgUrl: mw2Logo,
-    name: "MW2 Gun Builds",
-    description: "Create, Share, and View the best gun builds!",
-    url: "/mw2-builds",
-  },
-  {
-    imgUrl: "",
-    name: "Coming Soon",
-    description: "",
-    url: "/",
-  },
-  {
-    imgUrl: "",
-    name: "Coming Soon",
-    description: "",
-    url: "/",
-  },
-  {
-    imgUrl: "",
-    name: "Coming Soon",
-    description: "",
-    url: "/",
-  },
-  {
-    imgUrl: "",
-    name: "Coming Soon",
-    description: "",
-    url: "/",
-  },
-  {
-    imgUrl: "",
-    name: "Coming Soon",
-    description: "",
-    url: "/",
-  },
-  {
-    imgUrl: "",
-    name: "Coming Soon",
-    description: "",
-    url: "/",
-  },
-  {
-    imgUrl: "",
-    name: "Coming Soon",
-    description: "",
-    url: "/",
-  },
-  {
-    imgUrl: "",
-    name: "Coming Soon",
-    description: "",
-    url: "/",
-  },
-];
 const buildingToolsEmojis = ["👀", "👷", "🛠️", "🕒", "🚧"];
 const buildingToolsMessages = [
   "We are still working on this tool",

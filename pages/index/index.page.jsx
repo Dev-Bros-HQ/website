@@ -1,63 +1,7 @@
 import React from "react";
 import logo from "../../assets/square-dev-bros-hq-title.webp";
-import mw2Logo from "../../assets/mw2-2022-logo.webp";
 import { usePageContext } from "../../renderer/usePageContext";
-const popularTools = [
-  {
-    imgUrl: mw2Logo,
-    name: "MW2 Gun Builds",
-    description: "Create, Share, and View the best gun builds!",
-    url: "/mw2-builds",
-  },
-  {
-    imgUrl: "",
-    name: "Coming Soon",
-    description: "",
-    url: "/",
-  },
-  {
-    imgUrl: "",
-    name: "Coming Soon",
-    description: "",
-    url: "/",
-  },
-  {
-    imgUrl: "",
-    name: "Coming Soon",
-    description: "",
-    url: "/",
-  },
-  {
-    imgUrl: "",
-    name: "Coming Soon",
-    description: "",
-    url: "/",
-  },
-  {
-    imgUrl: "",
-    name: "Coming Soon",
-    description: "",
-    url: "/",
-  },
-  {
-    imgUrl: "",
-    name: "Coming Soon",
-    description: "",
-    url: "/",
-  },
-  {
-    imgUrl: "",
-    name: "Coming Soon",
-    description: "",
-    url: "/",
-  },
-  {
-    imgUrl: "",
-    name: "Coming Soon",
-    description: "",
-    url: "/",
-  },
-];
+import { popularTools } from "./popularTools";
 
 const Page = () => {
   const pageContext = usePageContext();
