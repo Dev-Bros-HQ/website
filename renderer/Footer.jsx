@@ -20,7 +20,7 @@ const Footer = () => {
                     About
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <a href="/" className="text-base">
                     Third Link
                   </a>
@@ -29,7 +29,7 @@ const Footer = () => {
                   <a href="/" className="text-base">
                     Fourth Link
                   </a>
-                </li>
+                </li> */}
               </ul>
             </nav>
           </div>
@@ -50,44 +50,15 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="/" className="text-base">
-                    Third Link
+                  <a href="/box-breathe" className="text-base">
+                    Box Breathing
                   </a>
                 </li>
-                <li>
-                  <a href="/" className="text-base">
-                    Fourth Link
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-            <h2 className="title-font font-medium text-neutral-content tracking-widest text-sm mb-3">
-              CATEGORIES
-            </h2>
-            <nav className="list-none mb-10">
-              <ul>
-                <li>
-                  <a href="/" className="text-base">
-                    First Link
-                  </a>
-                </li>
-                <li>
-                  <a href="/" className="text-base">
-                    Second Link
-                  </a>
-                </li>
-                <li>
-                  <a href="/" className="text-base">
-                    Third Link
-                  </a>
-                </li>
-                <li>
+                {/* <li>
                   <a href="/" className="text-base">
                     Fourth Link
                   </a>
-                </li>
+                </li> */}
               </ul>
             </nav>
           </div>
