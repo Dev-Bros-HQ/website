@@ -10,10 +10,10 @@ const DevBrosModal = ({ open, onClose, children, ...props }) => {
       className="w-full h-screen absolute left-0 top-0 bg-[rgba(0,0,0,.4)] flex justify-center items-center"
       {...props}
     >
-      <div>
+      <div className="w-full h-screen flex justify-center items-center">
         {children}
         <button
-          className="btn btn-circle fixed top-4 right-4"
+          className="btn btn-circle border-1 border-primary fixed top-4 right-4"
           onClick={onClose}
         >
           <svg
