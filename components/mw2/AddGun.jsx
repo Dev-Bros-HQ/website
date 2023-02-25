@@ -3,7 +3,7 @@ import { toast } from "react-hot-toast";
 import { createDocument } from "../../context/firebaseActions";
 import { build } from "../../helpers/guns";
 import Spinner from "../Spinner";
-import DevBrosModal from "../UI/Modal";
+import DevBrosModal from "../UI/Modal/Modal";
 
 const AddGun = () => {
   const buttonRef = useRef();
