@@ -187,6 +187,7 @@ const Page = () => {
                   value={breathTimes.inhale}
                   className="range range-primary"
                   onChange={handleRangeChange}
+                  aria-label='Slider for inhale time'
                 />
                 <span>
                   Hold
@@ -202,6 +203,7 @@ const Page = () => {
                   value={breathTimes.hold}
                   className="range range-success"
                   onChange={handleRangeChange}
+                  aria-label='Slider for hold time'
                 />
                 <span>
                   Exhale
@@ -217,6 +219,7 @@ const Page = () => {
                   value={breathTimes.exhale}
                   className="range range-accent"
                   onChange={handleRangeChange}
+                  aria-label='Slider for exhale time'
                 />
                 <p className="text-warning">
                   {showRestart
