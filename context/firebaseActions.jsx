@@ -61,6 +61,53 @@ export const getUser = async (db, uid, callback) => {
   callback(userInfo);
 };
 
+export const getUsers = async (db, callback) => {
+  const usersRef = collection(db, "users");
+  const usersSnapshot = await getDocs(usersRef);
+  const usersList = usersSnapshot.docs.map((doc) => doc.data());
+  callback(usersList);
+};
+
+export const getContributors = async (db, contributors, callback) => {
+  if (!contributors) {
+    return;
+  }
+  const contributorPromises = await Promise.all(
+    contributors?.map(({ user }) => getDocumentByPath(db, "users", user.id))
+  );
+
+  const filteredContributors = contributorPromises.map((user) => {
+    const { photoUrl, firstName, lastName, displayName, key } = user;
+    const notes = contributors.filter((contributor) => {
+      return contributor.user.id === key;
+    })[0].notes;
+    return { photoUrl, firstName, lastName, displayName, notes };
+  });
+
+  if (!callback) {
+    return filteredContributors;
+  }
+  callback(filteredContributors);
+};
+
+export const getProjects = async (db, callback) => {
+  const usersRef = collection(db, "projects");
+  const usersSnapshot = await getDocs(usersRef);
+  const usersList = usersSnapshot.docs.map((doc) => doc.data());
+  callback(usersList);
+};
+
+export const getProject = async (db, name, callback) => {
+  if (!name) console.warn("NO PROJECT NAME PRESENT");
+  const q = query(collection(db, "projects"), where("name", "==", name));
+  const doc = await getDocs(q);
+  const projectInfo = doc.docs[0].data();
+  if (!callback) {
+    return projectInfo;
+  }
+  callback(projectInfo);
+};
+
 export const createDocument = async (collectionName, data, id, idPrefix) => {
   return await createDatabaseDocument(db, collectionName, data, id, idPrefix);
 };
@@ -81,4 +128,17 @@ const createDatabaseDocument = async (
     .catch((err) => {
       return { success: null, error: err };
     });
+};
+
+export const getDocumentByPath = async (db, document, collection, callback) => {
+  if (!document || !collection) {
+    console.warn("NO PATH PRESENT");
+    return;
+  }
+  const docRef = doc(db, document, collection);
+  const docSnapshot = await getDoc(docRef);
+  if (!callback) {
+    return docSnapshot.data();
+  }
+  callback(docSnapshot.data());
 };
