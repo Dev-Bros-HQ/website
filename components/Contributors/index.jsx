@@ -18,11 +18,25 @@ const Contributors = ({ projectName }) => {
         );
 
         const filteredContributors = contributors.map((user) => {
-          const { photoUrl, firstName, lastName, displayName, key } = user;
+          const {
+            photoUrl,
+            firstName,
+            lastName,
+            displayName,
+            key,
+            developerPath,
+          } = user;
           const notes = projectInf.contributors.filter((contributor) => {
             return contributor.user.id === key;
           })[0].notes;
-          return { photoUrl, firstName, lastName, displayName, notes };
+          return {
+            photoUrl,
+            firstName,
+            lastName,
+            displayName,
+            notes,
+            developerPath,
+          };
         });
 
         setContributors(filteredContributors);
@@ -42,7 +56,8 @@ const Contributors = ({ projectName }) => {
       <div className="grid grid-cols-[repeat(auto-fit,minmax(486px,1fr))] gap-5">
         {contributors.length ? (
           contributors.map((contributor, index) => {
-            const { notes, firstName, lastName, photoUrl } = contributor || {};
+            const { notes, firstName, lastName, photoUrl, developerPath } =
+              contributor || {};
             return (
               <div
                 className="bg-gradient-to-br from-primary to-accent p-5 rounded-md flex gap-4"
@@ -62,9 +77,12 @@ const Contributors = ({ projectName }) => {
                     </div>
                   </div>
                   <div className="justify-end">
-                    <button className="btn text-secondary btn-sm py-3 h-auto">
+                    <a
+                      href={`developers/${developerPath || ""}`}
+                      className="btn text-secondary btn-sm py-3 h-auto"
+                    >
                       View Minifolio
-                    </button>
+                    </a>
                   </div>
                 </div>
                 <div className="flex flex-col gap-4 w-full">
@@ -73,7 +91,7 @@ const Contributors = ({ projectName }) => {
                   </h2>
                   <div className="flex flex-col gap-3 w-full">
                     <div className="mockup-code shadow-md">
-                      {notes.map((note, i) => (
+                      {notes.map((note) => (
                         <p key={note} className="px-5 pt-2 font-mono">
                           {note}
                         </p>
