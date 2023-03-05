@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import M from "./Modal";
+import M from "./index";
 
 export default {
   title: "Components/Modal",

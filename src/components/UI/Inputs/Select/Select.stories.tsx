@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import S from ".";
 
 export default {
-  title: "Components/Select",
+  title: "UI/Select",
   component: S,
   parameters: {
     // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
