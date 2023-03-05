@@ -78,7 +78,7 @@ const Contributors = ({ projectName }) => {
                   </div>
                   <div className="justify-end">
                     <a
-                      href={`developers/${developerPath || ""}`}
+                      href={`/developers/${developerPath || ""}`}
                       className="btn text-secondary btn-sm py-3 h-auto"
                     >
                       View Minifolio
