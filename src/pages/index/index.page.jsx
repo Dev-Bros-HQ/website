@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "../../assets/square-dev-bros-hq-title.webp";
-import { usePageContext } from "../../renderer/usePageContext";
+import { usePageContext } from "../../context/usePageContext";
 import { popularTools } from "./popularTools";
 
 const Page = () => {

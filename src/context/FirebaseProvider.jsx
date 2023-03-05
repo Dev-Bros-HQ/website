@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { useEffectOnce } from "../hooks/useEffectOnce";
-import { getUser } from "./firebaseActions";
+import {
+  getProject,
+  getProjects,
+  getUser,
+  getUsers,
+  getDocumentByPath,
+  getContributors,
+} from "./firebaseActions";
 import { app, auth, db } from "./firebaseConfig";
 
 const FirebaseContext = React.createContext();
@@ -32,6 +39,14 @@ function FirebaseProvider({ children }) {
       value={{
         app,
         user,
+        getUsers: (callback) => getUsers(db, callback),
+        getUser: (uid) => getUser(db, uid),
+        getProjects: (callback) => getProjects(db, callback),
+        getProject: (name, callback) => getProject(db, name, callback),
+        getDocumentByPath: (document, collection, callback) =>
+          getDocumentByPath(db, document, collection, callback),
+        getContributors: (contributors, callback) =>
+          getContributors(db, contributors, callback),
       }}
     >
       {children}

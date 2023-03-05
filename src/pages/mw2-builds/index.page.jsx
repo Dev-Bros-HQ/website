@@ -2,17 +2,20 @@ import mw2Image from "../../assets/mw2-2022-logo.webp";
 import { format } from "date-fns";
 import { useMW2 } from "../../context/MW2Provider";
 import { useEffectOnce } from "../../hooks/useEffectOnce";
+import Contributors from "../../components/Contributors";
 
 const Page = () => {
   //turning off page until ready to release
-  return <></>;
 
   const { builds, getBuilds } = useMW2();
   useEffectOnce(getBuilds);
 
   return (
     <>
-      <section className="body-font w-full lg:w-screen lg:-ml-[calc((100vw-1007px)/2)] mt-[-72px]">
+      <h1 className="text-4xl text-accent font-bold mt-4">
+        This page is under construction...
+      </h1>
+      {/* <section className="body-font w-full lg:w-screen lg:-ml-[calc((100vw-1007px)/2)] mt-[-72px]">
         <div
           className="hero h-[60vh] bg-cover"
           style={{ backgroundImage: `url(${mw2Image})` }}
@@ -86,7 +89,8 @@ const Page = () => {
             );
           })}
         </div>
-      </section>
+      </section> */}
+      <Contributors projectName="mw2-builds" />
     </>
   );
 };
