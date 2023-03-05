@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "./Layout";
-import { PageContextProvider } from "./usePageContext";
+import { PageContextProvider } from "../context/usePageContext";
 import { FirebaseProvider } from "../context/FirebaseProvider";
 import { MW2Provider } from "../context/MW2Provider";
 

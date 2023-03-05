@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import Contributors from "../../components/Contributors";
 import CountdownTimer from "../../components/CountdownTimer";
 
 const Page = () => {
@@ -301,6 +302,7 @@ const Page = () => {
           it a convenient tool for managing stress in the moment.
         </p>
       </section>
+      <Contributors projectName="box-breathe" />
     </>
   );
 };

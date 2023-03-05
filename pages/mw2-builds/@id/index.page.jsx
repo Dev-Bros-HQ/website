@@ -1,4 +1,4 @@
-import { usePageContext } from "../../../renderer/usePageContext";
+import { usePageContext } from "../../../context/usePageContext";
 import { useEffect, useState } from "react";
 import Spinner from "../../../components/Spinner";
 import { useMW2 } from "../../../context/MW2Provider";

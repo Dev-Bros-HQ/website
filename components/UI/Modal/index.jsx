@@ -7,7 +7,7 @@ const DevBrosModal = ({ open, onClose, children, ...props }) => {
       onHide={onClose}
       onBackdropClick={onClose}
       aria-labelledby="modal-label"
-      className="w-full h-screen absolute left-0 top-0 bg-[rgba(0,0,0,.4)] flex justify-center items-center"
+      className="w-full h-screen absolute left-0 top-0 bg-[rgba(0,0,0,.4)] flex justify-center items-center z-50 backdrop-blur-md"
       {...props}
     >
       <div className="w-full h-screen flex justify-center items-center">
