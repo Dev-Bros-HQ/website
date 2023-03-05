@@ -1,5 +1,5 @@
 import { create } from "@storybook/theming";
-import logo from "../assets/circle-dev-bros-hq-sm.webp";
+import logo from "../src/assets/circle-dev-bros-hq-sm.webp";
 
 export default create({
   base: "dark",

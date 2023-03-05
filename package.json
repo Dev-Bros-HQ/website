@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "yarn server",
-    "build": "vite build",
+    "build": "tsc && vite build",
     "server": "node ./server",
     "preview": "vite preview",
     "storybook": "start-storybook -p 6006",
@@ -19,6 +19,8 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "firebase": "^9.14.0",
+    "framer-motion": "^10.0.1",
+    "iconoir-react": "^6.3.0",
     "react": "^18.2.0",
     "react-aria-modal": "^4.0.2",
     "react-dom": "^18.2.0",
@@ -32,6 +34,7 @@
     "react-uuid": "^2.0.0",
     "sirv": "^2.0.2",
     "storybook": "^6.5.16",
+    "typescript": "^4.9.5",
     "vite-plugin-ssr": "^0.4.69"
   },
   "devDependencies": {
@@ -45,8 +48,8 @@
     "@storybook/react": "^6.5.16",
     "@storybook/testing-library": "^0.0.13",
     "@storybook/theming": "^6.5.16",
-    "@types/react": "^18.0.24",
-    "@types/react-dom": "^18.0.8",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^3.0.0",
     "animated-tailwindcss": "^4.0.0",
     "autoprefixer": "^10.4.13",
