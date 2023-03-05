@@ -1,4 +1,5 @@
 import { Modal } from "react-overlays";
+import { motion } from "framer-motion";
 
 const DevBrosModal = ({ open, onClose, children, ...props }) => {
   return (
@@ -11,7 +12,13 @@ const DevBrosModal = ({ open, onClose, children, ...props }) => {
       {...props}
     >
       <div className="w-full h-screen flex justify-center items-center">
-        {children}
+        <motion.div
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="w-full h-screen flex justify-center items-center"
+        >
+          {children}
+        </motion.div>
         <button
           className="btn btn-circle border-1 border-primary fixed top-4 right-4"
           onClick={onClose}
