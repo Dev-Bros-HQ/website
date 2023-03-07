@@ -13,16 +13,20 @@ const Nav = () => {
 
   return (
     <nav className="sticky top-0 z-50 pt-2">
-      <div className="navbar mx-2 w-[calc(100%-16px)] rounded-lg bg-neutral pl-4 text-neutral-content">
-        <div className="navbar-start">
+      <div className="mx-2 flex w-[calc(100%-16px)] justify-between gap-3 rounded-lg bg-neutral p-2 text-neutral-content">
+        <div className="min-w-12 flex items-center justify-center">
           <a
-            className="btn-ghost btn rounded-full p-0 text-xl normal-case"
+            className="btn-ghost btn w-full rounded-full p-0 text-xl normal-case"
             href="/"
           >
-            <img src={logo} alt="dev bros hq logo" className="h-12 w-12" />
+            <img
+              src={logo}
+              alt="dev bros hq logo"
+              className="w-full max-w-[48px]"
+            />
           </a>
         </div>
-        <div className="navbar-end">
+        <div className="grid w-[75%] max-w-md grid-cols-3 gap-3">
           {user?.admin ? (
             <a
               className="btn-outline btn-secondary btn rounded-lg"
@@ -33,9 +37,9 @@ const Nav = () => {
           ) : (
             ""
           )}
-          <ul className="menu menu-horizontal">
-            <li tabIndex={0}>
-              <button className="btn rounded-lg">
+          <ul className="menu menu-compact menu-horizontal flex w-full">
+            <li tabIndex={0} className="h-full w-full">
+              <button className="btn-sm btn h-full w-full rounded-md p-0 md:btn-md">
                 Tools
                 <svg
                   className="fill-current"
@@ -47,7 +51,7 @@ const Nav = () => {
                   <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
                 </svg>
               </button>
-              <ul className="right-0 rounded-lg bg-neutral p-2 pt-4">
+              <ul className="right-0 rounded-md bg-neutral p-1">
                 <li>
                   <a href="/mw2-builds">MW2 Builds</a>
                 </li>

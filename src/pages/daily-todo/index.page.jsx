@@ -155,14 +155,17 @@ const Page = () => {
 
   return (
     <>
-      <section className="flex flex-col items-center py-12">
+      <section className="flex flex-col items-center py-12 px-3">
         <div className="flex w-full justify-between">
           <h1 className="text-left text-4xl">
             Things {isToday ? "to do" : "you did"}{" "}
             {formatRelative(new Date(day), new Date()).split(" at")[0]}:
           </h1>
           <div className="flex gap-3">
-            <button className="btn-outline btn" onClick={() => updateDay(-1)}>
+            <button
+              className="btn-ghost btn-sm btn md:btn-outline md:btn-md"
+              onClick={() => updateDay(-1)}
+            >
               <svg
                 width="24px"
                 height="24px"
@@ -182,7 +185,7 @@ const Page = () => {
               </svg>
             </button>
             <button
-              className="btn-outline btn"
+              className="btn-ghost btn-sm btn md:btn-outline md:btn-md"
               disabled={day === startOfDay(new Date()).getTime()}
               onClick={() => updateDay(+1)}
             >
@@ -311,7 +314,7 @@ const Page = () => {
           </Droppable>
         </DragDropContext>
       </section>
-      <section>
+      <section className="flex flex-col items-center py-12 px-3">
         <p>
           Using a to-do list can help you prioritize your tasks and stay
           organized. By writing down everything you need to accomplish, you can
