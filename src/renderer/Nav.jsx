@@ -12,20 +12,20 @@ const Nav = () => {
   };
 
   return (
-    <nav className="sticky top-0 pt-2 z-50">
-      <div className="navbar bg-neutral text-neutral-content rounded-lg pl-4 mx-2 w-[calc(100%-16px)]">
+    <nav className="sticky top-0 z-50 pt-2">
+      <div className="navbar mx-2 w-[calc(100%-16px)] rounded-lg bg-neutral pl-4 text-neutral-content">
         <div className="navbar-start">
           <a
-            className="btn btn-ghost normal-case text-xl rounded-full p-0"
+            className="btn-ghost btn rounded-full p-0 text-xl normal-case"
             href="/"
           >
-            <img src={logo} alt="dev bros hq logo" className="w-12 h-12" />
+            <img src={logo} alt="dev bros hq logo" className="h-12 w-12" />
           </a>
         </div>
         <div className="navbar-end">
           {user?.admin ? (
             <a
-              className="btn btn-outline btn-secondary rounded-lg"
+              className="btn-outline btn-secondary btn rounded-lg"
               href="/admin"
             >
               Admin
@@ -47,7 +47,7 @@ const Nav = () => {
                   <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
                 </svg>
               </button>
-              <ul className="p-2 bg-neutral rounded-lg right-0 pt-4">
+              <ul className="right-0 rounded-lg bg-neutral p-2 pt-4">
                 <li>
                   <a href="/mw2-builds">MW2 Builds</a>
                 </li>
@@ -57,15 +57,18 @@ const Nav = () => {
                 <li>
                   <a href="/box-breathe">Box Breathing</a>
                 </li>
+                <li>
+                  <a href="/daily-todo">Daily Todo</a>
+                </li>
               </ul>
             </li>
           </ul>
           {user?.uid ? (
-            <button className="btn btn-accent" onClick={logout}>
+            <button className="btn-accent btn" onClick={logout}>
               Sign Out
             </button>
           ) : (
-            <a href="/sign-in" className="btn btn-accent">
+            <a href="/sign-in" className="btn-accent btn">
               Sign In
             </a>
           )}
