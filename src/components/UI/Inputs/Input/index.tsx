@@ -57,7 +57,7 @@ const Input: React.FC<InputProps> = ({
           required={required}
           aria-invalid={error ? "true" : "false"}
           aria-describedby={`${id}-error`}
-          className={`block w-full rounded-md border border-base-100 bg-white px-4 py-1 text-sm font-medium text-neutral shadow-sm focus:outline-none focus:ring-primary sm:text-lg ${
+          className={`block w-full rounded-md border border-base-100 bg-white px-4 py-1 text-lg font-medium text-neutral shadow-sm focus:outline-none focus:ring-primary ${
             error ? "border-error focus:border-error focus:ring-error" : ""
           }`}
           {...props}
