@@ -15,6 +15,7 @@ const Page = () => {
   const [currentTodo, setCurrentTodo] = useState("");
   const [day, setDay] = useState(startOfDay(new Date()).getTime());
   const [hasMounted, setHasMounted] = useState(false);
+  const [activeTimer, setActiveTimer] = useState("");
   const isToday = day === startOfDay(new Date()).getTime();
   const filteredTodos = todos.filter(
     (todo) => todo?.id >= day && todo?.id < day + 1000 * 60 * 60 * 24
@@ -308,6 +309,8 @@ const Page = () => {
                               updateTodoTime={updateTodoTime}
                               updateTodoText={updateTodoText}
                               updateTodoCompleted={updateTodoCompleted}
+                              setActiveTimer={setActiveTimer}
+                              activeTimer={activeTimer}
                             />
                           </motion.div>
                         )}

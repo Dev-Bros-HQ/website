@@ -7,6 +7,8 @@ const TodoItem = ({
   updateTodoTime,
   updateTodoText,
   updateTodoCompleted,
+  setActiveTimer,
+  activeTimer,
 }) => {
   const [timerStarted, setTimerStarted] = useState(false);
   const [startTime, setStartTime] = useState(Date.now());
@@ -45,6 +47,7 @@ const TodoItem = ({
       return;
     }
 
+    setActiveTimer(todo.id);
     setTimerStarted(true);
     setStartTime(Date.now());
   };
@@ -53,6 +56,12 @@ const TodoItem = ({
     updateTodoText({ ...todo, text });
     setEditTodo(false);
   };
+
+  useEffect(() => {
+    if (activeTimer !== todo.id) {
+      toggleTimer(true);
+    }
+  }, [activeTimer]);
 
   return (
     <div
