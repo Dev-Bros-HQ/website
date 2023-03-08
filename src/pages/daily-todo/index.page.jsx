@@ -4,7 +4,7 @@ import useLocalStorage from "../../hooks/useLocalStorage";
 import Input from "../../components/UI/Inputs/Input";
 import { AnimatePresence, motion } from "framer-motion";
 import TodoItem from "../../components/Todo/TodoItem";
-import { getRandomInt } from "../../helpers";
+import { getRandomInt, getReadableTime } from "../../helpers";
 import { startOfDay, formatRelative } from "date-fns";
 import Contributors from "../../components/Contributors";
 
@@ -19,6 +19,9 @@ const Page = () => {
   const filteredTodos = todos.filter(
     (todo) => todo?.id >= day && todo?.id < day + 1000 * 60 * 60 * 24
   );
+  const totalTime = filteredTodos
+    .map((todo) => todo.time)
+    .reduce((curr, total) => curr + total, 0);
 
   useEffect(() => {
     setHasMounted(true);
@@ -97,6 +100,8 @@ const Page = () => {
 
     return result;
   };
+
+  useEffect(() => {}, [todos]);
 
   const onDragEnd = (result) => {
     // dropped outside the list
@@ -210,6 +215,18 @@ const Page = () => {
           </div>
         </div>
         <AnimatePresence>
+          {hasMounted && (
+            <motion.p
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="w-full text-left"
+            >
+              Total time spent: {getReadableTime(totalTime)}
+            </motion.p>
+          )}
+        </AnimatePresence>
+        <AnimatePresence>
           {isToday && (
             <motion.div
               initial={{ height: 0, opacity: 0 }}
@@ -219,7 +236,7 @@ const Page = () => {
             >
               <form
                 onSubmit={(e) => handleAddTodo(e)}
-                className="my-2 flex w-full items-start items-center px-2 pt-7"
+                className="my-2 flex w-full items-center px-2 pt-7"
               >
                 <Input
                   id="todo-input"

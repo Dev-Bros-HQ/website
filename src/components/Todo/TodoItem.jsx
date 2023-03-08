@@ -32,8 +32,12 @@ const TodoItem = ({
     };
   }, [timerStarted]);
 
-  const toggleTimer = () => {
-    if (timerStarted) {
+  useEffect(() => {
+    updateTodoTime({ ...todo, time: elapsedTime });
+  }, [elapsedTime]);
+
+  const toggleTimer = (turnoff) => {
+    if (timerStarted || turnoff) {
       updateTodoTime({ ...todo, time: elapsedTime });
       setTimerStarted(false);
       clearInterval(intervalId);
@@ -63,9 +67,10 @@ const TodoItem = ({
               <input
                 type="checkbox"
                 defaultChecked={todo.completed}
-                onClick={() =>
-                  updateTodoCompleted({ ...todo, completed: !todo.completed })
-                }
+                onClick={() => {
+                  toggleTimer(true);
+                  updateTodoCompleted({ ...todo, completed: !todo.completed });
+                }}
                 className="checkbox-success checkbox"
               />
             </label>
@@ -132,14 +137,14 @@ const TodoItem = ({
               )}
               <p
                 key={todo.id}
-                className="mr-3 hidden w-full select-none sm:flex"
+                className="mr-3 hidden min-h-[32px] w-full select-none pt-1 sm:flex"
               >
                 {todo.text}
               </p>
               {todo.completed && (
                 <>
-                  <p className="min-w-[max-content] pl-3">Time Spent:</p>
-                  <p className="pl-3">{getReadableTime(elapsedTime)}</p>
+                  <p className="min-w-[max-content] pl-3 pt-1">Time Spent:</p>
+                  <p className="pl-3 pt-1">{getReadableTime(elapsedTime)}</p>
                 </>
               )}
             </>
