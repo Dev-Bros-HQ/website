@@ -215,7 +215,7 @@ const Page = () => {
           </div>
         </div>
         <AnimatePresence>
-          {hasMounted && (
+          {hasMounted && totalTime > 0 && (
             <motion.p
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}

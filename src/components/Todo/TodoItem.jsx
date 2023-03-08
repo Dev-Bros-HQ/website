@@ -141,7 +141,7 @@ const TodoItem = ({
               >
                 {todo.text}
               </p>
-              {todo.completed && (
+              {todo.completed && elapsedTime > 0 && (
                 <>
                   <p className="min-w-[max-content] pl-3 pt-1">Time Spent:</p>
                   <p className="pl-3 pt-1">{getReadableTime(elapsedTime)}</p>
@@ -154,7 +154,7 @@ const TodoItem = ({
           <div className="flex">
             <button
               className={`btn-accent btn-sm btn mr-3 flex flex-nowrap justify-start overflow-hidden px-2 text-sm transition-all hover:w-[120px] ${
-                timerStarted ? "w-[120px]" : "w-[38px]"
+                timerStarted || todo.time > 0 ? "w-[120px]" : "w-[38px]"
               }`}
               onClick={() => toggleTimer()}
             >
