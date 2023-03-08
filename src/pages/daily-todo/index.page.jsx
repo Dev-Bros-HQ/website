@@ -57,6 +57,17 @@ const Page = () => {
     setTodos([...(todos.length ? todos : []), todo]);
   };
 
+  const updateTodoId = (oldId, updatedTodo) => {
+    const index = todos.findIndex((todo) => todo.id === oldId);
+    console.log({ index });
+    const newTodos = [
+      ...todos.slice(0, index),
+      updatedTodo,
+      ...todos.slice(index + 1),
+    ];
+    setTodos(newTodos);
+  };
+
   const updateTodoTime = (updatedTodo) => {
     const index = todos.findIndex((todo) => todo.id === updatedTodo.id);
     const newTodos = [
@@ -306,6 +317,7 @@ const Page = () => {
                             <TodoItem
                               todo={todo}
                               handleDeleteTodo={handleDeleteTodo}
+                              updateTodoId={updateTodoId}
                               updateTodoTime={updateTodoTime}
                               updateTodoText={updateTodoText}
                               updateTodoCompleted={updateTodoCompleted}

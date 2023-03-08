@@ -22,3 +22,11 @@ div::-webkit-scrollbar {
 .selectOptions::-webkit-scrollbar-track {
   background: transparent;
 }
+
+.tooltip:hover::before {
+  transition-delay: 0.75s;
+}
+
+.tooltip:hover::after {
+  transition-delay: 0.75s;
+}
