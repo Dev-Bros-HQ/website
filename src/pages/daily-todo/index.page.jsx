@@ -121,8 +121,14 @@ const Page = () => {
       return;
     }
 
+    const todaysIds = filteredTodos.map((todo) => todo.id);
+
+    const withoutTodaysTodos = todos.filter(
+      (todo) => !todaysIds.includes(todo.id)
+    );
+
     const newTodos = reorder(
-      todos,
+      [...filteredTodos, ...withoutTodaysTodos],
       result.source.index,
       result.destination.index
     );
@@ -130,45 +136,49 @@ const Page = () => {
     setTodos(newTodos);
   };
 
-  // useEffect(() => {
-  //   const sampleTodos = [
-  //     "Buy groceries",
-  //     "Clean the kitchen",
-  //     "Schedule a dentist appointment",
-  //     "Pay bills",
-  //     "Call a friend",
-  //     "Exercise for 30 minutes",
-  //     "Water the plants",
-  //     "Write a blog post",
-  //     "Make a budget",
-  //     "Read a chapter of a book",
-  //     "Plan a weekend trip",
-  //     "Organize closet",
-  //     "Go for a walk",
-  //     "Research a new hobby",
-  //     "Write a thank you note",
-  //     "Sweep the floors",
-  //     "Make a meal plan for the week",
-  //     "Vacuum the living room",
-  //     "Call your parents",
-  //     "Attend a virtual event",
-  //   ];
+  useEffect(() => {
+    const sampleTodos = [
+      "Buy groceries",
+      "Clean the kitchen",
+      "Schedule a dentist appointment",
+      "Pay bills",
+      "Call a friend",
+      "Exercise for 30 minutes",
+      "Water the plants",
+      "Write a blog post",
+      "Make a budget",
+      "Read a chapter of a book",
+      "Plan a weekend trip",
+      "Organize closet",
+      "Go for a walk",
+      "Research a new hobby",
+      "Write a thank you note",
+      "Sweep the floors",
+      "Make a meal plan for the week",
+      "Vacuum the living room",
+      "Call your parents",
+      "Attend a virtual event",
+    ];
 
-  //   const newTodos = [];
+    if (typeof window !== "undefined") {
+      window.generateFakeTodos = () => {
+        const newTodos = [];
 
-  //   for (let i = 0; i < 7; i += 1) {
-  //     for (let j = 0; j < 5; j += 1) {
-  //       const todo = {
-  //         id: Date.now() + j * 1000 - 1000 * 60 * 60 * 24 * i,
-  //         text: sampleTodos[getRandomInt(0, sampleTodos.length - 1)],
-  //         time: 0,
-  //         completed: false,
-  //       };
-  //       newTodos.push(todo);
-  //     }
-  //   }
-  //   setTodos(newTodos);
-  // }, []);
+        for (let i = 0; i < 7; i += 1) {
+          for (let j = 0; j < 5; j += 1) {
+            const todo = {
+              id: Date.now() + j * 1000 - 1000 * 60 * 60 * 24 * i,
+              text: sampleTodos[getRandomInt(0, sampleTodos.length - 1)],
+              time: 0,
+              completed: false,
+            };
+            newTodos.push(todo);
+          }
+        }
+        setTodos(newTodos);
+      };
+    }
+  }, []);
 
   return (
     <>

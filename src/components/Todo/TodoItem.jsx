@@ -88,11 +88,12 @@ const TodoItem = ({
   }, [activeTimer]);
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence>
       <div
-        className={`group mb-3 flex flex-col items-start gap-3 rounded-md border-2 p-2 pl-3 transition-all sm:flex-row ${
-          todo.completed ? "border-success" : "border-transparent"
-        } ${todo.completed ? "bg-success-content" : "bg-base-100"}`}
+        className={`group mb-3 flex flex-col items-start gap-3 rounded-md border-2 p-2 pl-3 transition-all sm:flex-row
+        ${todo.completed ? "border-success" : "border-transparent"}
+        ${todo.completed ? "bg-success-content" : "bg-base-100"}
+        ${timerStarted ? "border-accent" : "border-transparent"}`}
       >
         <div className="flex min-h-[33px] w-full justify-between">
           <div className="flex w-full">
@@ -178,22 +179,17 @@ const TodoItem = ({
             )}
           </div>
           {!todo.completed && (
-            <motion.div
-              key={`${todo.id}-control-buttons`}
-              initial={{ opacity: 0, width: 0 }}
-              animate={{ opacity: 1, width: "138px" }}
-              exit={{ opacity: 0, width: 0 }}
-              className="min-h-[32px flex justify-end"
-            >
+            <div className="flex min-h-[32px] justify-end">
               {!isToday && (
                 <motion.div
+                  key={`${todo.id}-control-move-to-today`}
                   initial={{ opacity: 0, width: 0 }}
-                  animate={{ opacity: 1, width: "auto" }}
+                  animate={{ opacity: 1, width: "max-content" }}
                   exit={{ opacity: 0, width: 0 }}
-                  className="mr-3"
+                  className="w-full"
                 >
                   <div
-                    className="tooltip tooltip-left tooltip-primary"
+                    className="tooltip tooltip-left tooltip-primary mr-3"
                     data-tip="Move to today"
                   >
                     <button
@@ -205,79 +201,90 @@ const TodoItem = ({
                   </div>
                 </motion.div>
               )}
-              <div
-                className="tooltip tooltip-left tooltip-accent mr-3"
-                data-tip="Time spent on task"
+              <motion.div
+                key={`${todo.id}-control-clock`}
+                initial={{ opacity: 0, width: 0 }}
+                animate={{ opacity: 1, width: "auto" }}
+                exit={{ opacity: 0, width: 0 }}
               >
-                <button
-                  className={`btn-accent btn-sm btn flex flex-nowrap justify-start overflow-hidden px-2 text-sm transition-all hover:w-[120px] ${
-                    timerStarted || todo.time > 0 ? "w-[120px]" : "w-[38px]"
-                  }`}
-                  onClick={() => toggleTimer()}
-                >
-                  {timerStarted ? (
-                    <Pause width={20} />
-                  ) : (
-                    <Clock className="min-w-[20px]" width={20} />
-                  )}
-                  <p className="pl-3">{getReadableTime(elapsedTime)}</p>
-                </button>
-              </div>
-              {showConfirmDelete ? (
-                <motion.div
-                  key={`${todo.id}-confirm-delete-buttons`}
-                  initial={{ opacity: 0, width: 0 }}
-                  animate={{ opacity: 1, width: "auto" }}
-                  exit={{ opacity: 0, width: 0 }}
-                  className="flex w-full"
-                >
-                  <div
-                    className="tooltip tooltip-left tooltip-success mr-3"
-                    data-tip="Confirm Delete"
-                  >
-                    <button
-                      className="btn-success btn-sm btn px-2 text-sm"
-                      onClick={() => {
-                        handleDeleteTodo(todo.id);
-                        setShowConfirmDelete(false);
-                      }}
-                    >
-                      <Check width={20} />
-                    </button>
-                  </div>
-
-                  <div
-                    className="tooltip tooltip-left tooltip-error"
-                    data-tip="Cancel Delete"
-                  >
-                    <button
-                      className="btn-error btn-sm btn px-2 text-sm"
-                      onClick={() => {
-                        setShowConfirmDelete(false);
-                      }}
-                    >
-                      <Cancel width={20} />
-                    </button>
-                  </div>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key={`${todo.id}-confirm-delete`}
-                  initial={{ opacity: 0, width: 0 }}
-                  animate={{ opacity: 1, width: "auto" }}
-                  exit={{ opacity: 0, width: 0 }}
-                  className="tooltip tooltip-left tooltip-secondary"
-                  data-tip="Delete Task"
+                <div
+                  className="tooltip tooltip-left tooltip-accent mr-3"
+                  data-tip="Time spent on task"
                 >
                   <button
-                    className="btn-secondary btn-sm btn px-2 text-sm"
-                    onClick={() => setShowConfirmDelete(true)}
+                    className={`btn-accent btn-sm btn flex flex-nowrap justify-start overflow-hidden px-2 text-sm transition-all hover:w-[120px] ${
+                      timerStarted || todo.time > 0 ? "w-[120px]" : "w-[38px]"
+                    }`}
+                    onClick={() => toggleTimer()}
                   >
-                    <Trash width={20} />
+                    {timerStarted ? (
+                      <Pause width={20} />
+                    ) : (
+                      <Clock className="w-[20px] min-w-[20px]" width={20} />
+                    )}
+                    <p className="pl-3">{getReadableTime(elapsedTime)}</p>
                   </button>
-                </motion.div>
-              )}
-            </motion.div>
+                </div>
+              </motion.div>
+              <AnimatePresence>
+                {showConfirmDelete && (
+                  <motion.div
+                    key={`${todo.id}-confirm-delete-buttons`}
+                    initial={{ opacity: 0, width: 0 }}
+                    animate={{ opacity: 1, width: "auto" }}
+                    exit={{ opacity: 0, width: 0 }}
+                    transition={{ duration: 0.175, easings: [0.5, 1, 0.5, 1] }}
+                    className="flex w-full"
+                  >
+                    <div
+                      className="tooltip tooltip-left tooltip-success mr-3 w-1/2"
+                      data-tip="Confirm Delete"
+                    >
+                      <button
+                        className="btn-success btn-sm btn px-2 text-sm"
+                        onClick={() => {
+                          handleDeleteTodo(todo.id);
+                          setShowConfirmDelete(false);
+                        }}
+                      >
+                        <Check width={20} />
+                      </button>
+                    </div>
+
+                    <div
+                      className="tooltip tooltip-left tooltip-error w-1/2"
+                      data-tip="Cancel Delete"
+                    >
+                      <button
+                        className="btn-error btn-sm btn px-2 text-sm"
+                        onClick={() => {
+                          setShowConfirmDelete(false);
+                        }}
+                      >
+                        <Cancel width={20} />
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+                {!showConfirmDelete && (
+                  <motion.div
+                    key={`${todo.id}-confirm-delete`}
+                    initial={{ opacity: 0, width: 0 }}
+                    animate={{ opacity: 1, width: "auto" }}
+                    exit={{ opacity: 0, width: 0 }}
+                    className="tooltip tooltip-left tooltip-secondary"
+                    data-tip="Delete Task"
+                  >
+                    <button
+                      className="btn-secondary btn-sm btn px-2 text-sm"
+                      onClick={() => setShowConfirmDelete(true)}
+                    >
+                      <Trash width={20} />
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           )}
         </div>
         <div className="flex w-full gap-3 sm:hidden">
