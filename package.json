@@ -8,7 +8,8 @@
     "server": "node ./server",
     "preview": "vite preview",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "build-static-webapp": "expo build:web"
   },
   "dependencies": {
     "@hello-pangea/dnd": "^16.2.0",
