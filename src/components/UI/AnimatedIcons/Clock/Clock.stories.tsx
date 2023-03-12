@@ -12,16 +12,24 @@ export default {
     started: {
       control: "boolean",
     },
+    speed: {
+      control: "number",
+    },
+    className: {
+      control: "string",
+    },
   },
   args: {
     started: false,
+    speed: 2,
+    className: "",
   },
 } as ComponentMeta<typeof C>;
 
-export const Clock: ComponentStory<typeof C> = ({ started }) => {
+export const Clock: ComponentStory<typeof C> = ({ started, speed }) => {
   return (
     <div className="flex h-screen w-full flex-col items-center justify-center bg-white">
-      <C className="h-24 w-24 text-primary" started={started} />
+      <C className="h-24 w-24 text-primary" speed={speed} started={started} />
       <p>Started: {started ? "started" : "stopped"}</p>
     </div>
   );

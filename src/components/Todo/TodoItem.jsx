@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import {
   Cancel,
   Check,
-  Clock,
   EditPencil,
   LongArrowUpRight,
   Pause,
@@ -11,6 +10,7 @@ import {
 } from "iconoir-react";
 import { useEffect, useState } from "react";
 import { getReadableTime } from "../../helpers";
+import Clock from "../UI/AnimatedIcons/Clock";
 
 const TodoItem = ({
   todo,
@@ -217,11 +217,10 @@ const TodoItem = ({
                     }`}
                     onClick={() => toggleTimer()}
                   >
-                    {timerStarted ? (
-                      <Pause width={20} />
-                    ) : (
-                      <Clock className="w-[20px] min-w-[20px]" width={20} />
-                    )}
+                    <Clock
+                      className="w-[20px] min-w-[20px]"
+                      started={timerStarted}
+                    />
                     <p className="pl-3">{getReadableTime(elapsedTime)}</p>
                   </button>
                 </div>
