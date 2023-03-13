@@ -58,7 +58,6 @@ const TodoItem = ({
     if (timerStarted || turnoff) {
       updateTodoTime({ ...todo, time: elapsedTime });
       setTimerStarted(false);
-      setActiveTimer("");
       clearInterval(intervalId);
       setIntervalId(null);
       return;
@@ -83,6 +82,7 @@ const TodoItem = ({
   };
 
   useEffect(() => {
+    console.log({ activeTimer, "todo.id": todo.id });
     if (activeTimer !== todo.id) {
       toggleTimer(true);
     }
