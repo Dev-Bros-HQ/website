@@ -5,7 +5,7 @@ import Input from "../../components/UI/Inputs/Input";
 import { AnimatePresence, motion } from "framer-motion";
 import TodoItem from "../../components/Todo/TodoItem";
 import { getRandomInt, getReadableTime } from "../../helpers";
-import { startOfDay, formatRelative } from "date-fns";
+import { startOfDay, formatRelative, sub } from "date-fns";
 import Contributors from "../../components/Contributors";
 
 const Page = () => {
@@ -29,9 +29,9 @@ const Page = () => {
   }, []);
 
   const updateDay = (num) => {
-    const oneDay = 1000 * 60 * 60 * 24;
-    const updatedDay = day + num * oneDay;
-    setDay(updatedDay);
+    const res = sub(new Date(day), { days: num * -1 });
+    const milliseconds = new Date(res).getTime();
+    setDay(milliseconds);
   };
 
   const handleTodoInput = (value) => {
