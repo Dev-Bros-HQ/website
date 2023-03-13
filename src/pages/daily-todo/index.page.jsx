@@ -17,9 +17,9 @@ const Page = () => {
   const [hasMounted, setHasMounted] = useState(false);
   const [activeTimer, setActiveTimer] = useState("");
   const isToday = day === startOfDay(new Date()).getTime();
-  const filteredTodos = todos.filter(
-    (todo) => todo?.id >= day && todo?.id < day + 1000 * 60 * 60 * 24
-  );
+  const filteredTodos = todos
+    .filter((todo) => todo?.id >= day && todo?.id < day + 1000 * 60 * 60 * 24)
+    .reverse();
   const totalTime = filteredTodos
     .map((todo) => todo.time)
     .reduce((curr, total) => curr + total, 0);
@@ -110,10 +110,19 @@ const Page = () => {
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
 
-    return result;
+    return result.reverse();
   };
 
-  useEffect(() => {}, [todos]);
+  useEffect(() => {
+    const currTodoLabel = filteredTodos.filter(
+      (todo) => todo.id === activeTimer
+    )[0];
+    if (currTodoLabel?.text) {
+      document.title = currTodoLabel?.text;
+      return;
+    }
+    document.title = "Daily Todo List";
+  }, [activeTimer]);
 
   const onDragEnd = (result) => {
     // dropped outside the list
@@ -186,9 +195,33 @@ const Page = () => {
         <div className="flex w-full justify-between">
           <h1 className="text-left text-4xl">
             Things {isToday ? "to do" : "you did"}{" "}
-            {formatRelative(new Date(day), new Date()).split(" at")[0]}:
+            {
+              formatRelative(new Date(day), new Date())
+                .replace("last", "")
+                .split(" at")[0]
+            }
+            :
           </h1>
-          <div className="flex gap-3">
+          <div className="flex items-center gap-3">
+            <AnimatePresence>
+              {hasMounted && totalTime > 0 && (
+                <motion.div
+                  initial={{ width: 0, opacity: 0 }}
+                  animate={{ width: "auto", opacity: 1 }}
+                  exit={{ width: 0, opacity: 0 }}
+                  className={`w-full overflow-hidden text-left text-3xl ${
+                    activeTimer ? "text-accent" : "text-success"
+                  }`}
+                >
+                  <div
+                    className="tooltip tooltip-left tooltip-accent mr-3"
+                    data-tip="Total time spent today"
+                  >
+                    {getReadableTime(totalTime)}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
             <button
               className="btn-ghost btn-sm btn md:btn-outline md:btn-md"
               onClick={() => updateDay(-1)}
@@ -236,18 +269,6 @@ const Page = () => {
             </button>
           </div>
         </div>
-        <AnimatePresence>
-          {hasMounted && totalTime > 0 && (
-            <motion.p
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="w-full text-left"
-            >
-              Total time spent: {getReadableTime(totalTime)}
-            </motion.p>
-          )}
-        </AnimatePresence>
         <AnimatePresence>
           {isToday && (
             <motion.div

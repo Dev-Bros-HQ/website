@@ -28,7 +28,7 @@ const Page = () => {
         <div className="container mx-auto px-5 py-16">
           <div className="mb-20 flex w-full flex-col text-center">
             <h2 className="title-font mb-4 text-3xl font-medium text-base-300 sm:text-5xl">
-              Check out our Popular Tools!
+              Check out our Tools!
             </h2>
           </div>
           <div className="-m-2 flex flex-wrap">
