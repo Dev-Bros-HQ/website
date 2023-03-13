@@ -5,7 +5,6 @@ import {
   Check,
   EditPencil,
   LongArrowUpRight,
-  Pause,
   Trash,
 } from "iconoir-react";
 import { useEffect, useState } from "react";
@@ -82,7 +81,6 @@ const TodoItem = ({
   };
 
   useEffect(() => {
-    console.log({ activeTimer, "todo.id": todo.id });
     if (activeTimer !== todo.id) {
       toggleTimer(true);
     }
@@ -91,7 +89,7 @@ const TodoItem = ({
   return (
     <AnimatePresence>
       <div
-        className={`group mb-3 flex flex-col items-start gap-3 rounded-md border-2 p-2 pl-3 transition-all sm:flex-row
+        className={`group relative mb-3 flex flex-col items-start gap-3 overflow-hidden rounded-md border-2 p-2 pl-3 transition-all sm:flex-row
         ${todo.completed ? "border-success" : "border-transparent"}
         ${todo.completed ? "bg-success-content" : "bg-base-100"}
         ${timerStarted ? "border-accent" : "border-transparent"}`}
@@ -171,10 +169,17 @@ const TodoItem = ({
                   {todo.text}
                 </p>
                 {todo.completed && elapsedTime > 0 && (
-                  <>
+                  <motion.div
+                    initial={{ opacity: 0, width: 0 }}
+                    animate={{ opacity: 1, width: "100%" }}
+                    exit={{ opacity: 0, width: 0 }}
+                    transition={{ ease: "easeIn" }}
+                    key="completed-time"
+                    className="flex justify-end overflow-hidden"
+                  >
                     <p className="min-w-[max-content] pl-3 pt-1">Time Spent:</p>
                     <p className="pl-3 pt-1">{getReadableTime(elapsedTime)}</p>
-                  </>
+                  </motion.div>
                 )}
               </div>
             )}
@@ -202,30 +207,32 @@ const TodoItem = ({
                   </div>
                 </motion.div>
               )}
-              <motion.div
-                key={`${todo.id}-control-clock`}
-                initial={{ opacity: 0, width: 0 }}
-                animate={{ opacity: 1, width: "auto" }}
-                exit={{ opacity: 0, width: 0 }}
-              >
-                <div
-                  className="tooltip tooltip-left tooltip-accent mr-3"
-                  data-tip="Time spent on task"
+              <AnimatePresence>
+                <motion.div
+                  key={`${todo.id}-control-clock`}
+                  initial={{ opacity: 0, width: 0 }}
+                  animate={{ opacity: 1, width: "auto" }}
+                  exit={{ opacity: 0, width: 0 }}
                 >
-                  <button
-                    className={`btn-accent btn-sm btn flex flex-nowrap justify-start overflow-hidden px-2 text-sm transition-all hover:w-[120px] ${
-                      timerStarted || todo.time > 0 ? "w-[120px]" : "w-[38px]"
-                    }`}
-                    onClick={() => toggleTimer()}
+                  <div
+                    className="tooltip tooltip-left tooltip-accent mr-3"
+                    data-tip="Time spent on task"
                   >
-                    <Clock
-                      className="w-[20px] min-w-[20px]"
-                      started={timerStarted}
-                    />
-                    <p className="pl-3">{getReadableTime(elapsedTime)}</p>
-                  </button>
-                </div>
-              </motion.div>
+                    <button
+                      className={`btn-accent btn-sm btn flex flex-nowrap justify-start overflow-hidden px-2 text-sm transition-all hover:w-[120px] ${
+                        timerStarted || todo.time > 0 ? "w-[120px]" : "w-[38px]"
+                      }`}
+                      onClick={() => toggleTimer()}
+                    >
+                      <Clock
+                        className="w-[20px] min-w-[20px]"
+                        started={timerStarted}
+                      />
+                      <p className="pl-3">{getReadableTime(elapsedTime)}</p>
+                    </button>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
               <AnimatePresence>
                 {showConfirmDelete && (
                   <motion.div
