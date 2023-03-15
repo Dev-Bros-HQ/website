@@ -409,5 +409,5 @@ export const documentProps = {
   "og:description":
     "Keep track of what you need to get done today, and how long you spend on each task.",
   "og:url": "https://devbroshq.com/",
-  "og:image": "https://devbroshq.com/square-dev-bros-hq-title.webp",
+  "og:image": "https://devbroshq.com/todo.webp",
 };
