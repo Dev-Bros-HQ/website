@@ -1,6 +1,7 @@
 import mw2Logo from "../../assets/mw2-2022-logo.webp";
 import boxBreathe from "../../assets/box-breathe-logo.webp";
 import magic8Ball from "../../assets/magic-8-ball.webp";
+import todo from "../../assets/todo.webp";
 
 export const popularTools = [
   {
@@ -22,10 +23,10 @@ export const popularTools = [
     url: "/magic-8",
   },
   {
-    imgUrl: "",
-    name: "Coming Soon",
-    description: "",
-    url: "/",
+    imgUrl: todo,
+    name: "Daily Todo",
+    description: "Keep track of what you need to get done today.",
+    url: "/daily-todo",
   },
   {
     imgUrl: "",
