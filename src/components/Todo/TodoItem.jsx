@@ -1,25 +1,29 @@
-import { startOfDay } from "date-fns";
+import { formatRelative, startOfDay } from "date-fns";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Cancel,
   Check,
+  Copy,
   EditPencil,
   LongArrowUpRight,
   Trash,
 } from "iconoir-react";
 import { useEffect, useState } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
 import { getReadableTime } from "../../helpers";
 import Clock from "../UI/AnimatedIcons/Clock";
 
 const TodoItem = ({
   todo,
   handleDeleteTodo,
-  updateTodoId,
   updateTodoText,
   updateTodoTime,
   updateTodoCompleted,
   setActiveTimer,
   activeTimer,
+  activeTodo,
+  handleAddTodo,
+  index,
 }) => {
   const [timerStarted, setTimerStarted] = useState(false);
   const [startTime, setStartTime] = useState(Date.now());
@@ -67,17 +71,23 @@ const TodoItem = ({
     setStartTime(Date.now());
   };
 
+  useHotkeys(`shift+${index + 1}`, () => {
+    setActiveTimer(todo.id);
+    toggleTimer();
+  });
+
   const handleUpdateTodoText = (text) => {
     updateTodoText({ ...todo, text });
     setEditTodo(false);
   };
 
-  const handleUpdateTodoId = (id) => {
-    updateTodoId(todo.id, { ...todo, id });
-  };
-
-  const moveToToday = () => {
-    handleUpdateTodoId(Date.now());
+  const moveToToday = (e) => {
+    handleAddTodo(e, {
+      ...todo,
+      text: `${todo.text} (copy)`,
+      id: Date.now(),
+      copiedFrom: todo,
+    });
   };
 
   useEffect(() => {
@@ -88,11 +98,11 @@ const TodoItem = ({
 
   return (
     <AnimatePresence>
-      <div
-        className={`group relative mb-3 flex flex-col items-start gap-3 overflow-hidden rounded-md border-2 p-2 pl-3 transition-all sm:flex-row
+      <form
+        className={`group relative mb-3 flex w-full flex-col items-start gap-3 overflow-x-hidden rounded-md border-2 p-2 pl-3 transition-all sm:flex-row
         ${todo.completed ? "border-success" : "border-transparent"}
         ${todo.completed ? "bg-success-content" : "bg-base-100"}
-        ${timerStarted ? "border-accent" : "border-transparent"}`}
+        ${timerStarted || activeTodo ? "border-accent" : "border-transparent"}`}
       >
         <div className="flex min-h-[33px] w-full justify-between">
           <div className="flex w-full">
@@ -130,6 +140,7 @@ const TodoItem = ({
                   data-tip="Confirm edit"
                 >
                   <button
+                    type="submit"
                     className="btn-success btn-sm btn border-0 px-2 text-sm"
                     onClick={() => handleUpdateTodoText(todoValue)}
                   >
@@ -155,6 +166,7 @@ const TodoItem = ({
                     data-tip="Edit task"
                   >
                     <button
+                      type="button"
                       className="btn-outline btn-primary btn-sm btn border-0 px-2 text-sm"
                       onClick={() => setEditTodo(true)}
                     >
@@ -162,6 +174,9 @@ const TodoItem = ({
                     </button>
                   </motion.div>
                 )}
+                <button type="submit" className="hidden">
+                  hidden
+                </button>
                 <p
                   key={todo.id}
                   className="mx-3 hidden min-h-[32px] w-full select-none pt-1 sm:flex"
@@ -170,12 +185,12 @@ const TodoItem = ({
                 </p>
                 {todo.completed && elapsedTime > 0 && (
                   <motion.div
-                    initial={{ opacity: 0, width: 0 }}
-                    animate={{ opacity: 1, width: "100%" }}
-                    exit={{ opacity: 0, width: 0 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
                     transition={{ ease: "easeIn" }}
                     key="completed-time"
-                    className="flex justify-end overflow-hidden"
+                    className="flex justify-end"
                   >
                     <p className="min-w-[max-content] pl-3 pt-1">Time Spent:</p>
                     <p className="pl-3 pt-1">{getReadableTime(elapsedTime)}</p>
@@ -199,14 +214,41 @@ const TodoItem = ({
                     data-tip="Move to today"
                   >
                     <button
+                      type="button"
                       className="btn-primary btn-sm btn px-2 text-sm"
-                      onClick={() => moveToToday()}
+                      onClick={(e) => moveToToday(e)}
                     >
                       <LongArrowUpRight width={20} />
                     </button>
                   </div>
                 </motion.div>
               )}
+
+              <AnimatePresence>
+                {todo.copiedFrom ? (
+                  <motion.div
+                    key={`${todo.id}-control-copy`}
+                    initial={{ opacity: 0, width: 0 }}
+                    animate={{ opacity: 1, width: "auto" }}
+                    exit={{ opacity: 0, width: 0 }}
+                  >
+                    <div className="text btn-warning btn-sm btn mr-3 flex w-[38px] flex-nowrap justify-start overflow-hidden px-2 text-sm normal-case transition-all hover:w-[220px]">
+                      <Copy className="w-[20px] min-w-[20px]" />
+                      <p className="whitespace-nowrap pl-3 text-center">
+                        Copied from{" "}
+                        {
+                          formatRelative(
+                            new Date(todo.copiedFrom.id || 0),
+                            new Date()
+                          )
+                            .replace("last", "")
+                            .split(" at")[0]
+                        }
+                      </p>
+                    </div>
+                  </motion.div>
+                ) : null}
+              </AnimatePresence>
               <AnimatePresence>
                 <motion.div
                   key={`${todo.id}-control-clock`}
@@ -219,6 +261,7 @@ const TodoItem = ({
                     data-tip="Time spent on task"
                   >
                     <button
+                      type="button"
                       className={`btn-accent btn-sm btn flex flex-nowrap justify-start overflow-hidden px-2 text-sm transition-all hover:w-[120px] ${
                         timerStarted || todo.time > 0 ? "w-[120px]" : "w-[38px]"
                       }`}
@@ -240,7 +283,10 @@ const TodoItem = ({
                     initial={{ opacity: 0, width: 0 }}
                     animate={{ opacity: 1, width: "auto" }}
                     exit={{ opacity: 0, width: 0 }}
-                    transition={{ duration: 0.175, easings: [0.5, 1, 0.5, 1] }}
+                    transition={{
+                      duration: 0.175,
+                      easings: [0.5, 1, 0.5, 1],
+                    }}
                     className="flex w-full"
                   >
                     <div
@@ -248,6 +294,7 @@ const TodoItem = ({
                       data-tip="Confirm Delete"
                     >
                       <button
+                        type="button"
                         className="btn-success btn-sm btn px-2 text-sm"
                         onClick={() => {
                           handleDeleteTodo(todo.id);
@@ -263,6 +310,7 @@ const TodoItem = ({
                       data-tip="Cancel Delete"
                     >
                       <button
+                        type="button"
                         className="btn-error btn-sm btn px-2 text-sm"
                         onClick={() => {
                           setShowConfirmDelete(false);
@@ -283,6 +331,7 @@ const TodoItem = ({
                     data-tip="Delete Task"
                   >
                     <button
+                      type="button"
                       className="btn-secondary btn-sm btn px-2 text-sm"
                       onClick={() => setShowConfirmDelete(true)}
                     >
@@ -310,7 +359,7 @@ const TodoItem = ({
             </>
           )}
         </div>
-      </div>
+      </form>
     </AnimatePresence>
   );
 };

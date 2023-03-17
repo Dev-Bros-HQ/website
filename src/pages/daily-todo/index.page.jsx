@@ -7,6 +7,7 @@ import TodoItem from "../../components/Todo/TodoItem";
 import { getRandomInt, getReadableTime } from "../../helpers";
 import { startOfDay, formatRelative, sub } from "date-fns";
 import Contributors from "../../components/Contributors";
+import { Plus } from "iconoir-react";
 
 const Page = () => {
   const [todos, setTodos] = useLocalStorage("todos", []);
@@ -41,9 +42,9 @@ const Page = () => {
     setTodoInput(value);
   };
 
-  const handleAddTodo = (e) => {
+  const handleAddTodo = (e, template = {}) => {
     e.preventDefault();
-    if (todoInput === "" || !todoInput) {
+    if ((todoInput === "" || !todoInput) && !template.text) {
       setError("Type a task in the input and then submit");
       return;
     }
@@ -54,18 +55,7 @@ const Page = () => {
       completed: false,
     };
     setTodoInput("");
-    setTodos([...(todos.length ? todos : []), todo]);
-  };
-
-  const updateTodoId = (oldId, updatedTodo) => {
-    const index = todos.findIndex((todo) => todo.id === oldId);
-    console.log({ index });
-    const newTodos = [
-      ...todos.slice(0, index),
-      updatedTodo,
-      ...todos.slice(index + 1),
-    ];
-    setTodos(newTodos);
+    setTodos([...(todos.length ? todos : []), { ...todo, ...template }]);
   };
 
   const updateTodoTime = (updatedTodo) => {
@@ -173,7 +163,7 @@ const Page = () => {
       window.generateFakeTodos = () => {
         const newTodos = [];
 
-        for (let i = 0; i < 7; i += 1) {
+        for (let i = 0; i < 10; i += 1) {
           for (let j = 0; j < 5; j += 1) {
             const todo = {
               id: Date.now() + j * 1000 - 1000 * 60 * 60 * 24 * i,
@@ -294,25 +284,9 @@ const Page = () => {
                 />
                 <button
                   type="submit"
-                  className="btn-primary btn-sm btn ml-4 h-auto pl-1 pr-1"
+                  className="btn-primary btn-sm btn ml-4 h-auto px-6 py-[7px]"
                 >
-                  <svg
-                    width="35px"
-                    height="35px"
-                    strokeWidth="1.98"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    color="currentColor"
-                  >
-                    <path
-                      d="M6 12h6m6 0h-6m0 0V6m0 6v6"
-                      stroke="currentColor"
-                      strokeWidth="1.98"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    ></path>
-                  </svg>
+                  <Plus /> Add
                 </button>
               </form>
             </motion.div>
@@ -343,17 +317,18 @@ const Page = () => {
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
-                            className="w-full overflow-hidden"
+                            className="w-full"
                           >
                             <TodoItem
                               todo={todo}
                               handleDeleteTodo={handleDeleteTodo}
-                              updateTodoId={updateTodoId}
                               updateTodoTime={updateTodoTime}
                               updateTodoText={updateTodoText}
                               updateTodoCompleted={updateTodoCompleted}
                               setActiveTimer={setActiveTimer}
                               activeTimer={activeTimer}
+                              handleAddTodo={handleAddTodo}
+                              index={index}
                             />
                           </motion.div>
                         )}
