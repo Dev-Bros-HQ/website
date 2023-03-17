@@ -6,7 +6,8 @@ import "../../components/mw2/viewAttachments.css";
 import GunBuild from "../../components/mw2/gunBuild";
 
 const Page = () => {
-  //turning off page until ready to release
+  //turning off page until ready to release 
+  
   return<></>
 
   const { builds, getBuilds } = useMW2();
