@@ -1,6 +1,6 @@
 import { useState } from "react"
 import ConfigureWorkout from "./ConfigureWorkout"
-import RandomWorkout from "./RandomWorkout"
+import RandomWorkout from "./GetRandomWorkout"
 
 const ChooseWorkout = () => {
 
