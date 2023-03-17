@@ -1,0 +1,28 @@
+.card-bottom {
+    color: red;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(25, 20, 20, 0.34);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(9.5px);
+    -webkit-backdrop-filter: blur(9.5px);
+    border: 1px solid rgba(25, 20, 20, 0.55);
+}
+
+.card-bottom h1 {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.x {
+    position: fixed;
+    left: 50%;
+    bottom: 5px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+}

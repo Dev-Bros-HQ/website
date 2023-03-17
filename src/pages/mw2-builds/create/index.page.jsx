@@ -10,7 +10,7 @@ const Page = () => {
   return <></>;
 
   const { user } = useFirebase();
-  const { guns, createBuild } = useMW2();
+  const { guns, getGuns, createBuild } = useMW2();
   const [step, setStep] = useState(0);
   const [filteredGuns, setFilteredGuns] = useState([]);
   const [formattedGuns, setFormattedGuns] = useState([]);
@@ -19,6 +19,8 @@ const Page = () => {
   const [hasFiveAttachments, setHasFiveAttachments] = useState(false);
   const [handle, setHandle] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(()=>{getGuns()},[])
 
   const images = [
     {
@@ -398,10 +400,10 @@ const Page = () => {
             <div className="flex items-center space-x-4 pt-5 max-w-[1280px] mx-auto">
               <h1 className="grow-[2] w-[150px] text-right">Rear Grip:</h1>
               <select
-                name="rear-grip"
+                name="rearGrip"
                 onChange={handleInput}
                 className="select select-info w-64 max-w-xs"
-                disabled={isFieldDisabled("rear-grip")}
+                disabled={isFieldDisabled("rearGrip")}
               >
                 <option value="">Select Rear Grip</option>
                 {build.attachments["Rear Grips"].map((rg) => (
@@ -410,24 +412,24 @@ const Page = () => {
                   </option>
                 ))}
               </select>
-              <label htmlFor="rear-grip-x" className="grow[1]">
+              <label htmlFor="rearGrip-x" className="grow[1]">
                 X:
                 <input
                   onChange={handleTuningInput}
-                  name="rear-grip-x"
+                  name="rearGrip-x"
                   type="number"
                   className="input input-bordered input-info max-w-[100px] ml-2"
-                  disabled={isFieldDisabled("rear-grip")}
+                  disabled={isFieldDisabled("rearGrip")}
                 />
               </label>
-              <label htmlFor="rear-grip-y" className="grow[1]">
+              <label htmlFor="rearGrip-y" className="grow[1]">
                 Y:
                 <input
                   onChange={handleTuningInput}
-                  name="rear-grip-y"
+                  name="rearGrip-y"
                   type="number"
                   className="input input-bordered input-info max-w-[100px] ml-2"
-                  disabled={isFieldDisabled("rear-grip")}
+                  disabled={isFieldDisabled("rearGrip")}
                 />
               </label>
             </div>
