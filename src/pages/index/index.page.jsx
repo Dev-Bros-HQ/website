@@ -2,24 +2,28 @@ import React from "react";
 import logo from "../../assets/square-dev-bros-hq-title.webp";
 import { usePageContext } from "../../context/usePageContext";
 import { popularTools } from "./popularTools";
+import Text3D from "../../components/Text3D";
 
 const Page = () => {
   const pageContext = usePageContext();
   return (
     <>
       <section className="body-font w-full bg-[url('/assets/hero-background.svg')] bg-cover bg-bottom pb-[25vh] text-neutral-content lg:-ml-[calc((100vw-1134px)/2)] lg:w-screen">
-        <div className="container mx-auto flex flex-col items-center justify-center px-5 py-24 md:flex-row">
-          <img
-            className="mb-10 w-1/2 max-w-[300px] rounded-lg object-cover object-center"
-            alt="dev bros hq logo"
-            src={logo}
-            width="300"
-            height="300"
-          />
-          <div className="w-full text-left md:px-12 md:text-center lg:w-1/2">
-            <p className="mb-8 text-3xl sm:text-6xl">
-              Tools for internet users, built by a team that's{" "}
-              <span className="font-bold text-accent">always learning.</span>
+        <div className="container mx-auto flex flex-col items-center justify-center px-5 py-24 xl:flex-row">
+          <div className="mt-5 mb-20">
+            <Text3D
+              shadowColor="#3A4BF4"
+              shadowLength={20}
+              gradientAggresiveness={90}
+              className="text-white"
+            >
+              Web tools for the curious
+            </Text3D>
+          </div>
+          <div className="w-full text-left md:px-12 md:text-center">
+            <p className="mx-auto mb-8 max-w-md text-3xl sm:text-3xl">
+              Explore our random web tools and little projects that can assist
+              you in tasks and provide entertainment
             </p>
           </div>
         </div>
