@@ -75,7 +75,7 @@ const Text3D: React.FC<
       style={{
         textShadow: shadow,
       }}
-      className={`text-center text-7xl font-bold uppercase  ${className}`}
+      className={`text-center text-5xl font-bold uppercase md:text-7xl ${className}`}
       {...props}
     >
       {children}

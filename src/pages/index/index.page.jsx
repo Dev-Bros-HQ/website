@@ -9,8 +9,8 @@ const Page = () => {
   return (
     <>
       <section className="body-font w-full bg-[url('/assets/hero-background.svg')] bg-cover bg-bottom pb-[25vh] text-neutral-content lg:-ml-[calc((100vw-1134px)/2)] lg:w-screen">
-        <div className="container mx-auto flex flex-col items-center justify-center px-5 py-24 xl:flex-row">
-          <div className="mt-5 mb-20">
+        <div className="container mx-auto flex flex-col items-center justify-center px-5 py-24 xl:pt-36 xl:pb-48">
+          <div className="mb-20 mt-5 max-w-3xl">
             <Text3D
               shadowColor="#3A4BF4"
               shadowLength={20}
@@ -20,11 +20,13 @@ const Page = () => {
               Web tools for the curious
             </Text3D>
           </div>
-          <div className="w-full text-left md:px-12 md:text-center">
-            <p className="mx-auto mb-8 max-w-md text-3xl sm:text-3xl">
-              Explore our random web tools and little projects that can assist
-              you in tasks and provide entertainment
-            </p>
+          <div className="mt-10 flex w-full justify-center md:text-center xl:w-2/3">
+            <div className="card max-w-md bg-gradient-to-br from-primary to-accent p-10 text-left">
+              <p className="mx-auto text-3xl font-semibold text-base-300 sm:text-3xl">
+                Explore our random web tools and little projects that can assist
+                you in tasks and provide entertainment
+              </p>
+            </div>
           </div>
         </div>
       </section>
