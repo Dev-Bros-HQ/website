@@ -262,7 +262,7 @@ const Page = () => {
                 disabled={isFieldDisabled("ammunition")}
               >
                 <option value="">Select Ammo Type</option>
-                {build.attachments.Ammunition.map((ammo) => (
+                {build.attachments.Ammunition.sort().map((ammo) => (
                   <option key={ammo} value={ammo}>
                     {ammo}
                   </option>
@@ -298,7 +298,7 @@ const Page = () => {
                 disabled={isFieldDisabled("barrel")}
               >
                 <option value="">Select Barrel</option>
-                {build.attachments.Barrels.map((barrel) => (
+                {build.attachments.Barrels.sort().map((barrel) => (
                   <option key={barrel} value={barrel}>
                     {barrel}
                   </option>
@@ -334,7 +334,7 @@ const Page = () => {
                 disabled={isFieldDisabled("muzzle")}
               >
                 <option value="">Select Muzzle</option>
-                {build.attachments.Muzzles.map((muzzle) => (
+                {build.attachments.Muzzles.sort().map((muzzle) => (
                   <option key={muzzle} value={muzzle}>
                     {muzzle}
                   </option>
@@ -370,7 +370,7 @@ const Page = () => {
                 disabled={isFieldDisabled("optic")}
               >
                 <option value="">Select Optic</option>
-                {build.attachments.Optics.map((optics) => (
+                {build.attachments.Optics.sort().map((optics) => (
                   <option key={optics} value={optics}>
                     {optics}
                   </option>
@@ -406,7 +406,7 @@ const Page = () => {
                 disabled={isFieldDisabled("rearGrip")}
               >
                 <option value="">Select Rear Grip</option>
-                {build.attachments["Rear Grips"].map((rg) => (
+                {build.attachments["Rear Grips"].sort().map((rg) => (
                   <option key={rg} value={rg}>
                     {rg}
                   </option>
@@ -442,7 +442,7 @@ const Page = () => {
                 disabled={isFieldDisabled("stock")}
               >
                 <option value="">Select Stock</option>
-                {build.attachments.Stocks.map((stock) => (
+                {build.attachments.Stocks.sort().map((stock) => (
                   <option key={stock} value={stock}>
                     {stock}
                   </option>
@@ -478,7 +478,7 @@ const Page = () => {
                 disabled={isFieldDisabled("underbarrel")}
               >
                 <option value="">Select Underbarrel</option>
-                {build.attachments.Underbarrels.map((underbarrel) => (
+                {build.attachments.Underbarrels.sort().map((underbarrel) => (
                   <option key={underbarrel} value={underbarrel}>
                     {underbarrel}
                   </option>
@@ -515,7 +515,7 @@ const Page = () => {
                 disabled={isFieldDisabled("laser")}
               >
                 <option value="">Select Laser</option>
-                {build.attachments.Lasers.map((laser) => (
+                {build.attachments.Lasers.sort().map((laser) => (
                   <option key={laser} value={laser}>
                     {laser}
                   </option>
@@ -531,7 +531,7 @@ const Page = () => {
                 disabled={isFieldDisabled("magazine")}
               >
                 <option value="">Select Magazine</option>
-                {build.attachments.Magazines.map((magazine) => (
+                {build.attachments.Magazines.sort().map((magazine) => (
                   <option key={magazine} value={magazine}>
                     {magazine}
                   </option>
