@@ -8,7 +8,7 @@ import GunBuild from "../../components/mw2/gunBuild";
 const Page = () => {
   //turning off page until ready to release 
   
-  return<></>
+  // return<></>
 
   const { builds, getBuilds } = useMW2();
   useEffectOnce(getBuilds);
@@ -16,10 +16,10 @@ const Page = () => {
 
   return (
     <>
-      <h1 className="mt-4 text-4xl font-bold text-accent">
+      {/* <h1 className="mt-4 text-4xl font-bold text-accent">
         This page is under construction...
-      </h1>
-      <section className="body-font mt-[-72px] w-full lg:-ml-[calc((100vw-1007px)/2)] lg:w-screen">
+      </h1> */}
+      <section className="body-font mt-[-72px] w-full ">
         <div
           className="hero h-[60vh] bg-cover"
           style={{ backgroundImage: `url(${mw2Image})` }}

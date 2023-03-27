@@ -1,5 +1,15 @@
+@font-face {
+    font-family: munich;
+    src: url(../../assets/fonts/munich.otf);
+}
+
+@font-face {
+    font-family: kanit;
+    src: url(../../assets/fonts/Kanit-Regular.ttf);
+}
+
 .card-bottom {
-    color: red;
+    color: white;
     position: absolute;
     top: 0;
     right: 0;
@@ -25,4 +35,11 @@
     bottom: 5px;
     transform: translate(-50%, -50%);
     margin: 0 auto;
+}
+
+.weaponName {
+    color: black;
+    font-family: "kanit";
+    text-decoration: underline 3px;
+    -webkit-text-stroke: 2px #3abff8;
 }

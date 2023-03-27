@@ -7,7 +7,7 @@ import { useFirebase } from "../../../context/FirebaseProvider";
 
 const Page = () => {
   //turning off page until ready to release
-  return <></>;
+  // return <></>;
 
   const { user } = useFirebase();
   const { guns, getGuns, createBuild } = useMW2();
@@ -539,7 +539,7 @@ const Page = () => {
               </select>
             </div>
             <div className="flex items-center space-x-4 pt-5 max-w-[1280px] mx-auto">
-              <h1 className="grow-[2] w-[150px] text-right">Credit</h1>
+              <h1 className="grow-[2] w-[150px] text-right">Twitter:</h1>
               <input
                 type="text"
                 className="input input-bordered input-info max-w-[300px] ml-2"

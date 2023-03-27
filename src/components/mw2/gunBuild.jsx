@@ -44,7 +44,9 @@ const GunBuild = ({build}) => {
               </svg>
             </a>
           ) : null}
-          <p>If a dog chews shoes whose shoes does he choose?</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
           <div className="card-actions items-end justify-between">
             <div className="badge badge-lg">
               Created {format(new Date(createdDate), "P")}
@@ -55,20 +57,32 @@ const GunBuild = ({build}) => {
           </div>
           {showAttachments ? (
             <div className="card-bottom">
-                <h1>{gun["gun-name"]}</h1>
-                <div className="flex flex-col items-center gap-3">
-                    {muzzle && (<p>{muzzle.value} - X:{muzzle.tuningX} / Y:{muzzle.tuningY}</p>)}
-                    {barrel && (<p>{barrel.value} - X:{barrel.tuningX} / Y:{barrel.tuningY}</p>)}
-                    {underbarrel && (<p>{underbarrel.value} - X:{underbarrel.tuningX} / Y:{underbarrel.tuningY}</p>)}
-                    {laser && <p>{laser.value}</p>}
-                    {optic && (<p>{optic.value} - X:{optic.tuningX} / Y:{optic.tuningY}</p>)}
-                    {stock && (<p>{stock.value} - X:{stock.tuningX} / Y:{stock.tuningY}</p>)}
-                    {comb && <p>{comb.value}</p>}
-                    {rearGrip && (<p>{rearGrip.value} - X:{rearGrip.tuningX} / Y:{rearGrip.tuningY}</p>)}
-                    {bolt && <p>{bolt.value}</p>}
-                    {gaurd && (<p>{gaurd.value} - X:{gaurd.tuningX} / Y:{gaurd.tuningY}</p>)}
-                    {magazine && <p>{magazine.value}</p>}
-                    {ammunition && (<p>{ammunition.value} - X:{ammunition.tuningX} / Y:{ammunition.tuningY}</p>)}
+                <h1 className="weaponName pt-2">{gun["gun-name"]}</h1>
+                <div className="flex flex-col items-center">
+                    {ammunition && (<h2 className="text-center text-xl text-decoration-line: underline text-sky-400">Ammunition</h2>)}
+                    {ammunition && (<p className="pb-2">{ammunition.value} || X:{ammunition.tuningX} / Y:{ammunition.tuningY}</p>)}
+                    {barrel && (<h2 className="text-center text-xl text-decoration-line: underline text-sky-400">Barrel</h2>)}
+                    {barrel && (<p className="pb-2">{barrel.value} || X:{barrel.tuningX} / Y:{barrel.tuningY}</p>)}
+                    {gaurd && (<h2 className="text-center text-xl text-decoration-line: underline text-sky-400">Gaurd</h2>)}
+                    {gaurd && (<p className="pb-2">{gaurd.value} || X:{gaurd.tuningX} / Y:{gaurd.tuningY}</p>)}
+                    {muzzle && (<h2 className="text-center text-xl text-decoration-line: underline text-sky-400">Muzzle</h2>)}
+                    {muzzle && (<p className="pb-2">{muzzle.value} || X:{muzzle.tuningX} / Y:{muzzle.tuningY}</p>)}
+                    {rearGrip && (<h2 className="text-center text-xl text-decoration-line: underline text-sky-400">Rear Grip</h2>)}
+                    {rearGrip && (<p className="pb-2">{rearGrip.value} || X:{rearGrip.tuningX} / Y:{rearGrip.tuningY}</p>)}
+                    {stock && (<h2 className="text-center text-xl text-decoration-line: underline text-sky-400">Stock</h2>)}
+                    {stock && (<p className="pb-2">{stock.value} || X:{stock.tuningX} / Y:{stock.tuningY}</p>)}
+                    {optic && (<h2 className="text-center text-xl text-decoration-line: underline text-sky-400">Optic</h2>)}
+                    {optic && (<p className="pb-2">{optic.value} || X:{optic.tuningX} / Y:{optic.tuningY}</p>)}
+                    {underbarrel && (<h2 className="text-center text-xl text-decoration-line: underline text-sky-400">Underbarrel</h2>)}
+                    {underbarrel && (<p className="pb-2">{underbarrel.value} || X:{underbarrel.tuningX} / Y:{underbarrel.tuningY}</p>)}
+                    {bolt && (<h2 className="text-center text-xl text-decoration-line: underline text-sky-400">Bolt</h2>)}
+                    {bolt && <p className="pb-2">{bolt.value}</p>}
+                    {comb && (<h2 className="text-center text-xl text-decoration-line: underline text-sky-400">Comb</h2>)}
+                    {comb && <p className="pb-2">{comb.value}</p>}
+                    {laser && (<h2 className="text-center text-xl text-decoration-line: underline text-sky-400">Laser</h2>)}
+                    {laser && <p className="pb-2">{laser.value}</p>}
+                    {magazine && (<h2 className="text-center text-xl text-decoration-line: underline text-sky-400">Magazine</h2>)}
+                    {magazine && <p className="pb-2">{magazine.value}</p>}
                 </div>
                 <button onClick={() => setShowAttachments(false)} className="x btn btn-circle btn-outline">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
