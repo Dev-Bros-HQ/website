@@ -521,6 +521,27 @@ const Page = () => {
                   </option>
                 ))}
               </select>
+              <label htmlFor="laser-x" className="grow[1]">
+                X
+                <input
+                  onChange={handleTuningInput}
+                  name="laser-x"
+                  type="number"
+                  className="input input-bordered input-info max-w-[100px] ml-2"
+                  disabled={isFieldDisabled("laser")}
+                />
+                :
+              </label>
+              <label htmlFor="laser-y" className="grow[1]">
+                Y:
+                <input
+                  onChange={handleTuningInput}
+                  name="laser-y"
+                  type="number"
+                  className="input input-bordered input-info max-w-[100px] ml-2"
+                  disabled={isFieldDisabled("laser")}
+                />
+              </label>
             </div>
             <div className="flex items-center space-x-4 pt-5 max-w-[1280px] mx-auto">
               <h1 className="grow-[2] w-[150px] text-right">Magazine:</h1>
