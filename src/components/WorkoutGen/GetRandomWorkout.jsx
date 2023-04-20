@@ -54,6 +54,8 @@ const GetRandomWorkout = ({ setWorkout }) => {
   return (
     <div className="m-4 flex flex-col items-center">
 
+    <h2 className=" text-4xl m-2 text- ">Workout Generator</h2>
+
       <select onChange={(e) => setIntensity(e.target.value)} className=" select-bordered select-primary select w-full max-w-xs m-2">
 
         <option disabled selected>Choose intensity of workout</option>

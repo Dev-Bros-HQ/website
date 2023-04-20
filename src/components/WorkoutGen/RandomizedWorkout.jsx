@@ -126,7 +126,7 @@ const RandomizedWorkout = ({
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
             >
-              <div className=" m-4 flex rounded-2xl border-8 border-primary bg-secondary p-6 ">
+              <div className=" m-4 flex rounded-2xl border-8 border-black bg-secondary p-6 ">
                 <section>
                   <img src={workout.img} />
                 </section>
