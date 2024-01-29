@@ -5,11 +5,13 @@ import Spinner from "../../components/Spinner";
 
 const Page = () => {
   const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { getBlogPosts } = useFirebase();
 
   useEffect(() => {
     const fetchBlogPosts = async () => {
       await getBlogPosts(setBlogs);
+      setLoading(false);
     };
 
     fetchBlogPosts();
@@ -20,7 +22,7 @@ const Page = () => {
       <section className="mx-auto flex w-full max-w-2xl flex-col px-4 py-16 text-left">
         <div className="flex w-full flex-col gap-2">
           <h1 className="text-3xl font-semibold">Dev Bros Blog</h1>
-          {!!blogs.length ? (
+          {!loading && blogs.length ? (
             blogs?.map((blog) => {
               const { photoUrl, displayName, firstName, lastName } =
                 blog.author;
@@ -57,6 +59,10 @@ const Page = () => {
                 </a>
               );
             })
+          ) : !loading ? (
+            <div>
+              <p>No blog posts found. Check back later</p>
+            </div>
           ) : (
             <div className="flex w-full justify-center">
               <Spinner size="lg" color="primary" />
