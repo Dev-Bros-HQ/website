@@ -1,7 +1,7 @@
-import { usePageContext } from "../../../context/usePageContext";
+import { usePageContext } from "../../context/usePageContext";
 import { useEffect, useState } from "react";
-import Spinner from "../../../components/Spinner";
-import { useFirebase } from "../../../context/FirebaseProvider";
+import Spinner from "../../components/Spinner";
+import { useFirebase } from "../../context/FirebaseProvider";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { format } from "date-fns";
