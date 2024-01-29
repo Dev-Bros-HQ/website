@@ -20,16 +20,11 @@ const Footer = () => {
                     About
                   </a>
                 </li>
-                {/* <li>
-                  <a href="/" className="text-base">
-                    Third Link
+                <li>
+                  <a href="/blog" className="text-base">
+                    Blog
                   </a>
                 </li>
-                <li>
-                  <a href="/" className="text-base">
-                    Fourth Link
-                  </a>
-                </li> */}
               </ul>
             </nav>
           </div>

@@ -19,6 +19,7 @@ module.exports = withAnimations({
       animation: {
         shake: "shake .5s ease-in-out",
         "fade-in": "fade-in .5s ease-in-out",
+        spin: "spin .5s ease-in-out infinite",
       },
       keyframes: {
         shake: {
@@ -47,6 +48,14 @@ module.exports = withAnimations({
           },
           "100%": {
             opacity: "1",
+          },
+        },
+        spin: {
+          "0%": {
+            transform: "rotate(0deg)",
+          },
+          "100%": {
+            transform: "rotate(360deg)",
           },
         },
       },

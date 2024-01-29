@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import AdminHome from "../../components/Admin/AdminHome";
 import AdminProjects from "../../components/Admin/AdminProjects";
 import AdminUsers from "../../components/Admin/AdminUsers";
+import Blog from "../../components/Admin/Blog";
 import { useFirebase } from "../../context/FirebaseProvider";
 
 const Page = () => {
@@ -14,6 +15,7 @@ const Page = () => {
     "admin-home": <AdminHome />,
     "admin-users": <AdminUsers />,
     "admin-projects": <AdminProjects />,
+    blog: <Blog />,
   };
 
   useEffect(() => {
@@ -26,14 +28,14 @@ const Page = () => {
     <section className="flex flex-col items-center py-9">
       {isAdmin ? (
         <div className="flex w-full gap-3">
-          <aside className="bg-base-300 w-full max-w-[250px] min-h-16 rounded-md p-4">
+          <aside className="min-h-16 w-full max-w-[250px] rounded-md bg-base-300 p-4">
             <div className="flex items-end gap-5">
               <div className="avatar">
-                <div className="w-20 rounded-full ring ring-secondary ring-offset-base-100 ring-offset-2">
+                <div className="w-20 rounded-full ring ring-secondary ring-offset-2 ring-offset-base-100">
                   {user.photoUrl ? (
                     <img src={user.photoUrl} />
                   ) : (
-                    <div className="w-full h-full flex justify-center items-center">
+                    <div className="flex h-full w-full items-center justify-center">
                       <svg
                         width="24px"
                         height="24px"
@@ -59,28 +61,34 @@ const Page = () => {
               <p>Hey{user.displayName ? `, ${user.displayName}.` : ""}</p>
             </div>
             <div className="divider"></div>
-            <div className="w-full min-h-[300px] flex flex-col gap-1">
+            <div className="flex min-h-[300px] w-full flex-col gap-1">
               <button
-                className="btn btn-secondary btn-sm w-full justify-start"
+                className="btn-secondary btn-sm btn w-full justify-start"
                 onClick={() => setActivePage("admin-home")}
               >
                 Home
               </button>
               <button
-                className="btn btn-secondary btn-sm w-full justify-start"
+                className="btn-secondary btn-sm btn w-full justify-start"
                 onClick={() => setActivePage("admin-users")}
               >
                 Users
               </button>
               <button
-                className="btn btn-secondary btn-sm w-full justify-start"
+                className="btn-secondary btn-sm btn w-full justify-start"
                 onClick={() => setActivePage("admin-projects")}
               >
                 Projects
               </button>
+              <button
+                className="btn-secondary btn-sm btn w-full justify-start"
+                onClick={() => setActivePage("blog")}
+              >
+                Blog
+              </button>
             </div>
           </aside>
-          <section className="w-full bg-base-300 rounded-md p-3">
+          <section className="w-full rounded-md bg-base-300 p-3">
             {pageMap[activePage]}
           </section>
         </div>

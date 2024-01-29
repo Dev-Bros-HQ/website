@@ -6,6 +6,8 @@ import {
   doc,
   setDoc,
   getDoc,
+  updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import { generateUUID } from "../helpers";
 
@@ -141,4 +143,108 @@ export const getDocumentByPath = async (db, document, collection, callback) => {
     return docSnapshot.data();
   }
   callback(docSnapshot.data());
+};
+
+export const getBlogPosts = async (db, callback, authorId) => {
+  const blogsRef = collection(db, "blogs");
+
+  let blogsQuery = blogsRef;
+
+  if (authorId) {
+    // Filter blogs where the "author" field matches the author reference path
+    blogsQuery = query(blogsRef, where("author_uid", "==", authorId));
+  }
+
+  const blogsSnapshot = await getDocs(blogsQuery);
+  const blogsList = blogsSnapshot.docs.map((doc) => doc.data());
+
+  const blogsWithAuthors = await Promise.all(
+    blogsList.map(async (blog) => {
+      const q = query(
+        collection(db, "users"),
+        where("key", "==", blog.author_uid)
+      );
+      const doc = await getDocs(q);
+      const author = doc.docs[0].data();
+      return { ...blog, author };
+    })
+  );
+
+  if (!callback) {
+    return blogsWithAuthors;
+  }
+
+  callback(blogsWithAuthors);
+};
+
+export const updateBlogPost = async (db, blog, callback) => {
+  const blogUUID = blog?.id || generateUUID("blog");
+  const authorRef = doc(
+    db,
+    "users",
+    blog?.author?.author_uid || blog?.author?.key
+  );
+  const docData = {
+    id: blogUUID,
+    ...blog,
+    author: authorRef,
+  };
+
+  if (!!blog?.id) {
+    return await updateDoc(doc(db, "blogs", docData.id), docData).then(
+      (ref) => {
+        if (callback) {
+          callback(ref);
+        }
+        return ref;
+      }
+    );
+  }
+
+  return await setDoc(doc(db, "blogs", docData.id), docData).then((ref) => {
+    if (callback) {
+      callback(ref);
+    }
+    return ref;
+  });
+};
+
+export const getBlogPost = async (db, slug, callback) => {
+  if (!slug) console.warn("NO BLOG SLUG PRESENT");
+  const q = query(collection(db, "blogs"), where("slug", "==", slug));
+  const doc = await getDocs(q);
+  const blogInfo = doc.docs[0].data();
+  const authorQ = query(
+    collection(db, "users"),
+    where("key", "==", blogInfo.author.id || blogInfo.author.key)
+  );
+  const authorDoc = await getDocs(authorQ);
+  const author = authorDoc.docs[0].data();
+  if (!callback) {
+    return { ...blogInfo, author };
+  }
+  callback({ ...blogInfo, author });
+};
+
+export const deleteBlogPost = async (db, blogId, callback) => {
+  if (!blogId) {
+    console.warn("NO BLOG ID PRESENT");
+    return;
+  }
+
+  const blogDocRef = doc(db, "blogs", blogId);
+
+  try {
+    await deleteDoc(blogDocRef);
+    if (callback) {
+      callback({ success: true, message: "Blog post deleted successfully." });
+    }
+    return { success: true, message: "Blog post deleted successfully." };
+  } catch (error) {
+    console.error("Error deleting blog post:", error);
+    if (callback) {
+      callback({ success: false, message: "Error deleting blog post." });
+    }
+    return { success: false, message: "Error deleting blog post." };
+  }
 };

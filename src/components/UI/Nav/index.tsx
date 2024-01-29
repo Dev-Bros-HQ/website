@@ -53,6 +53,12 @@ const Nav: React.FC<PropsWithChildren> = () => {
             ) : (
               ""
             )}
+            <a
+              className="btn-sm btn h-full rounded-md py-1 px-3 md:btn-md"
+              href="/blog"
+            >
+              Blog
+            </a>
             <button
               className="btn-sm btn h-full rounded-md py-1 px-3 md:btn-md"
               onClick={() => setShowDrawer(!showDrawer)}

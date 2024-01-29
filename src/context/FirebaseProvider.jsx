@@ -7,6 +7,10 @@ import {
   getUsers,
   getDocumentByPath,
   getContributors,
+  getBlogPosts,
+  updateBlogPost,
+  getBlogPost,
+  deleteBlogPost,
 } from "./firebaseActions";
 import { app, auth, db } from "./firebaseConfig";
 
@@ -47,6 +51,12 @@ function FirebaseProvider({ children }) {
           getDocumentByPath(db, document, collection, callback),
         getContributors: (contributors, callback) =>
           getContributors(db, contributors, callback),
+        getBlogPosts: (callback, authorId) =>
+          getBlogPosts(db, callback, authorId),
+        getBlogPost: (slug, callback) => getBlogPost(db, slug, callback),
+        updateBlogPosts: (data, callback) => updateBlogPost(db, data, callback),
+        deleteBlogPost: (blogId, callback) =>
+          deleteBlogPost(db, blogId, callback),
       }}
     >
       {children}

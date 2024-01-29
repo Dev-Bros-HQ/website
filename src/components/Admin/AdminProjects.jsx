@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useFirebase } from "../../context/FirebaseProvider";
 import Modal from "../UI/Modal";
+import Spinner from "../Spinner";
 
 const AdminProjects = () => {
   const [projects, setProjects] = useState([]);
@@ -26,7 +27,7 @@ const AdminProjects = () => {
       <p className="text-4xl">Dev Bros HQ Projects</p>
       <br />
       {projects.length ? (
-        <div className="overflow-x-auto w-full">
+        <div className="w-full overflow-x-auto">
           <table className="table w-full">
             <thead>
               <tr>
@@ -49,11 +50,13 @@ const AdminProjects = () => {
           </table>
         </div>
       ) : (
-        <>Loading...</>
+        <div className="flex w-full justify-center">
+          <Spinner size="lg" color="primary" />
+        </div>
       )}
       <Modal open={open} onClose={() => setOpen(false)}>
-        <div className="w-full max-w-[900px] bg-neutral-content text-neutral py-12 px-6 rounded-lg">
-          <div className="w-full flex items-end gap-4">
+        <div className="w-full max-w-[900px] rounded-lg bg-neutral-content py-12 px-6 text-neutral">
+          <div className="flex w-full items-end gap-4">
             <div className="w-full">
               <p className="text-2xl">Project: {activeProject.name}</p>
               <br />
@@ -72,19 +75,19 @@ const AdminProjects = () => {
                       } = contributor;
                       return (
                         <div
-                          className="flex gap-2 mt-4"
+                          className="mt-4 flex gap-2"
                           key={`contributor-${i}`}
                         >
                           <div>
                             {photoUrl ? (
                               <div className="avatar">
-                                <div className="w-12 h-12 rounded-full">
+                                <div className="h-12 w-12 rounded-full">
                                   <img src={photoUrl} alt={displayName} />
                                 </div>
                               </div>
                             ) : (
-                              <div className="avatar placeholder">
-                                <div className="w-12 h-12 rounded-full flex justify-center items-center bg-secondary-focus">
+                              <div className="placeholder avatar">
+                                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-secondary-focus">
                                   <p className="text-2xl">{`${firstName.charAt(
                                     0
                                   )}${lastName.charAt(0)}`}</p>
@@ -137,36 +140,40 @@ const ProjectRow = ({ project, handleViewProjectDetails, ...props }) => {
       </td>
       <td className="border-secondary">
         <div className="avatar-group -space-x-6 p-2">
-          {contributorsInfo.length
-            ? contributorsInfo.map((contributor, i) => {
-                const { displayName, firstName, lastName, photoUrl } =
-                  contributor;
-                return (
-                  <div key={`contributor-${i}`}>
-                    {photoUrl ? (
-                      <div className="avatar">
-                        <div className="w-12 h-12">
-                          <img src={photoUrl} alt={displayName} />
-                        </div>
+          {contributorsInfo.length ? (
+            contributorsInfo.map((contributor, i) => {
+              const { displayName, firstName, lastName, photoUrl } =
+                contributor;
+              return (
+                <div key={`contributor-${i}`}>
+                  {photoUrl ? (
+                    <div className="avatar">
+                      <div className="h-12 w-12">
+                        <img src={photoUrl} alt={displayName} />
                       </div>
-                    ) : (
-                      <div className="avatar placeholder bg-secondary-focus">
-                        <div className="w-12 h-12 flex justify-center items-center">
-                          <p className="text-2xl">{`${firstName.charAt(
-                            0
-                          )}${lastName.charAt(0)}`}</p>
-                        </div>
+                    </div>
+                  ) : (
+                    <div className="placeholder avatar bg-secondary-focus">
+                      <div className="flex h-12 w-12 items-center justify-center">
+                        <p className="text-2xl">{`${firstName.charAt(
+                          0
+                        )}${lastName.charAt(0)}`}</p>
                       </div>
-                    )}
-                  </div>
-                );
-              })
-            : null}
+                    </div>
+                  )}
+                </div>
+              );
+            })
+          ) : (
+            <div className="flex w-full justify-center">
+              <Spinner size="lg" color="primary" />
+            </div>
+          )}
         </div>
       </td>
       <td className="border-secondary">
         <button
-          className="btn btn-sm btn-accent"
+          className="btn-accent btn-sm btn"
           onClick={() =>
             handleViewProjectDetails({
               ...project,

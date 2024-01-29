@@ -30,14 +30,14 @@ const Input: React.FC<InputProps> = ({
   ...props
 }) => {
   return (
-    <div className={`w-full max-w-lg ${className}`}>
+    <div className={`w-full ${className}`}>
       <div
         className={`group relative w-full rounded-md outline-2 outline-offset-2 outline-primary transition-all duration-75 focus-within:outline focus:outline active:outline`}
       >
         <label
           htmlFor={id}
-          className={`absolute flex h-full max-w-full -translate-y-1/2 cursor-text items-center overflow-hidden whitespace-nowrap px-3 font-medium transition-all group-focus-within:-left-3 group-focus-within:-top-[15px] group-focus-within:text-sm ${
-            value.length > 0 ? "-top-[15px]" : "top-1/2"
+          className={`absolute flex max-w-full -translate-y-1/2 cursor-text items-center overflow-hidden whitespace-nowrap px-3 font-medium transition-all group-focus-within:-left-3 group-focus-within:-top-[10px] group-focus-within:text-sm group-focus-within:text-white ${
+            value.length > 0 ? "-top-[10px]" : "top-1/2"
           } ${value.length > 0 ? "text-sm" : "text-lg"} ${
             value.length > 0 ? "-left-3" : "left-0"
           } ${

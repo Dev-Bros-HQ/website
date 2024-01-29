@@ -14,10 +14,11 @@ const Page = () => {
   return (
     <>
       <div className="font-sans">
-        <div className="container mx-auto px-4 py-8 flex flex-col items-center">
+        <div className="container mx-auto flex flex-col items-center px-4 py-8">
           <Header>Welcome to Dev Bros HQ!</Header>
           {textSections.map((copy, copyIndex) => (
             <p
+              key={copyIndex}
               className={
                 copyIndex === 0
                   ? "mb-4 max-w-lg text-xl text-accent"

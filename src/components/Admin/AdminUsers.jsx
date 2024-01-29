@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useFirebase } from "../../context/FirebaseProvider";
 import Modal from "../UI/Modal";
+import Spinner from "../Spinner";
 
 const AdminUsers = () => {
   const [users, setUsers] = useState([]);
@@ -27,7 +28,7 @@ const AdminUsers = () => {
       <p className="text-4xl">Dev Bros HQ Users</p>
       <br />
       {users.length ? (
-        <div className="overflow-x-auto w-full">
+        <div className="w-full overflow-x-auto">
           <table className="table w-full">
             <thead>
               <tr>
@@ -53,16 +54,16 @@ const AdminUsers = () => {
                     <td className="border-secondary">
                       <div className="flex items-center space-x-3">
                         <div className="avatar">
-                          <div className="mask mask-squircle w-12 h-12">
+                          <div className="mask mask-squircle h-12 w-12">
                             {photoUrl ? (
                               <div className="avatar">
-                                <div className="w-12 h-12">
+                                <div className="h-12 w-12">
                                   <img src={photoUrl} alt={displayName} />
                                 </div>
                               </div>
                             ) : (
-                              <div className="avatar placeholder bg-secondary-focus">
-                                <div className="w-12 h-12 flex justify-center items-center">
+                              <div className="placeholder avatar bg-secondary-focus">
+                                <div className="flex h-12 w-12 items-center justify-center">
                                   <p className="text-2xl">{`${firstName.charAt(
                                     0
                                   )}${lastName.charAt(0)}`}</p>
@@ -80,21 +81,21 @@ const AdminUsers = () => {
                     </td>
                     <td className="border-secondary">
                       {admin ? (
-                        <div className="badge badge-success">Yes</div>
+                        <div className="badge-success badge">Yes</div>
                       ) : (
-                        <div className="badge badge-error">No</div>
+                        <div className="badge-error badge">No</div>
                       )}
                     </td>
                     <td className="border-secondary">
                       {developer ? (
-                        <div className="badge badge-success">Yes</div>
+                        <div className="badge-success badge">Yes</div>
                       ) : (
-                        <div className="badge badge-error">No</div>
+                        <div className="badge-error badge">No</div>
                       )}
                     </td>
                     <td className="border-secondary">
                       <button
-                        className="btn btn-sm btn-accent"
+                        className="btn-accent btn-sm btn"
                         onClick={() => handleViewUserDetails(user)}
                       >
                         details
@@ -107,16 +108,18 @@ const AdminUsers = () => {
           </table>
         </div>
       ) : (
-        <>Loading...</>
+        <div className="flex w-full justify-center">
+          <Spinner size="lg" color="primary" />
+        </div>
       )}
       <Modal open={open} onClose={() => setOpen(false)}>
-        <div className="w-full max-w-[900px] bg-neutral-content text-neutral py-12 px-6 rounded-lg">
+        <div className="w-full max-w-[900px] rounded-lg bg-neutral-content py-12 px-6 text-neutral">
           <div className="flex items-end gap-4">
             <div className="avatar">
-              <div className="w-24 rounded-full ring ring-secondary ring-offset-base-100 ring-offset-2">
+              <div className="w-24 rounded-full ring ring-secondary ring-offset-2 ring-offset-base-100">
                 {activeUser.photoUrl ? (
                   <div className="avatar">
-                    <div className="w-24 h-24">
+                    <div className="h-24 w-24">
                       <img
                         src={activeUser.photoUrl}
                         alt={activeUser.displayName}
@@ -124,8 +127,8 @@ const AdminUsers = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="avatar placeholder bg-secondary-focus">
-                    <div className="w-24 h-24 flex justify-center items-center">
+                  <div className="placeholder avatar bg-secondary-focus">
+                    <div className="flex h-24 w-24 items-center justify-center">
                       <p className="text-2xl">{`${activeUser?.firstName?.charAt(
                         0
                       )}${activeUser?.lastName?.charAt(0)}`}</p>
@@ -139,14 +142,14 @@ const AdminUsers = () => {
                 {activeUser.firstName} {activeUser.lastName}
               </p>
               <i className="text-2xllg">{activeUser.email}</i>
-              <div className="flex gap-3 mt-2">
+              <div className="mt-2 flex gap-3">
                 {activeUser.admin ? (
-                  <div className="badge badge-primary">Admin</div>
+                  <div className="badge-primary badge">Admin</div>
                 ) : (
                   ""
                 )}
                 {activeUser.developer ? (
-                  <div className="badge badge-accent">Developer</div>
+                  <div className="badge-accent badge">Developer</div>
                 ) : (
                   ""
                 )}
